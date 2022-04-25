@@ -27,13 +27,18 @@ void	pgm_image_init(t_ptr *pgm, t_data *image)
 	pgm->image.img = mlx_new_image(pgm->mlx, HT, WT);
 	pgm->image.addr = mlx_get_data_addr(image->img,
 			&image->bpp, &image->line_length, &image->endian);
+	pgm->check.no = 0;
+	pgm->check.so = 0;
+	pgm->check.we = 0;
+	pgm->check.ea = 0;
+	pgm->check.f = 0;
+	pgm->check.c = 0;
 }
 
 int	main(int ac, char **av)
 {
 	t_ptr	pgm;
 
-	ft_check(ac, av);
 	pgm_image_init(&pgm, &pgm.image);
 /* 	if (!ft_strcmp(av[1], "julia"))
 	{
