@@ -46,7 +46,7 @@ static char	**ft_convert_map(char **strs, char *file)
 	return (strs);
 }
 
-char	**parsing(int argc, char **argv, size_t *nb_line)
+char	**parsing(int argc, char **argv, int *nb_line)
 {
 	char	**map;
 
@@ -56,21 +56,25 @@ char	**parsing(int argc, char **argv, size_t *nb_line)
         exit(0);
     }
 	*nb_line = ft_count_line_map(argv[1]);
-	map = malloc(sizeof(char *) * (*nb_line + 1));
+	map = ft_calloc(sizeof(char *), (*nb_line + 1));
 	if (!map)
-		ft_error();
+    {
+        ft_putstr_fd("Error\n", 2);
+        exit(0);
+        //Voir comment on exit
+    }
 	map = ft_convert_map(map, argv[1]);
 	if (!map)
 	{
         ft_putstr_error("Malloc failed\n");
         exit(0);
     }
-	if (ft_check(map, *nb_line) == 0)
-	{
-		ft_clean_tab2d(map);
-		write(2, "Error\n", 6);
-		ft_putstr_error("Mauvaise map\n");
-		exit(0);
-	}
+	// if (ft_check(map, *nb_line) == 0)
+	// {
+	// 	ft_clean_tab2d(map);
+	// 	write(2, "Error\n", 6);
+	// 	ft_putstr_error("Mauvaise map\n");
+	// 	exit(0);
+	// }
 	return (map);
 }
