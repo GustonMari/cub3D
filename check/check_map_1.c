@@ -105,6 +105,8 @@ int check_map(char **map, int nb_line)
     {
         if (check_horizon(map[i]) == FALSE)
             return (FALSE);
+		if (line_is_whitespace(map[i]) == TRUE)
+			return (FALSE);
         i++;
     }
     i = 0;

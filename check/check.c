@@ -36,12 +36,13 @@ int check_is_param(char *str)
 			if (tab[i] == 1)
 				return (FALSE);
 			if (i == 4 || i == 5)
-				check_color(str);
+				if (check_color(str) == FALSE)
+					return (FALSE);
 			tab[i] = 1;
 			return (TRUE);
 		}
 		if (tab_is_full(tab) == TRUE)
-			return (TRUE);
+			return (FULL);
 		i++;
 	}
 	return (FALSE);
@@ -62,43 +63,78 @@ int check_element_file(char **map)
 				j++;
 		if (check_is_param(&map[i][j]) == FALSE && ft_strcmp(map[i], "\n"))
 			return (FALSE);
+		else if (check_is_param(&map[i][j]) == FULL)
+			return (i + 1);
 		i++;
 	}
 	return (TRUE);
 }
 
-int ft_check(char **map, char *name, int nb_line)
+int ft_check(char **all, char *name, int nb_line)
 {
+	char **map;
+	char **param;
+	int	ret;
 	(void)map;
 	(void)nb_line;
+	(void)param;
+
+	ret = 0;
     if (check_name_map(name) == FALSE)
     {
         ft_putstr_error("Error\nWrong map name\n");
         return (FALSE);
     }
-
-    // if (check_map == FALSE)
-    // {
-    //     ft_putstr_error("Error\nWrong map\n");
-    //     return (FALSE);
-    // }
+	ret = check_element_file(all);
+	if (ret == FALSE)
+	{
+		ft_putstr_error("Error\nWrong element in file\n");
+		return (FALSE);
+	}
+	else if (ret > 1)
+	{
+		map = cpy_tab(&all[ret], (nb_line - ret));
+		print_tab_2d(map);
+		//printf("\n-------------------------\n");
+		// param = cpy_tab(all, ret);
+		// print_tab_2d(param);
+		//free(all) ne pas oublier
+	
+		map = adjust_map(map, ft_count_line(map));
+		//WARNING
+		if (!map)
+			return (FALSE);
+		if (check_map(map, ft_count_line(map)) == FALSE)
+    	{
+     	  ft_putstr_error("Error\nWrong map\n");
+    	   return (FALSE);
+  		}
+	}
+	else
+	{
+		printf("y'a un pb\n");
+		return (FALSE);
+	}
 	return (TRUE);
 }
 
-/* int main(int argc, char **argv)
+int main(int argc, char **argv)
 {
     char **map;
-    char **new_map;
+    //char **new_map;
     int nb_line;
 
     nb_line = -1;
     map = parsing(argc, argv, &nb_line);
-    new_map = adjust_map(map, nb_line);
-    //printf("check = %d\n", check_map(new_map, nb_line));
-    print_tab_2d(new_map);
+    //new_map = adjust_map(map, nb_line);
+    if (ft_check(map, argv[1], nb_line) == FALSE)
+		printf("C'est faux\n");
+	else
+		printf("c'est bon\n");
+    //print_tab_2d(new_map);
     //printf("ret = %d\n", check_map(map, nb_line));
     return (0);
-} */
+}
 
 /* int main(int argc, char **argv)
 {
@@ -111,8 +147,8 @@ int ft_check(char **map, char *name, int nb_line)
     map = parsing(argc, argv, &nb_line);
     //new_map = adjust_map(map, nb_line);
 
-	if (check_element_file(map) == TRUE)
-		printf("Les param sont bons\n");
+	if (ft_check(map, argv[1], nb_line) == TRUE)
+		printf("Le fichier est bon\n");
 	else
 		printf("C'est pas bon\n");
     return (0);

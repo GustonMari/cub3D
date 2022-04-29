@@ -78,12 +78,12 @@ int check_color(char *str)
 	return (TRUE);
 }
 
-int	main()
+/* int	main()
 {
-	char str[] = "F5,0,59";
+	char str[] = "F   5  ,  0   ,  59  ";
 	if (check_color(str) == TRUE)
 		printf("C'est booon");
 	else
 		printf("CEST FAUXXXX");
 	return (0);
-}
+} */

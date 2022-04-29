@@ -89,3 +89,44 @@ char	*ft_strdup_less(char *src, int carac)
 	dest[i] = '\0';
 	return (dest);
 }
+
+int	count_without_empty_line(char **srcs, int nb_line)
+{
+	int	i;
+	int	count;
+
+	i = 0;
+	count = 0;
+	while (srcs[i] && i < nb_line)
+	{
+		if (ft_strcmp(srcs[i], "\n"))
+			count++;
+		i++;
+	}
+	return (count);
+}
+
+char	**cpy_tab(char **srcs, int nb_line)
+{
+	int		len;
+	int		i;
+	int		j;
+	char	**new_tab;
+
+	i = 0;
+	j = 0;
+	len = count_without_empty_line(srcs, nb_line);
+	new_tab = ft_calloc(sizeof(char *), (len + 1));
+	while (srcs[i] && i < nb_line)
+	{
+		if (ft_strcmp(srcs[i], "\n"))
+		{
+			new_tab[j] = ft_strdup(srcs[i]);
+			j++;
+		}
+		i++;
+		
+	}
+	new_tab[j] = NULL;
+	return (new_tab);
+}

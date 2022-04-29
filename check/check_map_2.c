@@ -9,6 +9,9 @@ int check_first_last(char **map, int nb_line)
     int j;
 
     j = 0;
+	if (line_is_whitespace(map[0]) == TRUE
+		|| line_is_whitespace(map[nb_line -1]) == TRUE)
+		return (FALSE);
     while (map[0][j])
     {
         if ((ft_is_space(map[0][j])) && map[0][j] != '1')

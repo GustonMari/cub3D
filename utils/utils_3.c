@@ -44,3 +44,19 @@ int	ft_atoi(char *str)
 	}
 	return ((int)(nb * sign));
 }
+
+/*retourne TRUE si str n'est compose que de whitespaces*/
+
+int	line_is_whitespace(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (ft_is_space(str[i]) == FALSE)
+			return (FALSE);
+		i++;
+	}
+	return (TRUE);
+}
