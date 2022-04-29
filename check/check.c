@@ -24,7 +24,7 @@ On checkera plus tard pour voir si les path de NO SO WE EA sont ok*/
 
 int check_is_param(char *str)
 {
-	const char	*ref[] = {"NO ", "SO ", "WE ", "EA ", "F ", "C ", NULL};
+	const char	*ref[] = {"NO", "SO", "WE", "EA", "F", "C", NULL};
 	static int	tab[6] = {0, 0, 0, 0, 0, 0};
 	int			i;
 
@@ -35,6 +35,8 @@ int check_is_param(char *str)
 		{
 			if (tab[i] == 1)
 				return (FALSE);
+			if (i == 4 || i == 5)
+				check_color(str);
 			tab[i] = 1;
 			return (TRUE);
 		}
@@ -55,8 +57,6 @@ int check_element_file(char **map)
     while (map[i])
     {
 		j = 0;
-		/* if(ft_strcmp(map[i], "\n"))
-			i++; */
 		if (ft_is_space(map[i][0]) == TRUE)
 			while (map[i][j] && (ft_is_space(map[i][j]) == TRUE))
 				j++;
@@ -100,7 +100,7 @@ int ft_check(char **map, char *name, int nb_line)
     return (0);
 } */
 
-int main(int argc, char **argv)
+/* int main(int argc, char **argv)
 {
     char **map;
     char **new_map;
@@ -116,4 +116,4 @@ int main(int argc, char **argv)
 	else
 		printf("C'est pas bon\n");
     return (0);
-}
+} */

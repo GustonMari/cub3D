@@ -1,12 +1,11 @@
 NO ./path
-
+SO ./path
 EA ./path
+WE ./path
 
-F ./path
-C ./path
-     WE ./path
-
-						SO ./path
+F 20 0,100,0
+C 225,30,0
+F
 
 11111111
 11110101

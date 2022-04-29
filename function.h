@@ -87,6 +87,9 @@ char	*ft_strjoin_free(char *s1, char *s2, int del);
 void	print_tab_2d(char **strs);
 int		ft_count_line(char **tab);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
+int		ft_isdigit(int c);
+int		ft_atoi(char *str);
+
 /*
 ------------------CHECK MAP----------------------
 */
@@ -103,6 +106,12 @@ char	**adjust_map(char **map, int nb_line);
 
 int ft_check(char **map, char *name, int nb_line);
 
+/*
+-----------------CHECK COLOR----------------------
+*/
+
+int check_color(char *str);
+
 
 /*
 ------------------ERROR--------------------------
@@ -116,5 +125,10 @@ void	ft_putstr_error(char *s);
 
 char	**parsing(int argc, char **argv, int *nb_line);
 
+/*
+------------------SPLIT--------------------------
+*/
+
+char    **ft_split(char *str, char *charset);
 
 #endif

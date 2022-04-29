@@ -11,3 +11,36 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 		i++;
 	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }
+
+int	ft_isdigit(int c)
+{
+	if (c < '0' || c > '9')
+		return (FALSE);
+	else
+		return (TRUE);
+}
+
+int	ft_atoi(char *str)
+{
+	int		i;
+	long	nb;
+	long	sign;
+
+	sign = 1;
+	i = 0;
+	nb = 0;
+	while (ft_is_space(str[i]) == TRUE)
+		i++;
+	if (str[i] == '-' || str[i] == '+')
+	{
+		if (str[i] == '-')
+			sign *= -1;
+		i++;
+	}
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		nb = (nb * 10) + str[i] - '0';
+		i++;
+	}
+	return ((int)(nb * sign));
+}
