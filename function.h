@@ -86,6 +86,7 @@ void	*ft_free_tab_2d(char **tab);
 char	*ft_strjoin_free(char *s1, char *s2, int del);
 void	print_tab_2d(char **strs);
 int		ft_count_line(char **tab);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
 /*
 ------------------CHECK MAP----------------------
 */
@@ -96,6 +97,11 @@ int		check_name_map(char *name);
 int		find_max_lenght(char **map);
 char	**adjust_map(char **map, int nb_line);
 
+/*
+-----------------CHECK-------------------------
+*/
+
+int ft_check(char **map, char *name, int nb_line);
 
 
 /*

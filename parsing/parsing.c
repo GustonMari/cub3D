@@ -81,7 +81,7 @@ char	**parsing(int argc, char **argv, int *nb_line)
     }
 	if (ft_check(map, argv[1], *nb_line) == FALSE)
 	{
-		ft_clean_tab2d(map);
+		ft_free_tab_2d(map);
 		exit(0);
 	}
 	return (map);
