@@ -51,10 +51,13 @@ typedef struct s_ptr
 	void	*mlx;
 	void	*win;
 	t_data	image;
-	t_check	check;
+	//t_check	check;
 }				t_ptr;
 
 
+/*
+------------------MLX-------------------------
+*/
 
 int		key_esc(int key, t_ptr *pgm);
 int		ft_close(t_ptr *pgm);
@@ -66,19 +69,46 @@ int		palette(int i);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 
 /*
---------------------------------------------
+------------------GNL---------------------------
 */
 
 char	*get_next_line(int fd);
-void	ft_putstr_error(char *s);
-int		ft_is_space(char c);
-char	**parsing(int argc, char **argv, int *nb_line);
-void	print_tab_2d(char **strs);
-int		ft_count_line(char **tab);
+
+/*
+------------------UTILS--------------------------
+*/
+
+int		ft_strcmp(char *s1, char *s2);
+int		ft_strchr_str(char *s, char *str);
 void	ft_putstr_fd(char *s, int fd);
-int 	find_max_lenght(char **map);
+int		ft_is_space(char c);
 void	*ft_free_tab_2d(char **tab);
 char	*ft_strjoin_free(char *s1, char *s2, int del);
+void	print_tab_2d(char **strs);
+int		ft_count_line(char **tab);
+/*
+------------------CHECK MAP----------------------
+*/
+
+int		check_first_last(char **map, int nb_line);
+int		check_forbiden_char(char c);
+int		check_name_map(char *name);
+int		find_max_lenght(char **map);
 char	**adjust_map(char **map, int nb_line);
+
+
+
+/*
+------------------ERROR--------------------------
+*/
+
+void	ft_putstr_error(char *s);
+
+/*
+------------------PARSING-------------------------
+*/
+
+char	**parsing(int argc, char **argv, int *nb_line);
+
 
 #endif

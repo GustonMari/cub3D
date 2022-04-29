@@ -51,3 +51,38 @@ char	*ft_strjoin_free(char *s1, char *s2, int del)
 		free(s2);
 	return (dest);
 }
+
+int	ft_strcmp(char *s1, char *s2)
+{
+	int	i;
+
+	i = 0;
+	while (s1[i] && s1[i] == s2[i])
+	{
+		i++;
+	}
+	return (s1[i] - s2[i]);
+}
+
+int	ft_strchr_str(char *s, char *str)
+{
+	while (*s)
+	{
+		if (*s == str[0])
+		{
+			if (ft_strcmp(s, str) == 0)
+			{
+				return (TRUE);
+			}
+		}
+		s++;
+	}
+	return (FALSE);
+}
+
+// int main()
+// {
+// 	char	*name = "map.cub";
+
+// 	printf("ret = %d\n", ft_strchr_str(name, ".cub"));
+// }
