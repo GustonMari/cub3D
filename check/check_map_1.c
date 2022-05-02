@@ -6,7 +6,6 @@ int check_horizon(char *line)
 {
     int i;
     int space;
-    (void)space;
 
     i = 0;
     space = 0;
@@ -19,17 +18,17 @@ int check_horizon(char *line)
         return (FALSE);
     while (line[i])
     {
-        if (check_forbiden_char(line[i]) == FALSE)
-            return (FALSE);
-        if (line[i + 1] && ft_is_space(line[i + 1]) == TRUE)
-        {
-            if (line[i] != '1')
-                return (FALSE);
-            i++;
-            while (line[i] && ft_is_space(line[i]) == TRUE)
-                i++;
-            if (line[i] && line[i] != '1')
-                return (FALSE);
+		if (check_forbiden_char(line[i]) == FALSE)
+		    return (FALSE);
+		if (line[i + 1] && ft_is_space(line[i + 1]) == TRUE)
+		{
+			if (line[i] != '1')
+			    return (FALSE);
+			i++;
+			while (line[i] && ft_is_space(line[i]) == TRUE)
+			    i++;
+			if (line[i] && line[i] != '1')
+			    return (FALSE);
         }
         else
             i++;

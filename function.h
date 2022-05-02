@@ -18,16 +18,16 @@
 # define FULL 10
 # define HT 1000
 # define WT 1000
+# define NO 100
+# define SO 101
+# define EA 102
+# define WE 103
 
-typedef struct s_check
+typedef struct s_coord
 {
-	int	no;
-	int	so;
-	int	we;
-	int	ea;
-	int	f;
-	int	c;
-}				t_check;
+	int	x;
+	int	y;
+}				t_coord;
 
 typedef struct s_save
 {
@@ -49,10 +49,13 @@ typedef struct s_data
 //corespond a notre structure global
 typedef struct s_ptr
 {
+	t_data	image;
+	t_coord	coord;
+	int		pos;
 	void	*mlx;
 	void	*win;
-	t_data	image;
-	//t_check	check;
+	char	**param;
+	char	**map;
 }				t_ptr;
 
 
@@ -109,7 +112,7 @@ int		check_start_char(char c);
 -----------------CHECK-------------------------
 */
 
-int ft_check(char **map, char *name, int nb_line);
+int ft_check(char **all, char *name, int nb_line, t_ptr *pgm);
 
 /*
 -----------------CHECK COLOR----------------------
@@ -135,5 +138,12 @@ char	**parsing(int argc, char **argv, int *nb_line);
 */
 
 char    **ft_split(char *str, char *charset);
+
+/*
+------------------CLEAN AND CLOSE--------------------------
+*/
+
+int	ft_close(t_ptr *pgm);
+
 
 #endif

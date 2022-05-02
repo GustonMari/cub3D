@@ -17,6 +17,8 @@ int	ft_close(t_ptr *pgm)
 	mlx_destroy_image(pgm->mlx, pgm->image.img);
 	mlx_destroy_window(pgm->mlx, pgm->win);
 	mlx_destroy_display(pgm->mlx);
+	ft_free_tab_2d(pgm->map);
+	ft_free_tab_2d(pgm->param); // peut etre a tej plus tard
 	free(pgm->mlx);
 	exit(0);
 }

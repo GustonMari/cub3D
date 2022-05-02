@@ -20,7 +20,7 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-void	pgm_image_init(t_ptr *pgm, t_data *image)
+/* void	pgm_image_init(t_ptr *pgm, t_data *image)
 {
 	pgm->mlx = mlx_init();
 	pgm->win = mlx_new_window(pgm->mlx, HT, WT, "hello");
@@ -33,32 +33,54 @@ void	pgm_image_init(t_ptr *pgm, t_data *image)
 	pgm->check.ea = 0;
 	pgm->check.f = 0;
 	pgm->check.c = 0;
-}
+} */
 
-int	main(int ac, char **av)
+int main(int argc, char **argv)
 {
+	int nb_line;
+    char **map;
 	t_ptr	pgm;
+    
 
-	pgm_image_init(&pgm, &pgm.image);
-/* 	if (!ft_strcmp(av[1], "julia"))
+    nb_line = -1;
+    map = parsing(argc, argv, &nb_line);
+    if (ft_check(map, argv[1], nb_line, &pgm) == FALSE)
 	{
-		print_julia(&pgm, 2, 0);
-		mlx_key_hook(pgm.win, &key_julia, &pgm);
-		mlx_mouse_hook(pgm.win, &mouse_scroll, &pgm);
+		printf("Probleme maaaap\n");
 	}
-	if (!ft_strcmp(av[1], "mandelbrot"))
-	{
-		print_mandelbrot(&pgm, 2, 0);
-		mlx_key_hook(pgm.win, &key_mandel, &pgm);
-		mlx_mouse_hook(pgm.win, &mouse_scroll_2, &pgm);
-	}
-	if (!ft_strcmp(av[1], "gustave"))
-	{
-		print_gustave(&pgm, 2, 0);
-		mlx_key_hook(pgm.win, &key_gus, &pgm);
-		mlx_mouse_hook(pgm.win, &mouse_scroll_3, &pgm);
-	} */
+		
+	else
+		printf("c'est bon\n");
+    //print_tab_2d(new_map);
+    //printf("ret = %d\n", check_map(map, nb_line));
 	mlx_hook(pgm.win, 17, 02, ft_close, &pgm);
 	mlx_loop(pgm.mlx);
-	return (0);
+    return (0);
 }
+// int	main(int ac, char **av)
+//{
+//	t_ptr	pgm;
+//
+//	pgm_image_init(&pgm, &pgm.image);
+// 	if (!ft_strcmp(av[1], "julia"))
+//	{
+//		print_julia(&pgm, 2, 0);
+//		mlx_key_hook(pgm.win, &key_julia, &pgm);
+//		mlx_mouse_hook(pgm.win, &mouse_scroll, &pgm);
+//	}
+//	if (!ft_strcmp(av[1], "mandelbrot"))
+//	{
+//		print_mandelbrot(&pgm, 2, 0);
+//		mlx_key_hook(pgm.win, &key_mandel, &pgm);
+//		mlx_mouse_hook(pgm.win, &mouse_scroll_2, &pgm);
+//	}
+//	if (!ft_strcmp(av[1], "gustave"))
+//	{
+//		print_gustave(&pgm, 2, 0);
+//		mlx_key_hook(pgm.win, &key_gus, &pgm);
+//		mlx_mouse_hook(pgm.win, &mouse_scroll_3, &pgm);
+//	} 
+//	//mlx_hook(pgm.win, 17, 02, ft_close, &pgm);
+//	//mlx_loop(pgm.mlx);
+//	return (0);
+//} 
