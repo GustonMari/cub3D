@@ -94,7 +94,7 @@ int ft_check(char **all, char *name, int nb_line)
 	else if (ret > 1)
 	{
 		map = cpy_tab(&all[ret], (nb_line - ret));
-		print_tab_2d(map);
+		//print_tab_2d(map);
 		//printf("\n-------------------------\n");
 		// param = cpy_tab(all, ret);
 		// print_tab_2d(param);

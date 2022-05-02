@@ -104,7 +104,7 @@ int		check_name_map(char *name);
 int		find_max_lenght(char **map);
 char	**adjust_map(char **map, int nb_line);
 int		check_map(char **map, int nb_line);
-
+int		check_start_char(char c);
 /*
 -----------------CHECK-------------------------
 */

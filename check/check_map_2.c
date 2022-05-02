@@ -29,12 +29,20 @@ int check_first_last(char **map, int nb_line)
     return (TRUE);
 }
 
+/*Permet de checker si c'est un des caracteres de depart*/
+
+int	check_start_char(char c)
+{
+	if (c == 'N' || c == 'S' || c == 'W' || c == 'E')
+        return (TRUE);
+    return (FALSE);
+}
+
 int check_forbiden_char(char c)
 {
     if (c == '1' || c == '0' || c == 'N' 
         || c == 'S' || c == 'W' || c == 'E' || c == '\0' || c == '\n')
         return (TRUE);
-    printf("%c", c);
     return (FALSE);
 }
 

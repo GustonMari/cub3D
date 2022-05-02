@@ -93,6 +93,33 @@ int find_max_lenght(char **map)
     return (len);
 }
 
+/*ON va regarder si on a un point de depart un juste un seul
+sinon on retourne FALSE*/
+
+int	check_double(char **map)
+{
+	int i;
+	int j;
+	int letter;
+
+	i = 0;
+	letter = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (check_start_char(map[i][j]) == TRUE)
+				letter++;
+			j++;
+		}
+		i++;
+	}
+	if (letter != 1)
+		return (FALSE);
+	return (TRUE);
+}
+
 int check_map(char **map, int nb_line)
 {
     int i;
@@ -117,5 +144,7 @@ int check_map(char **map, int nb_line)
             return (FALSE);
         i++;
     }
+	if (check_double(map) == FALSE)
+		return (FALSE);
     return (TRUE);
 }
