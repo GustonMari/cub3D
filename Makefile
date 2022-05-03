@@ -29,6 +29,7 @@ SRC = main.c \
 			utils/utils.c \
 			utils/utils_2.c \
 			utils/utils_3.c \
+			utils/utils_4.c \
 			parsing/parsing.c \
 			parsing/convert_param.c \
 			parsing/adjust_map.c \

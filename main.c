@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 09:20:55 by gmary             #+#    #+#             */
-/*   Updated: 2022/05/03 14:25:25 by gmary            ###   ########.fr       */
+/*   Updated: 2022/05/03 16:32:18 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,22 +38,29 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 int main(int argc, char **argv)
 {
 	int nb_line;
-    char **all;
+	char **all;
 	t_ptr	pgm;
 
-    nb_line = -1;
-    all = parsing(argc, argv, &nb_line);
-    if (ft_check(all, argv[1], nb_line, &pgm) == FALSE)
+	nb_line = -1;
+	all = parsing(argc, argv, &nb_line);
+	if (ft_check(all, argv[1], nb_line, &pgm) == FALSE)
 	{
 		printf("Probleme maaaap\n");
 	}
 	else
 		printf("c'est bon\n");
+	pgm_image_init(&pgm, &pgm.image);
+	if (convert_param(&pgm) == FALSE)
+	{
+		ft_free_tab_2d(all);
+		ft_free_tab_2d(pgm.map);
+		ft_free_tab_2d(pgm.param);
+		return (1);
+	}
 	//print_tab_2d(pgm.param);
-    //print_tab_2d(new_map);
-    //printf("ret = %d\n", check_map(map, nb_line));
-	//mlx_hook(pgm.win, 17, 02, ft_close, &pgm);
-	//mlx_loop(pgm.mlx);
+	//print_tab_2d(new_map);
+	mlx_hook(pgm.win, 17, 02, ft_close, &pgm);
+	mlx_loop(pgm.mlx);
 	ft_free_tab_2d(all);
 	ft_free_tab_2d(pgm.map);
 	ft_free_tab_2d(pgm.param);

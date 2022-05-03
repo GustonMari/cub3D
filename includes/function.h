@@ -27,6 +27,7 @@ typedef struct s_coord
 {
 	int	x;
 	int	y;
+	int	direction;
 }				t_coord;
 
 typedef struct s_save
@@ -56,6 +57,10 @@ typedef struct s_ptr
 	void	*win;
 	char	**param;
 	char	**map;
+	void	*no;
+	void	*so;
+	void	*we;
+	void	*ea;
 }				t_ptr;
 
 
@@ -73,6 +78,8 @@ int		palette(int i);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 int		create_color(int t, int r, int g, int b);
 void	ft_bicolor(t_ptr *pgm, int color_floor, int color_ceil);
+void	pgm_image_init(t_ptr *pgm, t_data *image);
+
 
 /*
 ------------------GNL---------------------------
@@ -97,6 +104,7 @@ int		ft_isdigit(int c);
 int		ft_atoi(char *str);
 char	**cpy_tab(char **srcs, int nb_line);
 int		line_is_whitespace(char *str);
+char	*ft_strndup(char *str, int n);
 
 /*
 ------------------CHECK MAP----------------------
@@ -133,6 +141,12 @@ void	ft_putstr_error(char *s);
 */
 
 char	**parsing(int argc, char **argv, int *nb_line);
+
+/*
+------------------CONVERT PARAM-------------------------
+*/
+
+int	convert_param(t_ptr *pgm);
 
 /*
 ------------------SPLIT--------------------------
