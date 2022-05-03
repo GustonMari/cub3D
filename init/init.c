@@ -1,4 +1,4 @@
-#include "../function.h"
+#include "../includes/function.h"
 
 void	pgm_image_init(t_ptr *pgm, t_data *image)
 {

@@ -1,4 +1,4 @@
-#include "../function.h"
+#include "../includes/function.h"
 
 int	ft_strlen(char *str)
 {

@@ -6,11 +6,11 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 11:38:10 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/25 14:01:10 by gmary            ###   ########.fr       */
+/*   Updated: 2022/05/03 13:05:04 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "function.h"
+#include "../includes/function.h"
 
 int	ft_black(t_ptr *pgm)
 {

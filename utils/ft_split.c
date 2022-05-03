@@ -1,83 +1,100 @@
-#include "../function.h"
+#include "../includes/function.h"
 
-int    ft_is_sep(char c, char *charset)
+int	ft_is_sep(char c, char *charset)
 {
-    int    i;
-
-    i = 0;
-    while (charset[i])
-    {
-        if (c == charset[i])
-            return (1);
-        i++;
-    }
-    return (0);
+	while (*charset)
+	{
+		if (c == *charset)
+			return (1);
+		charset++;
+	}
+	return (0);
 }
 
-int    ft_wordlen(char *str, char *charset)
+char	ft_word_len(char *str, char *charset)
 {
-    int    i;
+	int	j;
 
-    i = 0;
-    while (str[i] && !ft_is_sep(str[i], charset))
-        i++;
-    return (i);
+	j = 0;
+	while (str[j] && (ft_is_sep(str[j], charset) == 0 ))
+		j++;
+	return (j + 1);
 }
 
-int    ft_count_words(char *str, char *charset)
+int	ft_word_count(char *str, char *charset)
 {
-    int    count;
-    int    len;
+	int	i;
+	int	count;
+	int	new_word;
 
-    count = 0;
-    while (*str)
-    {
-        while (ft_is_sep(*str, charset) && *str)
-            str++;
-        len = ft_wordlen(str, charset);
-        str += len;
-        if (len != 0)
-            count++;
-    }
-    return (count);
+	i = 0;
+	new_word = 0;
+	count = 0;
+	while (str[i])
+	{
+		if (ft_is_sep(str[i], charset))
+			new_word = 0;
+		if (new_word == 0)
+		{
+			if (ft_is_sep(str[i], charset) != 1)
+			{
+				new_word = 1;
+				count++;
+			}
+		}
+		i++;
+	}
+	return (count);
 }
 
-char    *w_copy(char *str, int len)
+char	**ft_cut(char *str, char *charset, char **tab)
 {
-    char    *ret;
+	int		i;
+	int		j;
+	int		k;
+	int		count;
 
-    ret = malloc(sizeof(char) * len + 1);
-    if (!ret)
-        return (NULL);
-    ret[len] = '\0';
-    while (len-- >= 0)
-        ret[len] = str[len];
-    return (ret);
-}
+	i = 0;
+	j = 0;
+	count = ft_word_count(str, charset);
+	while (j < count)
+	{	
+		k = 0;
+		while (str[i] && ft_is_sep(str[i], charset))
+			i++;
+		tab[j] = malloc(sizeof(char) * ft_word_len(&str[i], charset));
+		while (str[i] && (ft_is_sep(str[i], charset) != 1))
+		{
+			tab[j][k] = str[i];
+			k++;
+			i++;
+		}
+		tab[j][k] = '\0';
+		j++;
+	}
+	tab[j] = 0;
+	return (tab);
+}	
 
-char    **ft_split(char *str, char *charset)
+char	**ft_split(char *str, char *charset)
 {
-    char    **tab;
-    int        words;
-    int        w_len;
-    int        i;
+	char	**tab;
 
-    i = 0;
-    words = ft_count_words(str, charset);
-    tab = malloc(sizeof(char *) * (words + 1));
-    if (!tab)
-        return (NULL);
-    while (i < words)
-    {
-        while (ft_is_sep(*str, charset) && *str)
-            str++;
-        w_len = ft_wordlen(str, charset);
-        tab[i] = w_copy(str, w_len);
-        if (!tab[i])
-            return (0);
-        str += w_len;
-        i++;
-    }
-    tab[words] = 0;
-    return (tab);
+	tab = NULL;
+	if (str[0] == '\0' || !str || !charset)
+	{
+		tab = malloc(sizeof(char *));
+		tab[0] = 0;
+		return (tab);
+	}
+	if (ft_word_count(str, charset))
+		tab = malloc(sizeof(char *) * (ft_word_count(str, charset) + 1));
+	else
+	{
+		tab = malloc(sizeof(char *));
+		tab[0] = 0;
+		return (tab);
+	}
+	tab = ft_cut(str, charset, tab);
+	return (tab);
 }

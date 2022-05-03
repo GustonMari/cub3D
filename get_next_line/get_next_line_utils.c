@@ -1,4 +1,4 @@
-#include "get_next_line.h"
+#include "../includes/get_next_line.h"
 
 char	*ft_gnl_strjoin(char *s1, char *s2)
 {

@@ -1,4 +1,4 @@
-#include "../function.h"
+#include "../includes/function.h"
 
 void	ft_bzero(void *s, size_t n)
 {

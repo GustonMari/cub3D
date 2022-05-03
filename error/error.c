@@ -1,4 +1,4 @@
-#include "../function.h"
+#include "../includes/get_next_line.h"
 
 void	ft_putstr_error(char *s)
 {

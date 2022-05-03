@@ -1,54 +1,88 @@
+NAME = cub3d
+#CLEANHEREDOC = srcs/heredoc/clean_heredoc
+
+LIBINC = -L minilibx-linux -lmlx -lX11 -lXext
+
+SRCDIR = srcs
+OBJDIR = objs
+INCDIR = includes
+
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
-SRC = colors.c \
-			ft_gustave.c \
-			ft_julia.c \
-			ft_key.c \
-			ft_mandelbrot.c \
-			ft_zoom.c \
-			main.c
-OBJ = $(SRC:.c=.o)
-NAME= fractol
+CFLAGS = -Wall -Wextra -Werror -g
+MEM =  #-fsanitize=thread
 
-all: server
-	@echo "\\n\033[32;1mMAKE ALL OK \033[0m \\n"
-	@echo "\033[32;1m      ___           ___           ___           ___                  \033[0m"
-	@echo "\033[32;1m     /\__\         /\  \         /\  \         /\  \                 \033[0m"
-	@echo "\033[32;1m    /:/ _/_       |::\  \       /::\  \       /::\  \         ___    \033[0m"
-	@echo "\033[32;1m   /:/ /\  \      |:|:\  \     /:/\:\  \     /:/\:\__\       /|  |   \033[0m"
-	@echo "\033[32;1m  /:/ /::\  \   __|:|\:\  \   /:/ /::\  \   /:/ /:/  /      |:|  |   \033[0m"
-	@echo "\033[32;1m /:/__\/\:\__\ /::::|_\:\__\ /:/_/:/\:\__\ /:/_/:/__/___    |:|  |   \033[0m"
-	@echo "\033[32;1m \:\  \ /:/  / \:\~~\  \/__/ \:\/:/  \/__/ \:\/:::::/  /  __|:|__|   \033[0m"
-	@echo "\033[32;1m  \:\  /:/  /   \:\  \        \::/__/       \::/~~/~~~~  /::::\  \   \033[0m"
-	@echo "\033[32;1m   \:\/:/  /     \:\  \        \:\  \        \:\~~\      ~~~~\:\  \  \033[0m"
-	@echo "\033[32;1m    \::/  /       \:\__\        \:\__\        \:\__\          \:\__\ \033[0m"
-	@echo "\033[32;1m     \/__/         \/__/         \/__/         \/__/           \/__/ \033[0m"
-	@echo "\\n"
+ifeq ($(TMEM),0)
+MEM =
+endif
 
-server: $(NAME)
+INC = 	function.h \
+		get_next_line.h
 
-$(NAME): $(OBJ)
-	make -C minilibx_linux
-	$(CC) -o $(NAME) $(OBJ) -L minilibx_linux -lmlx -lX11 -lXext
-	@echo "\\n\033[32;1mSERVER OK \033[0m \\n"
+SRC = main.c \
+			get_next_line/get_next_line.c \
+			get_next_line/get_next_line_utils.c \
+			keys/ft_key.c \
+			utils/ft_bicolors.c \
+			utils/colors.c \
+			utils/ft_calloc.c \
+			utils/ft_split.c \
+			utils/utils.c \
+			utils/utils_2.c \
+			utils/utils_3.c \
+			parsing/parsing.c \
+			parsing/convert_param.c \
+			parsing/adjust_map.c \
+			init/init.c \
+			error/error.c \
+			check/check.c \
+			check/check_color.c \
+			check/check_map_1.c \
+			check/check_map_2.c
 
-%.o: %.c
-	$(CC) $(CFLAGS) -Ofast -c $< 
+OBJS = $(addprefix ${OBJDIR}/,${SRC:.c=.o})
 
-clean:
-	@echo "\\n\033[38;5;202;1mDeleting Objects... \033[0m \\n"
-	rm -rf $(OBJ)
-	make -C minilibx_linux clean
-	@echo "\\n\033[32;1mDeleting OK \033[0m \\n"
+all: ${NAME} ${CLEANHEREDOC}
 
-fclean: clean
-	@echo "\\n\033[38;5;202;1mCLEANING ALL... \033[0m \\n"
-	make -C minilibx_linux clean
-	rm -rf $(NAME)
-	@echo "\\n\033[32;1mOK \033[0m \\n"
+RED="\033[1;31m"
+GREEN="\033[1;32m"
+YELLOW="\033[1;33m"
+BLUE="\033[1;34m"
+PURPLE="\033[1;35m"
+CYAN="\033[1;36m"
+GREY="\033[0;37m"
+RESET="\033[m"
+
+$(NAME): ${OBJS}
+#	@echo "\\n\033[32;1mMAKE ALL OK \033[0m \\n"
+#	@echo ${GREEN} "           _       _     _          _ _ " ${RESET}
+#	@echo ${GREEN} "          (_)     (_)   | |        | | |" ${RESET}
+#	@echo ${GREEN} " _ __ ___  _ _ __  _ ___| |__   ___| | |" ${RESET}
+##	@echo ${GREEN} "| '_ ` _ \\| | '_ \\| / __| '_ \\ / _ \\ | |" ${RESET}
+#	@echo ${GREEN} "| | | | | | | | | | \\__ \\ | | |  __/ | |" ${RESET}
+#	@echo ${GREEN} "|_| |_| |_|_|_| |_|_|___/_| |_|\\___|_|_|" ${RESET}
+#	@echo
+	make -C minilibx-linux
+	${CC} ${CFLAGS} ${MEM} ${OBJS} -I./${INCDIR} -o $@ ${LIBINC}
+
+#$(CLEANHEREDOC):
+#	${CC} ${CFLAGS} srcs/heredoc/clean_heredoc.c -o $@
+
+$(OBJDIR)/%.o: %.c
+	@mkdir -p $(dir $@)
+	${CC} ${CFLAGS} ${MEM} -I./${INCDIR} -c $< -o $@
 
 re: fclean all
 
-.PHONY: all clean fclean re libft server client
+clean:
+	@echo  "Cleaning objects\c"
+	@rm -rf ${OBJDIR}
+	make -C minilibx-linux clean
+	@echo "\033[32m\t[OK]\033[0m"
 
-.SILENT:
+fclean: clean
+	@echo  "Removing minishell\c"
+	make -C minilibx-linux clean
+	@rm -rf ${NAME} ${CLEANHEREDOC}
+	@echo "\033[32m\t[OK]\033[0m"
+
+.PHONY : all clean re fclean 

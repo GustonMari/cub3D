@@ -4,7 +4,7 @@
 //for mac_os
 //# include "minilibx/mlx.h"
 //for Linux
-# include "minilibx-linux/mlx.h"
+# include "../minilibx-linux/mlx.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -71,6 +71,8 @@ void	ft_zoom_in(t_ptr *pgm, double zoom_f);
 int		create_color(int t, int r, int g, int b);
 int		palette(int i);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+int		create_color(int t, int r, int g, int b);
+void	ft_bicolor(t_ptr *pgm, int color_floor, int color_ceil);
 
 /*
 ------------------GNL---------------------------
@@ -95,7 +97,6 @@ int		ft_isdigit(int c);
 int		ft_atoi(char *str);
 char	**cpy_tab(char **srcs, int nb_line);
 int		line_is_whitespace(char *str);
-
 
 /*
 ------------------CHECK MAP----------------------
@@ -144,6 +145,5 @@ char    **ft_split(char *str, char *charset);
 */
 
 int	ft_close(t_ptr *pgm);
-
 
 #endif

@@ -1,4 +1,4 @@
-#include "../function.h"
+#include "../includes/function.h"
 
 /*Va checker si le tableau de boolens pour les parametres
 est completement rempli. Si oui on va s'arreter de checker,
@@ -53,7 +53,6 @@ int check_element_file(char **map)
     int i;
 	int	j;
 
-
     i = 0;
     while (map[i])
     {
@@ -75,18 +74,18 @@ int ft_check(char **all, char *name, int nb_line, t_ptr *pgm)
 	char **map;
 	char **param;
 	int	ret;
-	(void)param;
 
 	ret = 0;
-    if (check_name_map(name) == FALSE)
-    {
-        ft_putstr_error("Error\nWrong map name\n");
-        return (FALSE);
-    }
+	if (check_name_map(name) == FALSE)
+	{
+		ft_putstr_error("Error\nWrong map name\n");
+		return (FALSE);
+	}
 	ret = check_element_file(all);
 	if (ret == FALSE)
 	{
 		ft_putstr_error("Error\nWrong element in file\n");
+		ft_free_tab_2d(all);
 		return (FALSE);
 	}
 	else if (ret > 1)
@@ -96,15 +95,15 @@ int ft_check(char **all, char *name, int nb_line, t_ptr *pgm)
 		map = adjust_map(map, ft_count_line(map));
 		pgm->map = map;
 		pgm->param = param;
-		ft_free_tab_2d(all);
+		//ft_free_tab_2d(all);
 		//WARNING
 		if (!map)
 			return (FALSE);
 		if (check_map(map, ft_count_line(map)) == FALSE)
-    	{
+		{
 			ft_putstr_error("Error\nWrong map\n");
 			return (FALSE);
-  		}
+		}
 	}
 	else
 	{
@@ -113,5 +112,3 @@ int ft_check(char **all, char *name, int nb_line, t_ptr *pgm)
 	}
 	return (TRUE);
 }
-
-

@@ -1,4 +1,4 @@
-#include "../function.h"
+#include "../includes/function.h"
 
 /*Va checker si il n'y a pas d'espace entre
 les chiffres 22  0,10  0,0 par exemple*/
@@ -61,6 +61,7 @@ int	check_color_number(char *str)
 			return (FALSE);
 		i++;
 	}
+	ft_free_tab_2d(dest);
 	return (TRUE);
 }
 

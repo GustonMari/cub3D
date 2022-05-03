@@ -6,11 +6,11 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 14:33:29 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/25 14:00:25 by gmary            ###   ########.fr       */
+/*   Updated: 2022/05/03 13:04:48 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "function.h"
+#include "../includes/function.h"
 
 int	ft_close(t_ptr *pgm)
 {

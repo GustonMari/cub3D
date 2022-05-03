@@ -6,11 +6,11 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 09:20:55 by gmary             #+#    #+#             */
-/*   Updated: 2022/04/25 14:12:42 by gmary            ###   ########.fr       */
+/*   Updated: 2022/05/03 14:25:25 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "function.h"
+#include "includes/function.h"
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
@@ -27,35 +27,37 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	pgm->image.img = mlx_new_image(pgm->mlx, HT, WT);
 	pgm->image.addr = mlx_get_data_addr(image->img,
 			&image->bpp, &image->line_length, &image->endian);
-	pgm->check.no = 0;
-	pgm->check.so = 0;
-	pgm->check.we = 0;
-	pgm->check.ea = 0;
-	pgm->check.f = 0;
-	pgm->check.c = 0;
+	// pgm->check.no = 0;
+	// pgm->check.so = 0;
+	// pgm->check.we = 0;
+	// pgm->check.ea = 0;
+	// pgm->check.f = 0;
+	// pgm->check.c = 0;
 } */
 
 int main(int argc, char **argv)
 {
 	int nb_line;
-    char **map;
+    char **all;
 	t_ptr	pgm;
-    
 
     nb_line = -1;
-    map = parsing(argc, argv, &nb_line);
-    if (ft_check(map, argv[1], nb_line, &pgm) == FALSE)
+    all = parsing(argc, argv, &nb_line);
+    if (ft_check(all, argv[1], nb_line, &pgm) == FALSE)
 	{
 		printf("Probleme maaaap\n");
 	}
-		
 	else
 		printf("c'est bon\n");
+	//print_tab_2d(pgm.param);
     //print_tab_2d(new_map);
     //printf("ret = %d\n", check_map(map, nb_line));
-	mlx_hook(pgm.win, 17, 02, ft_close, &pgm);
-	mlx_loop(pgm.mlx);
-    return (0);
+	//mlx_hook(pgm.win, 17, 02, ft_close, &pgm);
+	//mlx_loop(pgm.mlx);
+	ft_free_tab_2d(all);
+	ft_free_tab_2d(pgm.map);
+	ft_free_tab_2d(pgm.param);
+	return (0);
 }
 // int	main(int ac, char **av)
 //{

@@ -1,4 +1,4 @@
-#include "../function.h"
+#include "../includes/function.h"
 
 int	ft_is_space(char c)
 {
@@ -125,7 +125,6 @@ char	**cpy_tab(char **srcs, int nb_line)
 			j++;
 		}
 		i++;
-		
 	}
 	new_tab[j] = NULL;
 	return (new_tab);
