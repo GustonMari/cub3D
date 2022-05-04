@@ -19,5 +19,6 @@ void	ft_bicolor(t_ptr *pgm, int color_floor, int color_ceil)
 		}
 		i++;
 	}
-	//mlx_put_image_to_window(pgm->mlx, pgm->win, pgm->image.img, 0, 0);
+	//WARNING a enlever
+	mlx_put_image_to_window(pgm->mlx, pgm->win, pgm->image.img, 0, 0);
 }

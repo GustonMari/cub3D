@@ -79,9 +79,29 @@ int	convert_param_2(t_ptr *pgm, char *str_param, int dir)
 	if (convert_cardinal_points(pgm, path, dir) == FALSE)
 	{
 		ft_putstr_error("Error\nImpossible to open texture\n");
+		free(path);
 		return (FALSE);
 	}
+	free(path);
 	return (TRUE);
+}
+
+/*Permet la converion des chiffres (exe: 255,0,0) 
+vers l'int qui serra stocke par la suite dans la struct*/
+
+void	convert_floor_ceil(t_ptr *pgm, char *path, int dir)
+{
+	char	**tab;
+
+	tab = ft_split(path, ", ");
+	if (dir == FLOOR)
+		pgm->floor = create_color(0,
+				ft_atoi(tab[0]), ft_atoi(tab[1]), ft_atoi(tab[2]));
+	if (dir == CEIL)
+		pgm->ceil = create_color(0,
+				ft_atoi(tab[0]), ft_atoi(tab[1]), ft_atoi(tab[2]));
+	free(path);
+	ft_free_tab_2d(tab);
 }
 
 /*Converti les param et les mets dans la structure*/
@@ -117,9 +137,14 @@ int	convert_param(t_ptr *pgm)
 			if (convert_param_2(pgm, &pgm->param[i][j], WE) == FALSE)
 				return (FALSE);
 		}
-		// if (ft_strncmp(pgm->param[i], "F", 1) == TRUE)
-		// if (ft_strncmp(pgm->param[i], "C", 1) == TRUE)
+		if (ft_strncmp(pgm->param[i], "F", 1) == TRUE)
+		{
+			convert_floor_ceil(pgm, convert_cardinal_path(find_cardinal_path(&pgm->param[i][j])), FLOOR);
+		}
+		if (ft_strncmp(pgm->param[i], "C", 1) == TRUE)
+			convert_floor_ceil(pgm, convert_cardinal_path(find_cardinal_path(&pgm->param[i][j])), CEIL);
 		i++;
 	}
+	//ft_bicolor(pgm, pgm->floor, pgm->ceil);
 	return (TRUE);
 }

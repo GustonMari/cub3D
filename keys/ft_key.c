@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 14:33:29 by gmary             #+#    #+#             */
-/*   Updated: 2022/05/03 13:04:48 by gmary            ###   ########.fr       */
+/*   Updated: 2022/05/04 10:31:03 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,10 @@
 int	ft_close(t_ptr *pgm)
 {
 	mlx_destroy_image(pgm->mlx, pgm->image.img);
+	mlx_destroy_image(pgm->mlx, pgm->no);
+	mlx_destroy_image(pgm->mlx, pgm->so);
+	mlx_destroy_image(pgm->mlx, pgm->we);
+	mlx_destroy_image(pgm->mlx, pgm->ea);
 	mlx_destroy_window(pgm->mlx, pgm->win);
 	mlx_destroy_display(pgm->mlx);
 	ft_free_tab_2d(pgm->map);

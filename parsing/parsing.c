@@ -57,10 +57,10 @@ char	**parsing(int argc, char **argv, int *nb_line)
 	char	**map;
 
 	if (argc != 2)
-    {
-        ft_putstr_error("Error, wrong number of arguments\n");
-        exit(0);
-    }
+	{
+		ft_putstr_error("Error, wrong number of arguments\n");
+		exit(0);
+	}
 	*nb_line = ft_count_line_map(argv[1]);
 	if (*nb_line == -1)
 	{
@@ -69,15 +69,15 @@ char	**parsing(int argc, char **argv, int *nb_line)
 	}
 	map = ft_calloc(sizeof(char *), (*nb_line + 1));
 	if (!map)
-    {
-        ft_putstr_error("Error\nCalloc failed\n");
-        exit(0);
-    }
+	{
+		ft_putstr_error("Error\nCalloc failed\n");
+		exit(0);
+	}
 	map = ft_convert_map(map, argv[1]);
 	if (!map)
 	{
-        ft_putstr_error("Malloc failed\n");
-        exit(0);
-    }
+		ft_putstr_error("Malloc failed\n");
+		exit(0);
+	}
 	return (map);
 }

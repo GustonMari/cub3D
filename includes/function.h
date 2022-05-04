@@ -22,6 +22,8 @@
 # define SO 101
 # define EA 102
 # define WE 103
+# define FLOOR 104
+# define CEIL 105
 
 typedef struct s_coord
 {
@@ -61,8 +63,9 @@ typedef struct s_ptr
 	void	*so;
 	void	*we;
 	void	*ea;
+	int		floor;
+	int		ceil;
 }				t_ptr;
-
 
 /*
 ------------------MLX-------------------------
