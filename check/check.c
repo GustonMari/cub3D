@@ -102,6 +102,9 @@ int ft_check(char **all, char *name, int nb_line, t_ptr *pgm)
 		if (check_map(map, ft_count_line(map)) == FALSE)
 		{
 			ft_putstr_error("Error\nWrong map\n");
+			ft_free_tab_2d(all);
+			ft_free_tab_2d(map);
+			ft_free_tab_2d(param);
 			return (FALSE);
 		}
 	}

@@ -3,12 +3,10 @@ SO ./texture/dofus.xpm
 EA ./texture/dofup.xpm
 WE ./texture/grass.xpm
 
-a
-
 F 200,100,0
 C 225,30,0
 
 11111111
-10110101
+10110101p
 1110N011
 11111111
