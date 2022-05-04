@@ -163,4 +163,10 @@ char    **ft_split(char *str, char *charset);
 
 int	ft_close(t_ptr *pgm);
 
+/*
+------------------KEYS--------------------------
+*/
+
+int	key_main(int key, t_ptr *pgm);
+
 #endif

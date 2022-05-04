@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 14:33:29 by gmary             #+#    #+#             */
-/*   Updated: 2022/05/04 10:31:03 by gmary            ###   ########.fr       */
+/*   Updated: 2022/05/04 10:45:35 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,14 @@
 int	ft_close(t_ptr *pgm)
 {
 	mlx_destroy_image(pgm->mlx, pgm->image.img);
-	mlx_destroy_image(pgm->mlx, pgm->no);
-	mlx_destroy_image(pgm->mlx, pgm->so);
-	mlx_destroy_image(pgm->mlx, pgm->we);
-	mlx_destroy_image(pgm->mlx, pgm->ea);
+	if (pgm->no)
+		mlx_destroy_image(pgm->mlx, pgm->no);
+	if (pgm->so)
+		mlx_destroy_image(pgm->mlx, pgm->so);
+	if (pgm->we)
+		mlx_destroy_image(pgm->mlx, pgm->we);
+	if (pgm->ea)
+		mlx_destroy_image(pgm->mlx, pgm->ea);
 	mlx_destroy_window(pgm->mlx, pgm->win);
 	mlx_destroy_display(pgm->mlx);
 	ft_free_tab_2d(pgm->map);
@@ -27,7 +31,7 @@ int	ft_close(t_ptr *pgm)
 	exit(0);
 }
 
-void	key_main(int key, t_ptr *pgm)
+int	key_main(int key, t_ptr *pgm)
 {
 	if (key == XK_Escape)
 		ft_close(pgm);
@@ -47,6 +51,7 @@ void	key_main(int key, t_ptr *pgm)
 		printf("UP\n");
 	if (key == XK_Down)
 		printf("DOWN\n");
+	return (0);
 }
 
 int	key_manager(int key, t_ptr *pgm)
