@@ -95,7 +95,6 @@ int ft_check(char **all, char *name, int nb_line, t_ptr *pgm)
 		map = adjust_map(map, ft_count_line(map));
 		pgm->map = map;
 		pgm->param = param;
-		//ft_free_tab_2d(all);
 		//WARNING
 		if (!map)
 			return (FALSE);

@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 09:20:55 by gmary             #+#    #+#             */
-/*   Updated: 2022/05/04 10:47:20 by gmary            ###   ########.fr       */
+/*   Updated: 2022/05/04 13:03:06 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,9 @@ int main(int argc, char **argv)
 	all = parsing(argc, argv, &nb_line);
 	if (ft_check(all, argv[1], nb_line, &pgm) == FALSE)
 	{
-		printf("Probleme maaaap\n");
+		printf("Probleme file-----------------------------------------\n");
 		return (1);
 	}
-	else
-		printf("c'est bon\n");
 	pgm_image_init(&pgm, &pgm.image);
 	if (convert_param(&pgm) == FALSE)
 	{
@@ -57,6 +55,7 @@ int main(int argc, char **argv)
 		ft_close(&pgm);
 		return (1);
 	}
+	launch_game(&pgm);
 	ft_free_tab_2d(all);
 	mlx_key_hook(pgm.win, &key_main, &pgm);
 	mlx_hook(pgm.win, 17, 02, ft_close, &pgm);

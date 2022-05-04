@@ -33,6 +33,7 @@ SRC = main.c \
 			parsing/parsing.c \
 			parsing/convert_param.c \
 			parsing/adjust_map.c \
+			parsing/launch_game.c \
 			init/init.c \
 			error/error.c \
 			check/check.c \

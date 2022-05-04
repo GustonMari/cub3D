@@ -112,9 +112,11 @@ int	convert_param(t_ptr *pgm)
 	int		j;
 
 	i = 0;
+	//print_tab_2d(pgm->param);
 	while (pgm->param[i])
 	{
 		j = 0;
+
 		while (pgm->param[i][j] && (ft_is_space(pgm->param[i][j]) == TRUE))
 			j++;
 		if (ft_strncmp(pgm->param[i], "NO", 2) == TRUE)

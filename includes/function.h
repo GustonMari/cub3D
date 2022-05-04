@@ -29,7 +29,8 @@ typedef struct s_coord
 {
 	int	x;
 	int	y;
-	int	direction;
+	int	direction_x;
+	int	direction_y;
 }				t_coord;
 
 typedef struct s_save
@@ -144,6 +145,12 @@ void	ft_putstr_error(char *s);
 */
 
 char	**parsing(int argc, char **argv, int *nb_line);
+
+/*
+------------------INIT GAME-------------------------
+*/
+
+void	launch_game(t_ptr *pgm);
 
 /*
 ------------------CONVERT PARAM-------------------------
