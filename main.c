@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 09:20:55 by gmary             #+#    #+#             */
-/*   Updated: 2022/05/04 10:43:49 by gmary            ###   ########.fr       */
+/*   Updated: 2022/05/04 10:47:20 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int main(int argc, char **argv)
 	if (ft_check(all, argv[1], nb_line, &pgm) == FALSE)
 	{
 		printf("Probleme maaaap\n");
+		return (1);
 	}
 	else
 		printf("c'est bon\n");

@@ -1,9 +1,9 @@
 NO ./texture/Face.xpm
 SO ./texture/dofus.xpm
 EA ./texture/dofup.xpm
-WE ./texture/grass.xpmmdr
+WE ./texture/grass.xpm
 
-
+a
 
 F 200,100,0
 C 225,30,0
