@@ -4,23 +4,31 @@ void	get_direction(t_ptr *pgm, char c)
 {
 	if (c == 'N')
 	{
-		pgm->coord.direction_x = 0;
-		pgm->coord.direction_y = -1;
+		pgm->coord.direction_x = 1.0;
+		pgm->coord.direction_y = -1.0;
+		// pgm->coord.plane_x = 0.62;
+		// pgm->coord.plane_y = 0.0;
 	}
 	else if (c == 'S')
 	{
-		pgm->coord.direction_x = 0;
+		pgm->coord.direction_x = 0.0;
 		pgm->coord.direction_y = 1;
+		// pgm->coord.plane_x = -0.62;
+		// pgm->coord.plane_y = 0.0;
 	}
 	else if (c == 'E')
 	{
-		pgm->coord.direction_x = 1;
-		pgm->coord.direction_y = 0;
+		pgm->coord.direction_x = 1.0;
+		pgm->coord.direction_y = 0.0;
+		// pgm->coord.plane_x = 0.0;
+		// pgm->coord.plane_y = 0.62;
 	}
 	else if (c == 'W')
 	{
-		pgm->coord.direction_x = -1;
-		pgm->coord.direction_y = 0;
+		pgm->coord.direction_x = -1.0;
+		pgm->coord.direction_y = 0.0;
+		// pgm->coord.plane_x = 0.0;
+		// pgm->coord.plane_y = -0.62;
 	}
 }
 void	find_pos(t_ptr *pgm)
@@ -101,6 +109,7 @@ void	find_impact(t_ptr *pgm)
 			pgm->coord.box_y += pgm->coord.move_y;
 			pgm->coord.impact_point = 1;
 		}
+		//WARNING a voir si oon doit inverser x et y
 		if (pgm->map[pgm->coord.box_y][pgm->coord.box_x] == '1')
 			impact = 1;
 	}
@@ -118,7 +127,7 @@ void	ray_casting(t_ptr *pgm, int i)
 {
 	pgm->coord.box_x = (int)pgm->coord.x;
 	pgm->coord.box_y = (int)pgm->coord.y;
-	pgm->coord.pos_x_camera = 2 * i / WIDTH - 1;
+	pgm->coord.pos_x_camera = 2 * i / (double)WIDTH - 1;
 	pgm->coord.ray_dir_x = pgm->coord.direction_x + (pgm->coord.plane_x * pgm->coord.pos_x_camera);
 	pgm->coord.ray_dir_y = pgm->coord.direction_y + (pgm->coord.plane_y * pgm->coord.pos_x_camera);
 	if (pgm->coord.ray_dir_x == 0)
@@ -133,19 +142,27 @@ void	ray_casting(t_ptr *pgm, int i)
 
 void	paint_world(t_ptr *pgm, double i, double angle)
 {
-	// int		top;
-	// int		bottom;
-	(void)i;
+	int		top;
+	int		bottom;
+	(void)angle;
 
 	if (pgm->coord.impact_point == 0)
-		pgm->coord.real_distance = pgm->coord.all_dist_box_x * cos(angle); 
+		pgm->coord.real_distance = pgm->coord.all_dist_box_x - pgm->coord.delta_dist_x;
 	else
-		pgm->coord.real_distance = pgm->coord.all_dist_box_y * cos(angle);
-	//ft_bicolor(pgm, pgm->floor, pgm->ceil);
-	// top = HEIGHT / 2 + (int)(HEIGHT / (pgm->coord.real_distance * 2));
-	// //WARNING
-	// bottom = HEIGHT / 2 - (int)(HEIGHT / (pgm->coord.real_distance * 2));
-	// ft_vertical(i, top, bottom, pgm);
+		pgm->coord.real_distance = pgm->coord.all_dist_box_y - pgm->coord.delta_dist_y;
+	
+	//if (pgm->coord.impact_point == 0)
+	//	pgm->coord.real_distance = pgm->coord.all_dist_box_x /* * cos(angle) */; 
+	//else
+	//	pgm->coord.real_distance = pgm->coord.all_dist_box_y /* * cos(angle) */;
+	top = HEIGHT / 2 - (int)(HEIGHT / (pgm->coord.real_distance * 2));
+	 if (top < 0)
+	 	top = 0;
+	//WARNING
+	bottom = HEIGHT / 2 + (int)(HEIGHT / (pgm->coord.real_distance * 2));
+	if (bottom > HEIGHT)
+		bottom = HEIGHT - 1;
+	ft_vertical(i, top, bottom, pgm);
 }
 
 /*
@@ -162,16 +179,18 @@ void	launch_game(t_ptr *pgm)
 	double	i;
 	double	angle;
 	double	coef;
-
-	i = 0;
+pgm->coord.plane_x = 0.0;
 	angle = 31.0;
 	coef = 62.0 / WIDTH;
 	find_pos(pgm);
 	pgm->coord.plane_x = 0.0;
+	//BIG BIG WARNING
 	pgm->coord.plane_y = 0.62;
+	//pgm->coord.plane_y = 0.00;
+	//pgm->coord.plane_y = 2 * atan(0.62 / 1.0);
+	//pgm->coord.plane_y = 0.0;
 	//inserer boucle infini
 	ft_bicolor(pgm, pgm->floor, pgm->ceil);
-	mlx_put_image_to_window(pgm->mlx, pgm->win, pgm->image.img, 0, 0);
 	while (i < WIDTH)
 	{
 		ray_casting(pgm, i);
@@ -184,7 +203,7 @@ void	launch_game(t_ptr *pgm)
 			angle += coef;
 		i++;
 	}
-	//mlx_put_image_to_window(pgm->mlx, pgm->win, pgm->image.img, 0, 0);
+	mlx_put_image_to_window(pgm->mlx, pgm->win, pgm->image.img, 0, 0);
 
 }
 

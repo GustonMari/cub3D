@@ -24,7 +24,6 @@ int	convert_cardinal_points(t_ptr *pgm, char *path, int dir)
 {
 	if (dir == NO)
 	{
-		fprintf(stderr, "param[i][j]: |%s|\n", path);
 		pgm->no = mlx_xpm_file_to_image(pgm->mlx, path,
 				&pgm->image.width, &pgm->image.height);
 		if (pgm->no == NULL)
