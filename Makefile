@@ -22,7 +22,7 @@ SRC = main.c \
 			get_next_line/get_next_line.c \
 			get_next_line/get_next_line_utils.c \
 			keys/ft_key.c \
-			utils/ft_bicolors.c \
+			utils/draw.c \
 			utils/colors.c \
 			utils/ft_calloc.c \
 			utils/ft_split.c \

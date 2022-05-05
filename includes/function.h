@@ -49,6 +49,11 @@ typedef struct s_coord
 	double	ray_dir_y;
 	double	delta_dist_x;
 	double	delta_dist_y;
+	double	all_dist_box_x;
+	double	all_dist_box_y;
+	double	move_x;
+	double	move_y;
+	double	impact_point;
 }				t_coord;
 
 typedef struct s_save
@@ -192,5 +197,11 @@ int	ft_close(t_ptr *pgm);
 */
 
 int	key_main(int key, t_ptr *pgm);
+
+/*
+------------------COLOR--------------------------
+*/
+
+int	ft_vertical(int x, int top, int bottom, t_ptr *pgm);
 
 #endif
