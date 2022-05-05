@@ -54,6 +54,7 @@ typedef struct s_coord
 	double	move_x;
 	double	move_y;
 	double	impact_point;
+	double	real_distance;
 }				t_coord;
 
 typedef struct s_save

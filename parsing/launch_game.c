@@ -25,8 +25,8 @@ void	get_direction(t_ptr *pgm, char c)
 }
 void	find_pos(t_ptr *pgm)
 {
-	double		i;
-	double		j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (pgm->map[i])
@@ -36,8 +36,8 @@ void	find_pos(t_ptr *pgm)
 		{
 			if (check_start_char(pgm->map[i][j]) == TRUE)
 			{
-				pgm->coord.x = j;
-				pgm->coord.y = i;
+				pgm->coord.x = (double)j;
+				pgm->coord.y = (double)i;
 				get_direction(pgm, pgm->map[i][j]);
 			}
 			j++;
@@ -75,6 +75,11 @@ void	find_intersection(t_ptr *pgm)
 		pgm->coord.all_dist_box_y = (pgm->coord.box_y + 1.0 - pgm->coord.y) * pgm->coord.delta_dist_y;
 	}
 }
+
+/*
+	Permet de trouver le point d'impact du rayon avec un mur (x et y)
+	si impact = 0 alors le rayon a taper un x cest a dire une ligne VERTICAL ATTENTION
+*/
 
 void	find_impact(t_ptr *pgm)
 {
@@ -114,8 +119,8 @@ void	ray_casting(t_ptr *pgm, int i)
 	pgm->coord.box_x = (int)pgm->coord.x;
 	pgm->coord.box_y = (int)pgm->coord.y;
 	pgm->coord.pos_x_camera = 2 * i / WIDTH - 1;
-	pgm->coord.ray_dir_x = pgm->coord.direction_x + pgm->coord.plane_x * pgm->coord.pos_x_camera;
-	pgm->coord.ray_dir_y = pgm->coord.direction_y + pgm->coord.plane_y * pgm->coord.pos_x_camera;
+	pgm->coord.ray_dir_x = pgm->coord.direction_x + (pgm->coord.plane_x * pgm->coord.pos_x_camera);
+	pgm->coord.ray_dir_y = pgm->coord.direction_y + (pgm->coord.plane_y * pgm->coord.pos_x_camera);
 	if (pgm->coord.ray_dir_x == 0)
 		pgm->coord.delta_dist_x = pow(10, 30);
 	else
@@ -126,35 +131,61 @@ void	ray_casting(t_ptr *pgm, int i)
 		pgm->coord.delta_dist_y = fabs(1 / pgm->coord.ray_dir_y);
 }
 
-void	paint_world(t_ptr *pgm)
+void	paint_world(t_ptr *pgm, double i, double angle)
 {
-	ft_bicolor(pgm, pgm->floor, pgm->ceil);
-	ft_vertical();
-	mlx_put_image_to_window(pgm->mlx, pgm->win, pgm->image.img, 0, 0);
+	// int		top;
+	// int		bottom;
+	(void)i;
+
+	if (pgm->coord.impact_point == 0)
+		pgm->coord.real_distance = pgm->coord.all_dist_box_x * cos(angle); 
+	else
+		pgm->coord.real_distance = pgm->coord.all_dist_box_y * cos(angle);
+	//ft_bicolor(pgm, pgm->floor, pgm->ceil);
+	// top = HEIGHT / 2 + (int)(HEIGHT / (pgm->coord.real_distance * 2));
+	// //WARNING
+	// bottom = HEIGHT / 2 - (int)(HEIGHT / (pgm->coord.real_distance * 2));
+	// ft_vertical(i, top, bottom, pgm);
 }
 
 /*
-	on a pris un FOV de 0.62 car on a fait 
+	on a pris un FOV de 0.62 car on a fait
 	2 * tan-1(0.62/1.0) = 62
+	tant qu'on est avant la droite du vecteur dir,
+	on va decrementer l'angle (qui est egal a la moitie du FOV -> 31)
+	par le coeficient coef qui se calcul en fonction de notre
+	definition de la largeur de l'ecran. Puis quand on depasse la droite on incremente.
 */
 
 void	launch_game(t_ptr *pgm)
 {
 	double	i;
+	double	angle;
+	double	coef;
 
 	i = 0;
+	angle = 31.0;
+	coef = 62.0 / WIDTH;
 	find_pos(pgm);
-	pgm->coord.plane_x = 0;
+	pgm->coord.plane_x = 0.0;
 	pgm->coord.plane_y = 0.62;
 	//inserer boucle infini
+	ft_bicolor(pgm, pgm->floor, pgm->ceil);
+	mlx_put_image_to_window(pgm->mlx, pgm->win, pgm->image.img, 0, 0);
 	while (i < WIDTH)
 	{
 		ray_casting(pgm, i);
 		find_intersection(pgm);
 		find_impact(pgm);
-		paint_world(pgm, i);
+		paint_world(pgm, i, angle);
+		if (i < WIDTH / 2)
+			angle -= coef;
+		else
+			angle += coef;
 		i++;
 	}
+	//mlx_put_image_to_window(pgm->mlx, pgm->win, pgm->image.img, 0, 0);
+
 }
 
 /*

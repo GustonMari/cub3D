@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 09:20:55 by gmary             #+#    #+#             */
-/*   Updated: 2022/05/04 13:03:06 by gmary            ###   ########.fr       */
+/*   Updated: 2022/05/05 15:14:11 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 /* void	pgm_image_init(t_ptr *pgm, t_data *image)
 {
 	pgm->mlx = mlx_init();
-	pgm->win = mlx_new_window(pgm->mlx, HT, WT, "hello");
-	pgm->image.img = mlx_new_image(pgm->mlx, HT, WT);
+	pgm->win = mlx_new_window(pgm->mlx, HEIGHT, WIDTH, "hello");
+	pgm->image.img = mlx_new_image(pgm->mlx, HEIGHT, WIDTH);
 	pgm->image.addr = mlx_get_data_addr(image->img,
 			&image->bpp, &image->line_length, &image->endian);
 	// pgm->check.no = 0;

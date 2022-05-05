@@ -1,7 +1,7 @@
 NAME = cub3d
 #CLEANHEREDOC = srcs/heredoc/clean_heredoc
 
-LIBINC = -L minilibx-linux -lmlx -lX11 -lXext
+LIBINC = -L minilibx-linux -lmlx -lX11 -lXext -lm
 
 SRCDIR = srcs
 OBJDIR = objs

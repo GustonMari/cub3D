@@ -8,12 +8,12 @@ void	ft_bicolor(t_ptr *pgm, int color_floor, int color_ceil)
 	int	j;
 
 	i = 0;
-	while (i < WT)
+	while (i < WIDTH)
 	{
 		j = 0;
-		while (j < HT)
+		while (j < HEIGHT)
 		{
-			if (j < HT / 2)
+			if (j < HEIGHT / 2)
 				my_mlx_pixel_put(&pgm->image, i, j, color_ceil);
 			else
 				my_mlx_pixel_put(&pgm->image, i, j, color_floor);
