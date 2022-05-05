@@ -12,25 +12,43 @@
 // check dans le makefile
 # include <X11/keysym.h>
 # include <unistd.h>
+# include <math.h>
 # include "get_next_line.h"
 # define TRUE 0
 # define FALSE 1
 # define FULL 10
-# define HT 1000
-# define WT 1000
+# define HEIGHT 480
+# define WIDTH 640
 # define NO 100
 # define SO 101
 # define EA 102
 # define WE 103
 # define FLOOR 104
 # define CEIL 105
+# define FOV 0.62
+
+/*
+	box_x et y sont les coordonnees de la du carre ou le joueur se trouve
+	direction_x et y sont les directions du joueur (par exmple N au depart))
+	plane_x et y sont les coordonnees du plan de vision du joueur
+	et x et y correspond a la valeur de la position du joueur precise
+*/
 
 typedef struct s_coord
 {
-	int	x;
-	int	y;
-	int	direction_x;
-	int	direction_y;
+	double	x;
+	double	y;
+	double	direction_x;
+	double	direction_y;
+	double	plane_x;
+	double	plane_y;
+	int		box_x;
+	int		box_y;
+	double	pos_x_camera;
+	double	ray_dir_x;
+	double	ray_dir_y;
+	double	delta_dist_x;
+	double	delta_dist_y;
 }				t_coord;
 
 typedef struct s_save
@@ -83,7 +101,6 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 int		create_color(int t, int r, int g, int b);
 void	ft_bicolor(t_ptr *pgm, int color_floor, int color_ceil);
 void	pgm_image_init(t_ptr *pgm, t_data *image);
-
 
 /*
 ------------------GNL---------------------------

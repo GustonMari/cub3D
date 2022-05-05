@@ -23,7 +23,7 @@ int	check_color_space(char *str)
 		if (k < 2)
 		{
 			if (str[i] && ft_strncmp(&str[i], ",", 1))
-			return (FALSE);
+				return (FALSE);
 		}
 		else
 		{
@@ -70,7 +70,7 @@ les parametres F et C sont bien formattes
 F 220,100,0 --> espace, bon nombre de virgules
 et chiffres pas superieurs a 255 ni inferieur a 0*/
 
-int check_color(char *str)
+int	check_color(char *str)
 {
 	if (check_color_space(str) == FALSE)
 		return (FALSE);

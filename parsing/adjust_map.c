@@ -2,7 +2,7 @@
 
 char	**adjust_map(char **map, int nb_line)
 {
-	int 	i;
+	int		i;
 	int		max_len;
 	char	**new_map;
 
@@ -27,7 +27,6 @@ char	**adjust_map(char **map, int nb_line)
 			if (!new_map)
 				return (NULL);
 		}
-
 		i++;
 	}
 	//print_tab_2d(map);

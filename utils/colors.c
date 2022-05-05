@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 11:38:10 by gmary             #+#    #+#             */
-/*   Updated: 2022/05/03 13:05:04 by gmary            ###   ########.fr       */
+/*   Updated: 2022/05/05 09:59:42 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ int	ft_black(t_ptr *pgm)
 	int	y;
 
 	y = 0;
-	while (y < HT)
+	while (y < HEIGHT)
 	{
 		x = 0;
-		while (x < WT)
+		while (x < WIDTH)
 		{
 			my_mlx_pixel_put(&pgm->image, x, y, create_color(0, 0, 0, 0));
 			x++;
@@ -31,6 +31,18 @@ int	ft_black(t_ptr *pgm)
 	return (0);
 }
 
+int	ft_vertical(int x, int top, int bottom, t_ptr *pgm)
+{
+	int	i;
+
+	i = top;
+	while (i < bottom)
+	{
+		my_mlx_pixel_put(&pgm->image, x, i, create_color(0, 255, 0, 0));
+		i++;
+	}
+	return (0);
+}
 /* 0xTTRRGGBB, 0x00FF0000 => red equivaut a (0,255,0,0), 0xFFFFFF => white */
 int	create_color(int t, int r, int g, int b)
 {
