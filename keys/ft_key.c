@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 14:33:29 by gmary             #+#    #+#             */
-/*   Updated: 2022/05/06 17:12:08 by gmary            ###   ########.fr       */
+/*   Updated: 2022/05/06 17:35:53 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,32 @@ void	key_down(t_ptr *pgm)
 		pgm->coord.y -= pgm->coord.ray_dir_y;
 }
 
+void	key_left(t_ptr *pgm)
+{
+	double old_dir_x;
+	double old_plane_x;
+
+	old_dir_x = pgm->coord.direction_x;
+	pgm->coord.direction_x = pgm->coord.direction_x * cos(-0.1) - pgm->coord.direction_y * sin(-0.1);
+	pgm->coord.direction_y = old_dir_x * sin(-0.1) + pgm->coord.direction_y * cos(-0.1);
+	old_plane_x = pgm->coord.plane_x;
+	pgm->coord.plane_x = pgm->coord.plane_x * cos(-0.1) - pgm->coord.plane_y * sin(-0.1);
+	pgm->coord.plane_y = old_plane_x * sin(-0.1) + pgm->coord.plane_y * cos(-0.1);
+}
+
+void	key_right(t_ptr *pgm)
+{
+	double old_dir_x;
+	double old_plane_x;
+
+	old_dir_x = pgm->coord.direction_x;
+	pgm->coord.direction_x = pgm->coord.direction_x * cos(0.1) - pgm->coord.direction_y * sin(0.1);
+	pgm->coord.direction_y = old_dir_x * sin(0.1) + pgm->coord.direction_y * cos(0.1);
+	old_plane_x = pgm->coord.plane_x;
+	pgm->coord.plane_x = pgm->coord.plane_x * cos(0.1) - pgm->coord.plane_y * sin(0.1);
+	pgm->coord.plane_y = old_plane_x * sin(0.1) + pgm->coord.plane_y * cos(0.1);
+}
+
 int	key_main(int key, t_ptr *pgm)
 {
 	if (key == XK_Escape)
@@ -72,8 +98,6 @@ int	key_main(int key, t_ptr *pgm)
 		key_up(pgm);
 	if (key == XK_Down)
 		key_down(pgm);
-	// printf("x: %f\n", pgm->coord.x);
-	// printf("y: %f\n", pgm->coord.y);
 	// if (key == XK_w || key == XK_Up)
 	// 	key_up(pgm);
 	// if (key == XK_s || key == XK_Down)
@@ -82,10 +106,10 @@ int	key_main(int key, t_ptr *pgm)
 	// 	printf("a\n");
 	// if (key == XK_d)
 	// 	printf("d\n");
-	// if (key == XK_Left)
-	// 	printf("LEFT\n");
-	// if (key == XK_Right)
-	// 	printf("RIGHT\n");
+	if (key == XK_Left)
+		key_left(pgm);
+	if (key == XK_Right)
+		key_right(pgm);
 	return (0);
 }
 

@@ -191,23 +191,26 @@ void	paint_world(t_ptr *pgm, double i, double angle)
 
 	shade = 0;
 	if (pgm->coord.impact_point == 0)
+	{
 		//mapX - rayPosX + (1 - stepX) / 2) / rayDirX
 		//pgm->coord.real_distance = fabs((pgm->coord.all_dist_box_x - pgm->coord.delta_dist_x + (1 - pgm->coord.move_x) / 2) / pgm->coord.ray_dir_x);
 		//pgm->coord.real_distance = (pgm->coord.all_dist_box_x - pgm->coord.delta_dist_x + (1 - pgm->coord.move_x) / 2);
+		shade = 1;
 		pgm->coord.real_distance = fabs(pgm->coord.all_dist_box_x - pgm->coord.delta_dist_x);
+	}
 	else
 	{
-		shade = 1;
+
 		//pgm->coord.real_distance = fabs((pgm->coord.all_dist_box_y - pgm->coord.delta_dist_y + (1 - pgm->coord.move_y) / 2) / pgm->coord.ray_dir_y);
 		//pgm->coord.real_distance = (pgm->coord.all_dist_box_y - pgm->coord.delta_dist_y + (1 - pgm->coord.move_y) / 2);
 		pgm->coord.real_distance = fabs(pgm->coord.all_dist_box_y - pgm->coord.delta_dist_y);
 	}
 
 	
-	//if (pgm->coord.impact_point == 0)
-	//	pgm->coord.real_distance = pgm->coord.all_dist_box_x /* * cos(angle) */; 
-	//else
-	//	pgm->coord.real_distance = pgm->coord.all_dist_box_y /* * cos(angle) */;
+	// if (pgm->coord.impact_point == 0)
+	// 	pgm->coord.real_distance = pgm->coord.all_dist_box_x * cos(angle); 
+	// else
+	// 	pgm->coord.real_distance = pgm->coord.all_dist_box_y * cos(angle);
 	top = HEIGHT / 2 - (int)(HEIGHT / (pgm->coord.real_distance * 2));
 	 if (top < 0)
 	 	top = 0;
