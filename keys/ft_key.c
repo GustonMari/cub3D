@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 14:33:29 by gmary             #+#    #+#             */
-/*   Updated: 2022/05/06 15:23:28 by gmary            ###   ########.fr       */
+/*   Updated: 2022/05/06 17:12:08 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,17 @@ void	key_up(t_ptr *pgm)
 	fprintf(stderr, "key_up\n");
 	//if (pgm->map[(int)(pgm->coord.x + pgm->coord.ray_dir_x)][(int)pgm->coord.y] != '1')
 	//	pgm->coord.x += pgm->coord.ray_dir_x;
-	fprintf(stderr, "UP----------------- x: %f y: %f\n", pgm->coord.x, (pgm->coord.y - pgm->coord.ray_dir_y));
-	fprintf(stderr, "UP----------------- x: %d y: %d\n", (int)pgm->coord.x, (int)(pgm->coord.y - pgm->coord.ray_dir_y));
-	if (pgm->map[(int)(pgm->coord.x)][(int)(pgm->coord.y + pgm->coord.ray_dir_y)] != '1')
-		pgm->coord.y += pgm->coord.ray_dir_y;
+	fprintf(stderr, "x: %f\n", pgm->coord.x);
+	fprintf(stderr, "y: %f\n", pgm->coord.y);
+	//fprintf(stderr, "")
+	
+	fprintf(stderr, "next case = |%c|\n", pgm->map[(int)(pgm->coord.y + pgm->coord.ray_dir_y)][(int)(pgm->coord.x)]);
+	// if (pgm->map[(int)(pgm->coord.x)][(int)(pgm->coord.y - pgm->coord.ray_dir_y)] != '1')
+	// 	pgm->coord.y += pgm->coord.ray_dir_y;
+	if (pgm->map[(int)(pgm->coord.y + pgm->coord.ray_dir_y)][(int)(pgm->coord.x)] != '1')
+	 	pgm->coord.y += pgm->coord.ray_dir_y;
+
+
 	////if (pgm->map[(int)(pgm->coord.x + pgm->coord.ray_dir_x)][(int)pgm->coord.y] != '1')
 	//	pgm->coord.x += pgm->coord.ray_dir_x;
 	////if (pgm->map[(int)(pgm->coord.x)][(int)(pgm->coord.y + pgm->coord.ray_dir_y)] != '1')
@@ -50,9 +57,10 @@ void	key_down(t_ptr *pgm)
 {
 	//if (pgm->map[(int)(pgm->coord.x - pgm->coord.ray_dir_x)][(int)pgm->coord.y] != '1')
 	//	pgm->coord.x -= pgm->coord.ray_dir_x;
-	fprintf(stderr, "DOWN----------------- x: %f y: %f\n", pgm->coord.x, (pgm->coord.y - pgm->coord.ray_dir_y));
-	fprintf(stderr, "DOWN----------------- x: %d y: %d\n", (int)pgm->coord.x, (int)(pgm->coord.y - pgm->coord.ray_dir_y));
-	if (pgm->map[(int)(pgm->coord.x)][(int)(pgm->coord.y - pgm->coord.ray_dir_y)] != '1')
+	printf("x: %f\n", pgm->coord.x);
+	printf("y: %f\n", pgm->coord.y);
+	fprintf(stderr, "back case = |%c|\n", pgm->map[(int)(pgm->coord.y)][(int)(pgm->coord.x - pgm->coord.ray_dir_x)]);
+	if (pgm->map[(int)(pgm->coord.y - pgm->coord.ray_dir_y)][(int)(pgm->coord.x)] != '1')
 		pgm->coord.y -= pgm->coord.ray_dir_y;
 }
 
@@ -64,8 +72,8 @@ int	key_main(int key, t_ptr *pgm)
 		key_up(pgm);
 	if (key == XK_Down)
 		key_down(pgm);
-	printf("x: %f\n", pgm->coord.x);
-	printf("y: %f\n", pgm->coord.y);
+	// printf("x: %f\n", pgm->coord.x);
+	// printf("y: %f\n", pgm->coord.y);
 	// if (key == XK_w || key == XK_Up)
 	// 	key_up(pgm);
 	// if (key == XK_s || key == XK_Down)

@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 09:20:55 by gmary             #+#    #+#             */
-/*   Updated: 2022/05/06 14:35:22 by gmary            ###   ########.fr       */
+/*   Updated: 2022/05/06 16:57:30 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ int main(int argc, char **argv)
 	//ft_bicolor(&pgm, pgm.floor, pgm.ceil);
 	//mlx_put_image_to_window(&pgm.mlx, &pgm.win, &pgm.image.img, 0, 0);
 	find_pos(&pgm);
+	fprintf(stderr, "map = %c\n", pgm.map[9][2]);
 	launch_game(&pgm);
 	ft_free_tab_2d(all);
 	mlx_key_hook(pgm.win, &key_manager, &pgm);
