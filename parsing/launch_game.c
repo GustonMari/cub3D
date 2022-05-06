@@ -1,69 +1,76 @@
 #include "../includes/function.h"
 
+// void	get_direction(t_ptr *pgm, char c)
+// {
+// 	if (c == 'N')
+// 	{
+// 		pgm->coord.direction_x = -1.0;
+// 		pgm->coord.direction_y = 0;
+// 		pgm->coord.plane_x = 0.0;
+// 		pgm->coord.plane_y = 0.62;
+// 	}
+// 	else if (c == 'S')
+// 	{
+// 		pgm->coord.direction_x = 1.0;
+// 		pgm->coord.direction_y = 0;
+// 		pgm->coord.plane_x = 0.0;
+// 		pgm->coord.plane_y = -0.62;
+// 	}
+// 	else if (c == 'E')
+// 	{//pgm->coord.plane_x = 0.0;
+// 		pgm->coord.direction_x = 0.0;
+// 		pgm->coord.direction_y = 1.0;
+// 		pgm->coord.plane_x = 0.62;
+// 		pgm->coord.plane_y = 0.0;
+// 	}
+// 	else if (c == 'W')
+// 	{
+// 		pgm->coord.direction_x = 0.0;
+// 		pgm->coord.direction_y = -1.0;
+// 		pgm->coord.plane_x = -0.62;
+// 		pgm->coord.plane_y = 0.0;
+// 	}
+// }
+
 void	get_direction(t_ptr *pgm, char c)
 {
 	if (c == 'N')
 	{
+		pgm->coord.direction_x = 0.0;
+		pgm->coord.direction_y = -1.0;
+		
+		pgm->coord.plane_x = 0.62;
+		pgm->coord.plane_y = 0.0;
+	}
+	else if (c == 'S')
+	{
+		pgm->coord.direction_x = 0.0;
+		pgm->coord.direction_y = 1.0;
+
+		
+		pgm->coord.plane_x = -0.62;
+		pgm->coord.plane_y = 0.0;
+	}
+	else if (c == 'E')
+	{//pgm->coord.plane_x = 0.0;
 		pgm->coord.direction_x = -1.0;
 		pgm->coord.direction_y = 0;
 		pgm->coord.plane_x = 0.0;
 		pgm->coord.plane_y = 0.62;
+		
 	}
-	else if (c == 'S')
+	else if (c == 'W')
 	{
 		pgm->coord.direction_x = 1.0;
 		pgm->coord.direction_y = 0;
 		pgm->coord.plane_x = 0.0;
 		pgm->coord.plane_y = -0.62;
-	}
-	else if (c == 'E')
-	{//pgm->coord.plane_x = 0.0;
-		pgm->coord.direction_x = 0.0;
-		pgm->coord.direction_y = 1.0;
-		pgm->coord.plane_x = 0.62;
-		pgm->coord.plane_y = 0.0;
-	}
-	else if (c == 'W')
-	{
-		pgm->coord.direction_x = 0.0;
-		pgm->coord.direction_y = -1.0;
-		pgm->coord.plane_x = -0.62;
-		pgm->coord.plane_y = 0.0;
+
+		
 	}
 }
 
-/* void	get_direction(t_ptr *pgm, char c)
-{
-	if (c == 'N')
-	{
-		pgm->coord.direction_x = 1.0;
-		pgm->coord.direction_y = -1.0;
-		// pgm->coord.plane_x = 0.62;
-		// pgm->coord.plane_y = 0.0;
-	}
-	else if (c == 'S')
-	{
-		pgm->coord.direction_x = 0.0;
-		pgm->coord.direction_y = 1;
-		// pgm->coord.plane_x = -0.62;
-		// pgm->coord.plane_y = 0.0;
-	}
-	else if (c == 'E')
-	{//pgm->coord.plane_x = 0.0;
-		pgm->coord.direction_x = 1.0;
-		pgm->coord.direction_y = 0.0;
-		// pgm->coord.plane_x = 0.0;
-		// pgm->coord.plane_y = 0.62;
-	}
-	else if (c == 'W')
-	{
-		pgm->coord.direction_x = -1.0;
-		pgm->coord.direction_y = 0.0;
-		// pgm->coord.plane_x = 0.0;
-		// pgm->coord.plane_y = -0.62;
-	}
-}
- */
+
 void	find_pos(t_ptr *pgm)
 {
 	int	i;
@@ -77,8 +84,10 @@ void	find_pos(t_ptr *pgm)
 		{
 			if (check_start_char(pgm->map[i][j]) == TRUE)
 			{
-				pgm->coord.x = (double)j;
-				pgm->coord.y = (double)i;
+				//WARNING 0.5 sert a mettre au milieu d'un carre mais
+				//c'est pas forcement ca qu'il faut faire
+				pgm->coord.x = (double)j + 0.5;
+				pgm->coord.y = (double)i + 0.5;
 				get_direction(pgm, pgm->map[i][j]);
 			}
 			j++;
@@ -183,15 +192,15 @@ void	paint_world(t_ptr *pgm, double i, double angle)
 	shade = 0;
 	if (pgm->coord.impact_point == 0)
 		//mapX - rayPosX + (1 - stepX) / 2) / rayDirX
-		pgm->coord.real_distance = fabs((pgm->coord.all_dist_box_x - pgm->coord.delta_dist_x + (1 - pgm->coord.move_x) / 2) / pgm->coord.ray_dir_x);
+		//pgm->coord.real_distance = fabs((pgm->coord.all_dist_box_x - pgm->coord.delta_dist_x + (1 - pgm->coord.move_x) / 2) / pgm->coord.ray_dir_x);
 		//pgm->coord.real_distance = (pgm->coord.all_dist_box_x - pgm->coord.delta_dist_x + (1 - pgm->coord.move_x) / 2);
-		//pgm->coord.real_distance = pgm->coord.all_dist_box_x - pgm->coord.delta_dist_x;
+		pgm->coord.real_distance = fabs(pgm->coord.all_dist_box_x - pgm->coord.delta_dist_x);
 	else
 	{
 		shade = 1;
-		pgm->coord.real_distance = fabs((pgm->coord.all_dist_box_y - pgm->coord.delta_dist_y + (1 - pgm->coord.move_y) / 2) / pgm->coord.ray_dir_y);
+		//pgm->coord.real_distance = fabs((pgm->coord.all_dist_box_y - pgm->coord.delta_dist_y + (1 - pgm->coord.move_y) / 2) / pgm->coord.ray_dir_y);
 		//pgm->coord.real_distance = (pgm->coord.all_dist_box_y - pgm->coord.delta_dist_y + (1 - pgm->coord.move_y) / 2);
-		//pgm->coord.real_distance = pgm->coord.all_dist_box_y - pgm->coord.delta_dist_y;
+		pgm->coord.real_distance = fabs(pgm->coord.all_dist_box_y - pgm->coord.delta_dist_y);
 	}
 
 	
@@ -224,10 +233,11 @@ void	launch_game(t_ptr *pgm)
 	double	i;
 	double	angle;
 	double	coef;
-pgm->coord.plane_x = 0.0;
+	//pgm->coord.plane_x = 0.0;
 	angle = 31.0;
 	coef = 62.0 / WIDTH;
-	find_pos(pgm);
+	//find_pos(pgm);
+
 	//pgm->coord.plane_x = 0.0;
 	//BIG BIG WARNING
 	//pgm->coord.plane_y = 0.62;

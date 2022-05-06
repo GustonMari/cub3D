@@ -174,6 +174,7 @@ char	**parsing(int argc, char **argv, int *nb_line);
 */
 
 void	launch_game(t_ptr *pgm);
+void	find_pos(t_ptr *pgm);
 
 /*
 ------------------CONVERT PARAM-------------------------
