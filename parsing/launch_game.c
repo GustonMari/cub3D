@@ -4,6 +4,38 @@ void	get_direction(t_ptr *pgm, char c)
 {
 	if (c == 'N')
 	{
+		pgm->coord.direction_x = -1.0;
+		pgm->coord.direction_y = 0;
+		pgm->coord.plane_x = 0.0;
+		pgm->coord.plane_y = 0.62;
+	}
+	else if (c == 'S')
+	{
+		pgm->coord.direction_x = 1.0;
+		pgm->coord.direction_y = 0;
+		pgm->coord.plane_x = 0.0;
+		pgm->coord.plane_y = -0.62;
+	}
+	else if (c == 'E')
+	{//pgm->coord.plane_x = 0.0;
+		pgm->coord.direction_x = 0.0;
+		pgm->coord.direction_y = 1.0;
+		pgm->coord.plane_x = 0.62;
+		pgm->coord.plane_y = 0.0;
+	}
+	else if (c == 'W')
+	{
+		pgm->coord.direction_x = 0.0;
+		pgm->coord.direction_y = -1.0;
+		pgm->coord.plane_x = -0.62;
+		pgm->coord.plane_y = 0.0;
+	}
+}
+
+/* void	get_direction(t_ptr *pgm, char c)
+{
+	if (c == 'N')
+	{
 		pgm->coord.direction_x = 1.0;
 		pgm->coord.direction_y = -1.0;
 		// pgm->coord.plane_x = 0.62;
@@ -17,7 +49,7 @@ void	get_direction(t_ptr *pgm, char c)
 		// pgm->coord.plane_y = 0.0;
 	}
 	else if (c == 'E')
-	{
+	{//pgm->coord.plane_x = 0.0;
 		pgm->coord.direction_x = 1.0;
 		pgm->coord.direction_y = 0.0;
 		// pgm->coord.plane_x = 0.0;
@@ -31,6 +63,7 @@ void	get_direction(t_ptr *pgm, char c)
 		// pgm->coord.plane_y = -0.62;
 	}
 }
+ */
 void	find_pos(t_ptr *pgm)
 {
 	int	i;
@@ -38,7 +71,7 @@ void	find_pos(t_ptr *pgm)
 
 	i = 0;
 	while (pgm->map[i])
-	{
+	{//pgm->coord.plane_x = 0.0;
 		j = 0;
 		while (pgm->map[i][j])
 		{
@@ -67,7 +100,7 @@ void	find_intersection(t_ptr *pgm)
 		pgm->coord.move_x = -1;
 		pgm->coord.all_dist_box_x = (pgm->coord.x - pgm->coord.box_x) * pgm->coord.delta_dist_x;
 	}
-	else
+	else//pgm->coord.plane_x = 0.0;
 	{
 		pgm->coord.move_x = 1;
 		pgm->coord.all_dist_box_x = (pgm->coord.box_x + 1.0 - pgm->coord.x) * pgm->coord.delta_dist_x;
@@ -144,12 +177,23 @@ void	paint_world(t_ptr *pgm, double i, double angle)
 {
 	int		top;
 	int		bottom;
+	int		shade;
 	(void)angle;
 
+	shade = 0;
 	if (pgm->coord.impact_point == 0)
-		pgm->coord.real_distance = pgm->coord.all_dist_box_x - pgm->coord.delta_dist_x;
+		//mapX - rayPosX + (1 - stepX) / 2) / rayDirX
+		pgm->coord.real_distance = fabs((pgm->coord.all_dist_box_x - pgm->coord.delta_dist_x + (1 - pgm->coord.move_x) / 2) / pgm->coord.ray_dir_x);
+		//pgm->coord.real_distance = (pgm->coord.all_dist_box_x - pgm->coord.delta_dist_x + (1 - pgm->coord.move_x) / 2);
+		//pgm->coord.real_distance = pgm->coord.all_dist_box_x - pgm->coord.delta_dist_x;
 	else
-		pgm->coord.real_distance = pgm->coord.all_dist_box_y - pgm->coord.delta_dist_y;
+	{
+		shade = 1;
+		pgm->coord.real_distance = fabs((pgm->coord.all_dist_box_y - pgm->coord.delta_dist_y + (1 - pgm->coord.move_y) / 2) / pgm->coord.ray_dir_y);
+		//pgm->coord.real_distance = (pgm->coord.all_dist_box_y - pgm->coord.delta_dist_y + (1 - pgm->coord.move_y) / 2);
+		//pgm->coord.real_distance = pgm->coord.all_dist_box_y - pgm->coord.delta_dist_y;
+	}
+
 	
 	//if (pgm->coord.impact_point == 0)
 	//	pgm->coord.real_distance = pgm->coord.all_dist_box_x /* * cos(angle) */; 
@@ -162,7 +206,8 @@ void	paint_world(t_ptr *pgm, double i, double angle)
 	bottom = HEIGHT / 2 + (int)(HEIGHT / (pgm->coord.real_distance * 2));
 	if (bottom > HEIGHT)
 		bottom = HEIGHT - 1;
-	ft_vertical(i, top, bottom, pgm);
+	ft_vertical(i, top, bottom, pgm, shade);
+	//ft_vertical(i, top, bottom, pgm);
 }
 
 /*
@@ -183,9 +228,9 @@ pgm->coord.plane_x = 0.0;
 	angle = 31.0;
 	coef = 62.0 / WIDTH;
 	find_pos(pgm);
-	pgm->coord.plane_x = 0.0;
+	//pgm->coord.plane_x = 0.0;
 	//BIG BIG WARNING
-	pgm->coord.plane_y = 0.62;
+	//pgm->coord.plane_y = 0.62;
 	//pgm->coord.plane_y = 0.00;
 	//pgm->coord.plane_y = 2 * atan(0.62 / 1.0);
 	//pgm->coord.plane_y = 0.0;

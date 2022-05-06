@@ -203,6 +203,7 @@ int	key_main(int key, t_ptr *pgm);
 ------------------COLOR--------------------------
 */
 
-int	ft_vertical(int x, int top, int bottom, t_ptr *pgm);
+//int	ft_vertical(int x, int top, int bottom, t_ptr *pgm);
+int	ft_vertical(int x, int top, int bottom, t_ptr *pgm, int shade);
 
 #endif

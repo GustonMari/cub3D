@@ -27,7 +27,23 @@ void	ft_bicolor(t_ptr *pgm, int color_floor, int color_ceil)
 
 /*Dessinne un lgine verticale de l'ecran (Une ligne du ray casting)*/
 
-int	ft_vertical(int x, int top, int bottom, t_ptr *pgm)
+int	ft_vertical(int x, int top, int bottom, t_ptr *pgm, int shade)
+{
+	int	i;
+
+	i = top;
+	while (i < bottom)
+	{
+		if (shade == 0)
+			my_mlx_pixel_put(&pgm->image, x, i, create_color(0, 255, 0, 0));
+		else
+			my_mlx_pixel_put(&pgm->image, x, i, create_color(0, 255 / 2, 0 / 2, 0 / 2));
+		i++;
+	}
+	return (0);
+}
+
+/* int	ft_vertical(int x, int top, int bottom, t_ptr *pgm)
 {
 	int	i;
 
@@ -38,4 +54,4 @@ int	ft_vertical(int x, int top, int bottom, t_ptr *pgm)
 		i++;
 	}
 	return (0);
-}
+} */
