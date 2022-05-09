@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 14:33:29 by gmary             #+#    #+#             */
-/*   Updated: 2022/05/06 17:35:53 by gmary            ###   ########.fr       */
+/*   Updated: 2022/05/09 13:22:22 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,34 +34,32 @@ int	ft_close(t_ptr *pgm)
 void	key_up(t_ptr *pgm)
 {
 	fprintf(stderr, "key_up\n");
-	//if (pgm->map[(int)(pgm->coord.x + pgm->coord.ray_dir_x)][(int)pgm->coord.y] != '1')
-	//	pgm->coord.x += pgm->coord.ray_dir_x;
+	fprintf(stderr, "ray dir y = %f\n", pgm->coord.ray_dir_y);
+	if (pgm->map[(int)pgm->coord.y][(int)(pgm->coord.x + pgm->coord.ray_dir_x)] != '1')
+		pgm->coord.x += pgm->coord.direction_x;
+
 	fprintf(stderr, "x: %f\n", pgm->coord.x);
 	fprintf(stderr, "y: %f\n", pgm->coord.y);
-	//fprintf(stderr, "")
 	
 	fprintf(stderr, "next case = |%c|\n", pgm->map[(int)(pgm->coord.y + pgm->coord.ray_dir_y)][(int)(pgm->coord.x)]);
-	// if (pgm->map[(int)(pgm->coord.x)][(int)(pgm->coord.y - pgm->coord.ray_dir_y)] != '1')
-	// 	pgm->coord.y += pgm->coord.ray_dir_y;
 	if (pgm->map[(int)(pgm->coord.y + pgm->coord.ray_dir_y)][(int)(pgm->coord.x)] != '1')
-	 	pgm->coord.y += pgm->coord.ray_dir_y;
+	 	pgm->coord.y += pgm->coord.direction_y;
 
 
-	////if (pgm->map[(int)(pgm->coord.x + pgm->coord.ray_dir_x)][(int)pgm->coord.y] != '1')
-	//	pgm->coord.x += pgm->coord.ray_dir_x;
-	////if (pgm->map[(int)(pgm->coord.x)][(int)(pgm->coord.y + pgm->coord.ray_dir_y)] != '1')
-	//	pgm->coord.y += pgm->coord.ray_dir_y;
 }
 
 void	key_down(t_ptr *pgm)
 {
-	//if (pgm->map[(int)(pgm->coord.x - pgm->coord.ray_dir_x)][(int)pgm->coord.y] != '1')
-	//	pgm->coord.x -= pgm->coord.ray_dir_x;
+	fprintf(stderr, "ray dir x = %f\n", pgm->coord.ray_dir_x);
+	if (pgm->map[(int)(pgm->coord.y)][(int)(pgm->coord.x - pgm->coord.ray_dir_x)] != '1')
+		pgm->coord.x -= pgm->coord.direction_x;
+
 	printf("x: %f\n", pgm->coord.x);
 	printf("y: %f\n", pgm->coord.y);
 	fprintf(stderr, "back case = |%c|\n", pgm->map[(int)(pgm->coord.y)][(int)(pgm->coord.x - pgm->coord.ray_dir_x)]);
 	if (pgm->map[(int)(pgm->coord.y - pgm->coord.ray_dir_y)][(int)(pgm->coord.x)] != '1')
-		pgm->coord.y -= pgm->coord.ray_dir_y;
+		pgm->coord.y -= pgm->coord.direction_y;
+
 }
 
 void	key_left(t_ptr *pgm)
@@ -75,6 +73,8 @@ void	key_left(t_ptr *pgm)
 	old_plane_x = pgm->coord.plane_x;
 	pgm->coord.plane_x = pgm->coord.plane_x * cos(-0.1) - pgm->coord.plane_y * sin(-0.1);
 	pgm->coord.plane_y = old_plane_x * sin(-0.1) + pgm->coord.plane_y * cos(-0.1);
+	printf("x: %f\n", pgm->coord.x);
+	printf("y: %f\n", pgm->coord.y);
 }
 
 void	key_right(t_ptr *pgm)
@@ -88,6 +88,11 @@ void	key_right(t_ptr *pgm)
 	old_plane_x = pgm->coord.plane_x;
 	pgm->coord.plane_x = pgm->coord.plane_x * cos(0.1) - pgm->coord.plane_y * sin(0.1);
 	pgm->coord.plane_y = old_plane_x * sin(0.1) + pgm->coord.plane_y * cos(0.1);
+	//WARNING
+	// pgm->coord.ray_dir_x = pgm->coord.direction_x + (pgm->coord.plane_x * pgm->coord.pos_x_camera);
+	// pgm->coord.ray_dir_y = pgm->coord.direction_y + (pgm->coord.plane_y * pgm->coord.pos_x_camera);
+	printf("x: %f\n", pgm->coord.x);
+	printf("y: %f\n", pgm->coord.y);
 }
 
 int	key_main(int key, t_ptr *pgm)

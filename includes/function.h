@@ -26,7 +26,7 @@
 # define FLOOR 104
 # define CEIL 105
 # define FOV 0.62
-
+# define SPEED 0.5
 /*
 	box_x et y sont les coordonnees de la du carre ou le joueur se trouve
 	direction_x et y sont les directions du joueur (par exmple N au depart))
