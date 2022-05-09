@@ -26,7 +26,7 @@
 # define FLOOR 104
 # define CEIL 105
 # define FOV 0.62
-# define SPEED 1.0
+# define SPEED 0.1
 /*
 	box_x et y sont les coordonnees de la du carre ou le joueur se trouve
 	direction_x et y sont les directions du joueur (par exmple N au depart))
@@ -200,6 +200,8 @@ int	ft_close(t_ptr *pgm);
 */
 
 int	key_main(int key, t_ptr *pgm);
+int key_release(int key, t_ptr *pgm);
+
 
 /*
 ------------------COLOR--------------------------

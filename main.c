@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 09:20:55 by gmary             #+#    #+#             */
-/*   Updated: 2022/05/09 14:57:39 by gmary            ###   ########.fr       */
+/*   Updated: 2022/05/09 16:56:40 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,18 +43,16 @@ int main(int argc, char **argv)
 	//WARNING
 	if (secure_map(&pgm) == FALSE)
 		return (FALSE);
-	// printf("%s\n", pgm.map[0]);
-	// printf("%s\n", pgm.map[nb_line + 1]);
-	print_tab_2d(pgm.map);
+	find_pos(&pgm);
+	launch_game(&pgm);
+	ft_free_tab_2d(all);
 
+	//mlx_key_hook(pgm.win, &key_manager, &pgm);
 
-	// find_pos(&pgm);
-	// fprintf(stderr, "map = %c\n", pgm.map[9][2]);
-	// launch_game(&pgm);
-	// ft_free_tab_2d(all);
-	// mlx_key_hook(pgm.win, &key_manager, &pgm);
-	// mlx_hook(pgm.win, 17, 02, ft_close, &pgm);
-	// mlx_loop(pgm.mlx);
+	mlx_hook(pgm.win, 2, (1L << 0), &key_manager, &pgm);
+	mlx_hook(pgm.win, 3, (1L << 1), &key_release, &pgm);
+	mlx_hook(pgm.win, 17, 02, ft_close, &pgm);
+	mlx_loop(pgm.mlx);
 	return (0);
 }
 
