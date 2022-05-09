@@ -39,7 +39,8 @@ SRC = main.c \
 			check/check.c \
 			check/check_color.c \
 			check/check_map_1.c \
-			check/check_map_2.c
+			check/check_map_2.c \
+			parsing/secure_map.c
 
 OBJS = $(addprefix ${OBJDIR}/,${SRC:.c=.o})
 

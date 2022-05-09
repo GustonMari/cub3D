@@ -26,7 +26,7 @@
 # define FLOOR 104
 # define CEIL 105
 # define FOV 0.62
-# define SPEED 0.5
+# define SPEED 1.0
 /*
 	box_x et y sont les coordonnees de la du carre ou le joueur se trouve
 	direction_x et y sont les directions du joueur (par exmple N au depart))
@@ -80,6 +80,7 @@ typedef struct s_ptr
 	t_data	image;
 	t_coord	coord;
 	int		pos;
+	int 	nb_line;
 	void	*mlx;
 	void	*win;
 	char	**param;
@@ -206,5 +207,11 @@ int	key_main(int key, t_ptr *pgm);
 
 //int	ft_vertical(int x, int top, int bottom, t_ptr *pgm);
 int	ft_vertical(int x, int top, int bottom, t_ptr *pgm, int shade);
+
+/*
+------------------SECURE MAP-------------------------
+*/
+
+int	secure_map(t_ptr *pgm);
 
 #endif

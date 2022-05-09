@@ -15,7 +15,7 @@ void	print_tab_2d(char **strs)
 	while (strs[i])
 	{
 		ft_putstr_fd(strs[i], 2);
-		//ft_putstr_fd("\n", 2);
+		ft_putstr_fd("\n", 2);
 		i++;
 	}
 }

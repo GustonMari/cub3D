@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 09:20:55 by gmary             #+#    #+#             */
-/*   Updated: 2022/05/06 16:57:30 by gmary            ###   ########.fr       */
+/*   Updated: 2022/05/09 14:57:39 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,6 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	dst = data->addr + (y * data->line_length + x * (data->bpp / 8));
 	*(unsigned int *)dst = color;
 }
-
-/* void	pgm_image_init(t_ptr *pgm, t_data *image)
-{
-	pgm->mlx = mlx_init();
-	pgm->win = mlx_new_window(pgm->mlx, HEIGHT, WIDTH, "hello");
-	pgm->image.img = mlx_new_image(pgm->mlx, HEIGHT, WIDTH);
-	pgm->image.addr = mlx_get_data_addr(image->img,
-			&image->bpp, &image->line_length, &image->endian);
-	// pgm->check.no = 0;
-	// pgm->check.so = 0;
-	// pgm->check.we = 0;
-	// pgm->check.ea = 0;
-	// pgm->check.f = 0;
-	// pgm->check.c = 0;
-} */
 
 int main(int argc, char **argv)
 {
@@ -55,41 +40,21 @@ int main(int argc, char **argv)
 		ft_close(&pgm);
 		return (1);
 	}
-	//ft_bicolor(&pgm, pgm.floor, pgm.ceil);
-	//mlx_put_image_to_window(&pgm.mlx, &pgm.win, &pgm.image.img, 0, 0);
-	find_pos(&pgm);
-	fprintf(stderr, "map = %c\n", pgm.map[9][2]);
-	launch_game(&pgm);
-	ft_free_tab_2d(all);
-	mlx_key_hook(pgm.win, &key_manager, &pgm);
-	mlx_hook(pgm.win, 17, 02, ft_close, &pgm);
-	mlx_loop(pgm.mlx);
+	//WARNING
+	if (secure_map(&pgm) == FALSE)
+		return (FALSE);
+	// printf("%s\n", pgm.map[0]);
+	// printf("%s\n", pgm.map[nb_line + 1]);
+	print_tab_2d(pgm.map);
+
+
+	// find_pos(&pgm);
+	// fprintf(stderr, "map = %c\n", pgm.map[9][2]);
+	// launch_game(&pgm);
+	// ft_free_tab_2d(all);
+	// mlx_key_hook(pgm.win, &key_manager, &pgm);
+	// mlx_hook(pgm.win, 17, 02, ft_close, &pgm);
+	// mlx_loop(pgm.mlx);
 	return (0);
 }
-// int	main(int ac, char **av)
-//{
-//	t_ptr	pgm;
-//
-//	pgm_image_init(&pgm, &pgm.image);
-// 	if (!ft_strcmp(av[1], "julia"))
-//	{
-//		print_julia(&pgm, 2, 0);
-//		mlx_key_hook(pgm.win, &key_julia, &pgm);
-//		mlx_mouse_hook(pgm.win, &mouse_scroll, &pgm);
-//	}
-//	if (!ft_strcmp(av[1], "mandelbrot"))
-//	{
-//		print_mandelbrot(&pgm, 2, 0);
-//		mlx_key_hook(pgm.win, &key_mandel, &pgm);
-//		mlx_mouse_hook(pgm.win, &mouse_scroll_2, &pgm);
-//	}
-//	if (!ft_strcmp(av[1], "gustave"))
-//	{
-//		print_gustave(&pgm, 2, 0);
-//		mlx_key_hook(pgm.win, &key_gus, &pgm);
-//		mlx_mouse_hook(pgm.win, &mouse_scroll_3, &pgm);
-//	} 
-//	//mlx_hook(pgm.win, 17, 02, ft_close, &pgm);
-//	//mlx_loop(pgm.mlx);
-//	return (0);
-//} 
+
