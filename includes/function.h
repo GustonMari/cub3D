@@ -78,6 +78,10 @@ typedef struct s_data
 typedef struct s_ptr
 {
 	t_data	image;
+	// t_data	no;
+	// t_data	so;
+	// t_data	ea;
+	// t_data	we;
 	t_coord	coord;
 	int		pos;
 	int 	nb_line;
