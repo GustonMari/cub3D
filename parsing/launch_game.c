@@ -122,6 +122,32 @@ void	find_impact(t_ptr *pgm)
 	}
 }
 
+/* void	find_impact(t_ptr *pgm)
+{
+	int	impact;
+
+	impact = 0;
+	//warning on sait jamais
+	while (impact == 0)
+	{
+		if (pgm->coord.all_dist_box_x < pgm->coord.all_dist_box_y)
+		{
+			pgm->coord.all_dist_box_x += pgm->coord.delta_dist_x;
+			pgm->coord.box_x += pgm->coord.move_x;
+			pgm->coord.impact_point = 0;
+		}
+		else
+		{
+			pgm->coord.all_dist_box_y += pgm->coord.delta_dist_y;
+			pgm->coord.box_y += pgm->coord.move_y;
+			pgm->coord.impact_point = 1;
+		}
+		//WARNING a voir si oon doit inverser x et y
+		if (pgm->map[pgm->coord.box_y][pgm->coord.box_x] == '1')
+			impact = 1;
+	}
+} */
+
 /*
 	cree et lance un rayon et determine sa distance euclidienne (donc avec effet fisheye pour linstant)
 	et determine la distance avec le mur (delta_dist)
