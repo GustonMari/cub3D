@@ -14,7 +14,7 @@ rempli de 1*/
 
 int	first_last_line(char **new_map , int nb_line, int len)
 {
-	int 		i;
+	int		i;
 
 	i = 0;
 	new_map[i] = ft_calloc(sizeof(char), len + 3);
@@ -81,8 +81,6 @@ int	secure_map(t_ptr *pgm)
 		new_map[pgm->nb_line + 2] = NULL;
 		i++;
 	}
-	
-	//new_map[pgm->nb_line][len] = '1';
 	printf("nb_line = %d\n", pgm->nb_line);
 	printf("len = %d\n", len);
 	ft_free_tab_2d(pgm->map);

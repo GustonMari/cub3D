@@ -21,8 +21,6 @@ void	ft_bicolor(t_ptr *pgm, int color_floor, int color_ceil)
 		}
 		i++;
 	}
-	//WARNING a enlever
-	//mlx_put_image_to_window(pgm->mlx, pgm->win, pgm->image.img, 0, 0);
 }
 
 /*Dessinne un lgine verticale de l'ecran (Une ligne du ray casting)*/
@@ -37,7 +35,8 @@ int	ft_vertical(int x, int top, int bottom, t_ptr *pgm, int shade)
 		if (shade == 0)
 			my_mlx_pixel_put(&pgm->image, x, i, create_color(0, 255, 0, 0));
 		else
-			my_mlx_pixel_put(&pgm->image, x, i, create_color(0, 255 / 2, 0 / 2, 0 / 2));
+			my_mlx_pixel_put(&pgm->image, x, i,
+				create_color(0, 255 / 2, 0 / 2, 0 / 2));
 		i++;
 	}
 	return (0);

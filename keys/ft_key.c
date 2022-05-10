@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 14:33:29 by gmary             #+#    #+#             */
-/*   Updated: 2022/05/09 17:07:25 by gmary            ###   ########.fr       */
+/*   Updated: 2022/05/10 09:54:57 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	key_up(t_ptr *pgm)
 		pgm->coord.x += pgm->coord.direction_x * SPEED;
 	fprintf(stderr, "next case = |%c|\n", pgm->map[(int)(pgm->coord.y + pgm->coord.ray_dir_y)][(int)(pgm->coord.x)]);
 	if (pgm->map[(int)(pgm->coord.y + pgm->coord.ray_dir_y)][(int)(pgm->coord.x)] != '1')
-	 	pgm->coord.y += pgm->coord.direction_y * SPEED;
+		pgm->coord.y += pgm->coord.direction_y * SPEED;
 }
 
 void	key_down(t_ptr *pgm)
@@ -52,15 +52,19 @@ void	key_down(t_ptr *pgm)
 
 void	key_left(t_ptr *pgm)
 {
-	double old_dir_x;
-	double old_plane_x;
+	double	old_dir_x;
+	double	old_plane_x;
 
 	old_dir_x = pgm->coord.direction_x;
-	pgm->coord.direction_x = pgm->coord.direction_x * cos(-0.05) - pgm->coord.direction_y * sin(-0.05);
-	pgm->coord.direction_y = old_dir_x * sin(-0.05) + pgm->coord.direction_y * cos(-0.05);
+	pgm->coord.direction_x = pgm->coord.direction_x * cos(-0.05)
+		- pgm->coord.direction_y * sin(-0.05);
+	pgm->coord.direction_y = old_dir_x * sin(-0.05)
+		+ pgm->coord.direction_y * cos(-0.05);
 	old_plane_x = pgm->coord.plane_x;
-	pgm->coord.plane_x = pgm->coord.plane_x * cos(-0.05) - pgm->coord.plane_y * sin(-0.05);
-	pgm->coord.plane_y = old_plane_x * sin(-0.05) + pgm->coord.plane_y * cos(-0.05);
+	pgm->coord.plane_x = pgm->coord.plane_x * cos(-0.05)
+		- pgm->coord.plane_y * sin(-0.05);
+	pgm->coord.plane_y = old_plane_x * sin(-0.05)
+		+ pgm->coord.plane_y * cos(-0.05);
 }
 
 void	key_right(t_ptr *pgm)
@@ -69,33 +73,29 @@ void	key_right(t_ptr *pgm)
 	double old_plane_x;
 
 	old_dir_x = pgm->coord.direction_x;
-	pgm->coord.direction_x = pgm->coord.direction_x * cos(0.05) - pgm->coord.direction_y * sin(0.05);
-	pgm->coord.direction_y = old_dir_x * sin(0.05) + pgm->coord.direction_y * cos(0.05);
+	pgm->coord.direction_x = pgm->coord.direction_x * cos(0.05)
+		- pgm->coord.direction_y * sin(0.05);
+	pgm->coord.direction_y = old_dir_x * sin(0.05)
+		+ pgm->coord.direction_y * cos(0.05);
 	old_plane_x = pgm->coord.plane_x;
-	pgm->coord.plane_x = pgm->coord.plane_x * cos(0.05) - pgm->coord.plane_y * sin(0.05);
-	pgm->coord.plane_y = old_plane_x * sin(0.05) + pgm->coord.plane_y * cos(0.05);
+	pgm->coord.plane_x = pgm->coord.plane_x * cos(0.05)
+		- pgm->coord.plane_y * sin(0.05);
+	pgm->coord.plane_y = old_plane_x * sin(0.05)
+		+ pgm->coord.plane_y * cos(0.05);
 }
 
 int	key_main(int key, t_ptr *pgm)
 {
-		if (key == XK_Escape)
-			ft_close(pgm);
-		if (key == XK_Up)
-			key_up(pgm);
-		if (key == XK_Down)
-			key_down(pgm);
-		// if (key == XK_w || key == XK_Up)
-		// 	key_up(pgm);
-		// if (key == XK_s || key == XK_Down)
-		// 	key_down(pgm);
-		// if (key == XK_a)
-		// 	printf("a\n");
-		// if (key == XK_d)
-		// 	printf("d\n");
-		if (key == XK_Left)
-			key_left(pgm);
-		if (key == XK_Right)
-			key_right(pgm);
+	if (key == XK_Escape)
+		ft_close(pgm);
+	if (key == XK_w || key == XK_Up)
+		key_up(pgm);
+	if (key == XK_s || key == XK_Down)
+		key_down(pgm);
+	if (key == XK_a || key == XK_Left)
+		key_left(pgm);
+	if (key == XK_d || key == XK_Right)
+		key_right(pgm);
 	return (0);
 }
 
@@ -111,7 +111,6 @@ int	key_manager(int key, t_ptr *pgm)
 	key_main(key, pgm);
 	fprintf(stderr, "launch\n");
 	launch_game(pgm);
-		fprintf(stderr, "after launch\n");
-	//print_gustave(pgm, 2, 0); //ligne ou on render notre cub3d
+	fprintf(stderr, "after launch\n");
 	return (0);
 }

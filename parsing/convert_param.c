@@ -20,6 +20,39 @@ char	*convert_cardinal_path(char *str)
 
 /*Permet de d'ouvrir les textures des points cardinaux*/
 
+/* int	convert_cardinal_points(t_ptr *pgm, char *path, int dir)
+{
+	if (dir == NO)
+	{
+		pgm->no = mlx_xpm_file_to_image(pgm->mlx, path,
+				&pgm->image.width, &pgm->image.height);
+		if (pgm->no == NULL)
+			return (FALSE);
+	}
+	if (dir == SO)
+	{
+		pgm->so = mlx_xpm_file_to_image(pgm->mlx, path,
+				&pgm->image.width, &pgm->image.height);
+		if (pgm->so == NULL)
+			return (FALSE);
+	}
+	if (dir == EA)
+	{
+		pgm->ea = mlx_xpm_file_to_image(pgm->mlx, path,
+				&pgm->image.width, &pgm->image.height);
+		if (pgm->ea == NULL)
+			return (FALSE);
+	}
+	if (dir == WE)
+	{
+		pgm->we = mlx_xpm_file_to_image(pgm->mlx, path,
+				&pgm->image.width, &pgm->image.height);
+		if (pgm->we == NULL)
+			return (FALSE);
+	}
+	return (TRUE);
+} */
+
 int	convert_cardinal_points(t_ptr *pgm, char *path, int dir)
 {
 	if (dir == NO)
@@ -145,6 +178,5 @@ int	convert_param(t_ptr *pgm)
 			convert_floor_ceil(pgm, convert_cardinal_path(find_cardinal_path(&pgm->param[i][j])), CEIL);
 		i++;
 	}
-	//ft_bicolor(pgm, pgm->floor, pgm->ceil);
 	return (TRUE);
 }
