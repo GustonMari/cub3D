@@ -57,6 +57,9 @@ typedef struct s_coord
 	double	move_y;
 	double	impact_point;
 	double	real_distance;
+	int		cardinal_wall;
+	double	wall_x;
+	int		texture_x;
 }				t_coord;
 
 typedef struct s_save
@@ -224,7 +227,9 @@ int	secure_map(t_ptr *pgm);
 ------------------DRAW------------------------------
 */
 void		draw_buffer(t_ptr *pgm);
-int			define_walls(t_ptr *pgm);
+void		define_walls(t_ptr *pgm);
+void	find_texture_x(t_ptr *pgm, int cardinal_wall);
+
 
 //int			get_pixel(t_data *data, int x, int y, unsigned int *color);
 

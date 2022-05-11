@@ -151,8 +151,8 @@ void	paint_world(t_ptr *pgm, double i)
 {
 	int		top;
 	int		bottom;
-	double	wallX;
-	int		texture_x;
+	//double	wallX;
+
 
 	define_walls(pgm);
 	top = HEIGHT / 2 - (int)(HEIGHT / (pgm->coord.real_distance * 2));
@@ -163,16 +163,11 @@ void	paint_world(t_ptr *pgm, double i)
 	if (bottom > HEIGHT)
 		bottom = HEIGHT - 1;
 	if (pgm->coord.impact_point == 0)
-		wallX = (pgm->coord.y + (pgm->coord.real_distance * pgm->coord.ray_dir_y));
+		pgm->coord.wall_x = (pgm->coord.y + (pgm->coord.real_distance * pgm->coord.ray_dir_y));
 	else
-		wallX = (pgm->coord.x + (pgm->coord.real_distance * pgm->coord.ray_dir_x));
-	wallX -= floor(wallX);
-
-	texture_x = (int)(wallX * (double)pgm->north.width);
-	if (pgm->coord.impact_point == 0 && pgm->coord.ray_dir_x > 0)
-		texture_x = pgm->north.width - texture_x - 1;
-	if (pgm->coord.impact_point == 1 && pgm->coord.ray_dir_y < 0)
-		texture_x = pgm->north.width - texture_x - 1;
+		pgm->coord.wall_x = (pgm->coord.x + (pgm->coord.real_distance * pgm->coord.ray_dir_x));
+	pgm->coord.wall_x -= floor(pgm->coord.wall_x);
+	find_texture_x(pgm, pgm->coord.cardinal_wall);
 	double step = 1.0 * pgm->north.height / (HEIGHT / (pgm->coord.real_distance));
 	double texpos = (top - HEIGHT /2  + ((HEIGHT / pgm->coord.real_distance) / 2)) * step;
 	int texY;
@@ -181,13 +176,21 @@ void	paint_world(t_ptr *pgm, double i)
 	{
 		texY = (int)(texpos) & (pgm->north.height - 1);
 		texpos += step;
-		color = pgm->north.addr[texY * pgm->north.width + texture_x];
+		//printf("%d\n", pgm->coord.texture_x);
+		if (pgm->coord.cardinal_wall == NO)
+			color = pgm->north.addr[texY * pgm->north.width + pgm->coord.texture_x];
+		if (pgm->coord.cardinal_wall == SO)
+			color = pgm->south.addr[texY * pgm->south.width + pgm->coord.texture_x];
+		if (pgm->coord.cardinal_wall == EA)
+			color = pgm->east.addr[texY * pgm->east.width + pgm->coord.texture_x];
+		if (pgm->coord.cardinal_wall == WE)
+			color = pgm->west.addr[texY * pgm->west.width + pgm->coord.texture_x];
 		if (pgm->coord.impact_point == 0)
 			color = (color >> 1) & 8355711;
 		pgm->buff[y][(int)i] = color;
 	}
-	printf("raydir_x = %f\n", pgm->coord.ray_dir_x);
-	printf("raydir_y = %f\n", pgm->coord.ray_dir_y);
+	// printf("raydir_x = %f\n", pgm->coord.ray_dir_x);
+	// printf("raydir_y = %f\n", pgm->coord.ray_dir_y);
 }
 
 /* void	paint_world(t_ptr *pgm, double i)
