@@ -186,8 +186,8 @@ void	paint_world(t_ptr *pgm, double i)
 			color = (color >> 1) & 8355711;
 		pgm->buff[y][(int)i] = color;
 	}
-	// printf("raydir_x = %f\n", pgm->coord.ray_dir_x);
-	// printf("raydir_y = %f\n", pgm->coord.ray_dir_y);
+	printf("raydir_x = %f\n", pgm->coord.ray_dir_x);
+	printf("raydir_y = %f\n", pgm->coord.ray_dir_y);
 }
 
 /* void	paint_world(t_ptr *pgm, double i)
