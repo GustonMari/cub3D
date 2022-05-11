@@ -61,30 +61,34 @@ int	convert_cardinal_points(t_ptr *pgm, char *path, int dir)
 				&pgm->north.width, &pgm->north.height);
 		pgm->north.addr = (int *)mlx_get_data_addr(pgm->north.img,
 		&pgm->north.bpp, &pgm->north.line_length, &pgm->north.endian);
-
-		//fprintf(stderr, "")
 		if (pgm->north.img == NULL)
 			return (FALSE);
 	}
 	if (dir == SO)
 	{
-		pgm->so = mlx_xpm_file_to_image(pgm->mlx, path,
-				&pgm->image.width, &pgm->image.height);
-		if (pgm->so == NULL)
+		pgm->south.img = mlx_xpm_file_to_image(pgm->mlx, path,
+				&pgm->south.width, &pgm->south.height);
+		pgm->south.addr = (int *)mlx_get_data_addr(pgm->south.img,
+		&pgm->south.bpp, &pgm->south.line_length, &pgm->south.endian);
+		if (pgm->south.img == NULL)
 			return (FALSE);
 	}
 	if (dir == EA)
 	{
-		pgm->ea = mlx_xpm_file_to_image(pgm->mlx, path,
-				&pgm->image.width, &pgm->image.height);
-		if (pgm->ea == NULL)
+		pgm->east.img = mlx_xpm_file_to_image(pgm->mlx, path,
+				&pgm->east.width, &pgm->east.height);
+		pgm->east.addr = (int *)mlx_get_data_addr(pgm->east.img,
+			&pgm->east.bpp, &pgm->east.line_length, &pgm->east.endian);
+		if (pgm->east.img == NULL)
 			return (FALSE);
 	}
 	if (dir == WE)
 	{
-		pgm->we = mlx_xpm_file_to_image(pgm->mlx, path,
-				&pgm->image.width, &pgm->image.height);
-		if (pgm->we == NULL)
+		pgm->west.img = mlx_xpm_file_to_image(pgm->mlx, path,
+				&pgm->west.width, &pgm->west.height);
+		pgm->west.addr = (int *)mlx_get_data_addr(pgm->west.img,
+			&pgm->west.bpp, &pgm->west.line_length, &pgm->west.endian);
+		if (pgm->west.img == NULL)
 			return (FALSE);
 	}
 	return (TRUE);

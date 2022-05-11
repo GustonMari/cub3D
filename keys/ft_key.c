@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 14:33:29 by gmary             #+#    #+#             */
-/*   Updated: 2022/05/11 11:12:32 by gmary            ###   ########.fr       */
+/*   Updated: 2022/05/11 15:55:50 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 int	ft_close(t_ptr *pgm)
 {
 	mlx_destroy_image(pgm->mlx, pgm->image.img);
-	if (pgm->no)
-		mlx_destroy_image(pgm->mlx, pgm->no);
-	if (pgm->so)
-		mlx_destroy_image(pgm->mlx, pgm->so);
-	if (pgm->we)
-		mlx_destroy_image(pgm->mlx, pgm->we);
-	if (pgm->ea)
-		mlx_destroy_image(pgm->mlx, pgm->ea);
+	if (pgm->north.img)
+		mlx_destroy_image(pgm->mlx, pgm->north.img);
+	if (pgm->south.img)
+		mlx_destroy_image(pgm->mlx, pgm->south.img);
+	if (pgm->west.img)
+		mlx_destroy_image(pgm->mlx, pgm->west.img);
+	if (pgm->east.img)
+		mlx_destroy_image(pgm->mlx, pgm->east.img);
 	mlx_destroy_window(pgm->mlx, pgm->win);
 	mlx_destroy_display(pgm->mlx);
 	ft_free_tab_2d(pgm->map);

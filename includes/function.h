@@ -81,13 +81,9 @@ typedef struct s_ptr
 {
 	t_data	image;
 	t_data	north;
-	//t_data	so;
-	//t_data	ea;
-	//t_data	we;
-	//t_data	no;
-	//t_data	so;
-	//t_data	ea;
-	//t_data	we;
+	t_data	south;
+	t_data	east;
+	t_data	west;
 	t_coord	coord;
 	int		pos;
 	int 	nb_line;
@@ -96,10 +92,6 @@ typedef struct s_ptr
 	char	**param;
 	char	**map;
 	int		**buff;
-	void	*no;
-	void	*so;
-	void	*we;
-	void	*ea;
 	int		floor;
 	int		ceil;
 }				t_ptr;
