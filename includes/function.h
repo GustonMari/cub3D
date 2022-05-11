@@ -13,6 +13,8 @@
 # include <X11/keysym.h>
 # include <unistd.h>
 # include <math.h>
+# include <stdint.h>
+# include <inttypes.h>
 # include "get_next_line.h"
 # define TRUE 0
 # define FALSE 1
@@ -66,7 +68,7 @@ typedef struct s_save
 typedef struct s_data
 {
 	void	*img;
-	char	*addr;
+	int		*addr;
 	int		bpp;
 	int		line_length;
 	int		endian;
