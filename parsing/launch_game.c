@@ -18,17 +18,17 @@ void	get_direction(t_ptr *pgm, char c)
 	}
 	else if (c == 'E')
 	{
-		pgm->coord.direction_x = -1.0;
-		pgm->coord.direction_y = 0;
-		pgm->coord.plane_x = 0.0;
-		pgm->coord.plane_y = 0.62;
-	}
-	else if (c == 'W')
-	{
 		pgm->coord.direction_x = 1.0;
 		pgm->coord.direction_y = 0;
 		pgm->coord.plane_x = 0.0;
-		pgm->coord.plane_y = -0.62;
+		 pgm->coord.plane_y = 0.62;
+	}
+	else if (c == 'W')
+	{
+		pgm->coord.direction_x = -1.0;
+		pgm->coord.direction_y = 0;
+		pgm->coord.plane_x = 0.0;
+		 pgm->coord.plane_y = -0.62;
 	}
 }
 
@@ -147,26 +147,14 @@ void	ray_casting(t_ptr *pgm, int i)
 		pgm->coord.delta_dist_y = fabs(1 / pgm->coord.ray_dir_y);
 }
 
-void	paint_world(t_ptr *pgm, double i, double angle)
+void	paint_world(t_ptr *pgm, double i)
 {
 	int		top;
 	int		bottom;
-	(void)angle;
-	int		shade;
+	double	wallX;
+	int		texture_x;
 
-
-	shade = 0;
-	
-	if (pgm->coord.impact_point == 0)
-	{
-		shade = 1;
-		pgm->coord.real_distance = fabs(pgm->coord.all_dist_box_x
-				- pgm->coord.delta_dist_x);
-	}
-	else
-		pgm->coord.real_distance = fabs(pgm->coord.all_dist_box_y
-				- pgm->coord.delta_dist_y);
-;
+	define_walls(pgm);
 	top = HEIGHT / 2 - (int)(HEIGHT / (pgm->coord.real_distance * 2));
 	 if (top < 0)
 	 	top = 0;
@@ -174,11 +162,6 @@ void	paint_world(t_ptr *pgm, double i, double angle)
 	bottom = HEIGHT / 2 + (int)(HEIGHT / (pgm->coord.real_distance * 2));
 	if (bottom > HEIGHT)
 		bottom = HEIGHT - 1;
-
-
-	double wallX;
-	int		texture_x;
-
 	if (pgm->coord.impact_point == 0)
 		wallX = (pgm->coord.y + (pgm->coord.real_distance * pgm->coord.ray_dir_y));
 	else
@@ -190,8 +173,6 @@ void	paint_world(t_ptr *pgm, double i, double angle)
 		texture_x = pgm->north.width - texture_x - 1;
 	if (pgm->coord.impact_point == 1 && pgm->coord.ray_dir_y < 0)
 		texture_x = pgm->north.width - texture_x - 1;
-	//uint32_t buffer[HEIGHT][WIDTH];
-	
 	double step = 1.0 * pgm->north.height / (HEIGHT / (pgm->coord.real_distance));
 	double texpos = (top - HEIGHT /2  + ((HEIGHT / pgm->coord.real_distance) / 2)) * step;
 	int texY;
@@ -201,51 +182,63 @@ void	paint_world(t_ptr *pgm, double i, double angle)
 		texY = (int)(texpos) & (pgm->north.height - 1);
 		texpos += step;
 		color = pgm->north.addr[texY * pgm->north.width + texture_x];
-		//color = (uint32_t)pgm->north.addr[y];
-		//color = pgm->north.addr[1];
-		// printf("%d\n", pgm->north.line_length);
-		// for (int i = 0; i < pgm->north.line_length / 4; i++)
-		// printf("%d\n", pgm->north.addr[i]);
-		//color = pgm->north.addr[texture_x + y * pgm->north.width];
-		//if (pgm->coord.impact_point == 1)
-		//	color = (color >> 1) & 8355711;
-
-		//get_pixel(&pgm->north, y, i, &color);
+		if (pgm->coord.impact_point == 0)
+			color = (color >> 1) & 8355711;
 		pgm->buff[y][(int)i] = color;
 	}
-	(void)shade;
-	(void)i;
-	//ft_vertical(i, top, bottom, pgm, shade);
+	// printf("raydir_x = %f\n", pgm->coord.ray_dir_x);
+	// printf("raydir_y = %f\n", pgm->coord.ray_dir_y);
 }
 
-// void	paint_world(t_ptr *pgm, double i, double angle)
-// {
-// 	int		top;
-// 	int		bottom;
-// 	int		shade;
-// 	(void)angle;
+/* void	paint_world(t_ptr *pgm, double i)
+{
+	int		top;
+	int		bottom;
+	double	wallX;
+	int		texture_x;
 
-// 	shade = 0;
-// 	if (pgm->coord.impact_point == 0)
-// 	{
-// 		shade = 1;
-// 		pgm->coord.real_distance = fabs(pgm->coord.all_dist_box_x
-// 				- pgm->coord.delta_dist_x);
-// 	}
-// 	else
-// 		pgm->coord.real_distance = fabs(pgm->coord.all_dist_box_y
-// 				- pgm->coord.delta_dist_y);
-// 	top = HEIGHT / 2 - (int)(HEIGHT / (pgm->coord.real_distance * 2));
-// 	 if (top < 0)
-// 	 	top = 0;
-// 	//WARNING
-// 	bottom = HEIGHT / 2 + (int)(HEIGHT / (pgm->coord.real_distance * 2));
-// 	if (bottom > HEIGHT)
-// 		bottom = HEIGHT - 1;
-// 	(void)shade;
-// 	(void)i;
-// 	//ft_vertical(i, top, bottom, pgm, shade);
-// }
+	if (pgm->coord.impact_point == 0)
+	{
+		//ici on est sur les cote east west
+		pgm->coord.real_distance = fabs(pgm->coord.all_dist_box_x
+				- pgm->coord.delta_dist_x);
+	}
+	else
+		pgm->coord.real_distance = fabs(pgm->coord.all_dist_box_y
+				- pgm->coord.delta_dist_y);
+
+	top = HEIGHT / 2 - (int)(HEIGHT / (pgm->coord.real_distance * 2));
+	 if (top < 0)
+	 	top = 0;
+	//WARNING
+	bottom = HEIGHT / 2 + (int)(HEIGHT / (pgm->coord.real_distance * 2));
+	if (bottom > HEIGHT)
+		bottom = HEIGHT - 1;
+	if (pgm->coord.impact_point == 0)
+		wallX = (pgm->coord.y + (pgm->coord.real_distance * pgm->coord.ray_dir_y));
+	else
+		wallX = (pgm->coord.x + (pgm->coord.real_distance * pgm->coord.ray_dir_x));
+	wallX -= floor(wallX);
+
+	texture_x = (int)(wallX * (double)pgm->north.width);
+	if (pgm->coord.impact_point == 0 && pgm->coord.ray_dir_x > 0)
+		texture_x = pgm->north.width - texture_x - 1;
+	if (pgm->coord.impact_point == 1 && pgm->coord.ray_dir_y < 0)
+		texture_x = pgm->north.width - texture_x - 1;
+	double step = 1.0 * pgm->north.height / (HEIGHT / (pgm->coord.real_distance));
+	double texpos = (top - HEIGHT /2  + ((HEIGHT / pgm->coord.real_distance) / 2)) * step;
+	int texY;
+	uint32_t color;
+	for(int y = top; y < bottom; y++)
+	{
+		texY = (int)(texpos) & (pgm->north.height - 1);
+		texpos += step;
+		color = pgm->north.addr[texY * pgm->north.width + texture_x];
+		if (pgm->coord.impact_point == 0)
+			color = (color >> 1) & 8355711;
+		pgm->buff[y][(int)i] = color;
+	}
+} */
 
 /*
 	on a pris un FOV de 0.62 car on a fait
@@ -259,23 +252,15 @@ void	paint_world(t_ptr *pgm, double i, double angle)
 void	launch_game(t_ptr *pgm)
 {
 	double	i;
-	double	angle;
-	double	coef;
 
 	i = 0.0;
-	angle = 31.0;
-	coef = 62.0 / WIDTH;
 	ft_bicolor(pgm, pgm->floor, pgm->ceil);
 	while (i < WIDTH)
 	{
 		ray_casting(pgm, i);
 		find_intersection(pgm);
 		find_impact(pgm);
-		paint_world(pgm, i, angle);
-		if (i < WIDTH / 2)
-			angle -= coef;
-		else
-			angle += coef;
+		paint_world(pgm, i);
 		i++;
 	}
 	draw_buffer(pgm);

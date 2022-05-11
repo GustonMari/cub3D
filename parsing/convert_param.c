@@ -59,37 +59,39 @@ int	convert_cardinal_points(t_ptr *pgm, char *path, int dir)
 	{
 		pgm->north.img = mlx_xpm_file_to_image(pgm->mlx, path,
 				&pgm->north.width, &pgm->north.height);
-		pgm->north.addr = (int *)mlx_get_data_addr(pgm->north.img,
-		&pgm->north.bpp, &pgm->north.line_length, &pgm->north.endian);
 		if (pgm->north.img == NULL)
 			return (FALSE);
+		pgm->north.addr = (int *)mlx_get_data_addr(pgm->north.img,
+		&pgm->north.bpp, &pgm->north.line_length, &pgm->north.endian);
+
 	}
 	if (dir == SO)
 	{
 		pgm->south.img = mlx_xpm_file_to_image(pgm->mlx, path,
 				&pgm->south.width, &pgm->south.height);
-		pgm->south.addr = (int *)mlx_get_data_addr(pgm->south.img,
-		&pgm->south.bpp, &pgm->south.line_length, &pgm->south.endian);
 		if (pgm->south.img == NULL)
 			return (FALSE);
+		pgm->south.addr = (int *)mlx_get_data_addr(pgm->south.img,
+		&pgm->south.bpp, &pgm->south.line_length, &pgm->south.endian);
+
 	}
 	if (dir == EA)
 	{
 		pgm->east.img = mlx_xpm_file_to_image(pgm->mlx, path,
 				&pgm->east.width, &pgm->east.height);
-		pgm->east.addr = (int *)mlx_get_data_addr(pgm->east.img,
-			&pgm->east.bpp, &pgm->east.line_length, &pgm->east.endian);
 		if (pgm->east.img == NULL)
 			return (FALSE);
+		pgm->east.addr = (int *)mlx_get_data_addr(pgm->east.img,
+			&pgm->east.bpp, &pgm->east.line_length, &pgm->east.endian);
 	}
 	if (dir == WE)
 	{
 		pgm->west.img = mlx_xpm_file_to_image(pgm->mlx, path,
 				&pgm->west.width, &pgm->west.height);
-		pgm->west.addr = (int *)mlx_get_data_addr(pgm->west.img,
-			&pgm->west.bpp, &pgm->west.line_length, &pgm->west.endian);
 		if (pgm->west.img == NULL)
 			return (FALSE);
+		pgm->west.addr = (int *)mlx_get_data_addr(pgm->west.img,
+			&pgm->west.bpp, &pgm->west.line_length, &pgm->west.endian);
 	}
 	return (TRUE);
 }
@@ -118,7 +120,7 @@ int	convert_param_2(t_ptr *pgm, char *str_param, int dir)
 	}
 	if (convert_cardinal_points(pgm, path, dir) == FALSE)
 	{
-		ft_putstr_error("Error\nImpossible to open texture\n");
+		ft_putstr_error("Error\nUnable to open texture\n");
 		free(path);
 		return (FALSE);
 	}

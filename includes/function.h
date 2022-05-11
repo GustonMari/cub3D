@@ -19,8 +19,8 @@
 # define TRUE 0
 # define FALSE 1
 # define FULL 10
-# define HEIGHT 480
-# define WIDTH 640
+# define HEIGHT 480//960 
+# define WIDTH 640//1280 
 # define NO 100
 # define SO 101
 # define EA 102
@@ -173,6 +173,7 @@ void	ft_putstr_error(char *s);
 
 char	**parsing(int argc, char **argv, int *nb_line);
 
+
 /*
 ------------------INIT GAME-------------------------
 */
@@ -219,8 +220,12 @@ int	ft_vertical(int x, int top, int bottom, t_ptr *pgm, int shade);
 
 int	secure_map(t_ptr *pgm);
 
-
-
-int			get_pixel(t_data *data, int x, int y, unsigned int *color);
+/*
+------------------DRAW------------------------------
+*/
 void		draw_buffer(t_ptr *pgm);
+int			define_walls(t_ptr *pgm);
+
+//int			get_pixel(t_data *data, int x, int y, unsigned int *color);
+
 #endif

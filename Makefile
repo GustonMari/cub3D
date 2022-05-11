@@ -34,6 +34,7 @@ SRC = main.c \
 			parsing/convert_param.c \
 			parsing/adjust_map.c \
 			parsing/launch_game.c \
+			parsing/put_texture.c \
 			init/init.c \
 			error/error.c \
 			check/check.c \

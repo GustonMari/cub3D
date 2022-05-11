@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 14:33:29 by gmary             #+#    #+#             */
-/*   Updated: 2022/05/11 15:55:50 by gmary            ###   ########.fr       */
+/*   Updated: 2022/05/11 16:11:27 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,8 +109,6 @@ int key_release(int key, t_ptr *pgm)
 int	key_manager(int key, t_ptr *pgm)
 {
 	key_main(key, pgm);
-	fprintf(stderr, "launch\n");
 	launch_game(pgm);
-	fprintf(stderr, "after launch\n");
 	return (0);
 }
