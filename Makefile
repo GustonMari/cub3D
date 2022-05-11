@@ -7,7 +7,7 @@ SRCDIR = srcs
 OBJDIR = objs
 INCDIR = includes
 
-CC = gcc
+CC = clang
 CFLAGS = -Wall -Wextra -Werror -g
 MEM =  #-fsanitize=thread
 

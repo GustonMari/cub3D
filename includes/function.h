@@ -95,6 +95,7 @@ typedef struct s_ptr
 	void	*win;
 	char	**param;
 	char	**map;
+	int		**buff;
 	void	*no;
 	void	*so;
 	void	*we;
@@ -226,4 +227,8 @@ int	ft_vertical(int x, int top, int bottom, t_ptr *pgm, int shade);
 
 int	secure_map(t_ptr *pgm);
 
+
+
+int			get_pixel(t_data *data, int x, int y, unsigned int *color);
+void		draw_buffer(t_ptr *pgm);
 #endif

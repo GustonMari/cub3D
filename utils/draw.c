@@ -1,7 +1,6 @@
 #include "../includes/function.h"
 
-
-void	draw_buffer(t_ptr *pgm, int (*buff)[WIDTH])
+void	draw_buffer(t_ptr *pgm)
 {
 	int	i;
 	int j;
@@ -12,13 +11,12 @@ void	draw_buffer(t_ptr *pgm, int (*buff)[WIDTH])
 		j = 0;
 		while (j < WIDTH)
 		{
-			pgm->image.addr[i * WIDTH + j] = buff[i][j];
+			pgm->image.addr[i * WIDTH + j] = pgm->buff[i][j];
 			j++;
 		}
 		i++;
 	}
-
-	mlx_put_image_to_window(pgm->mlx, pgm->win, pgm->image.img, 0, 0);
+	//mlx_put_image_to_window(pgm->mlx, pgm->win, pgm->image.img, 0, 0);
 }
 
 /*Permet de dessiner le plafond et le mur en fonction des couleurs donnees*/
@@ -27,7 +25,6 @@ void	ft_bicolor(t_ptr *pgm, int color_floor, int color_ceil)
 {
 	int	i;
 	int	j;
-	int	buff[HEIGHT][WIDTH];
 
 	i = 0;
 	while (i < WIDTH)
@@ -36,20 +33,59 @@ void	ft_bicolor(t_ptr *pgm, int color_floor, int color_ceil)
 		while (j < HEIGHT)
 		{
 			if (j < HEIGHT / 2)
-				buff[j][i] = color_floor;
-				//my_mlx_pixel_put(&pgm->image, i, j, color_ceil);
+				pgm->buff[j][i] = color_floor;
 			else
-				buff[j][i] = color_ceil;
-				//my_mlx_pixel_put(&pgm->image, i, j, color_floor);
+				pgm->buff[j][i] = color_ceil;
 			j++;
 		}
 		i++;
 	}
-	(void)buff;
-	(void)pgm;
-	//fprintf(stderr, "bicolor\n");
-	draw_buffer(pgm, buff);
+	draw_buffer(pgm);
 }
+
+// void	draw_buffer(t_ptr *pgm, int (*buff)[WIDTH])
+// {
+// 	int	i;
+// 	int j;
+
+// 	i = 0;
+// 	while (i < HEIGHT)
+// 	{
+// 		j = 0;
+// 		while (j < WIDTH)
+// 		{
+// 			pgm->image.addr[i * WIDTH + j] = buff[i][j];
+// 			j++;
+// 		}
+// 		i++;
+// 	}
+// 	mlx_put_image_to_window(pgm->mlx, pgm->win, pgm->image.img, 0, 0);
+// }
+
+// /*Permet de dessiner le plafond et le mur en fonction des couleurs donnees*/
+
+// void	ft_bicolor(t_ptr *pgm, int color_floor, int color_ceil)
+// {
+// 	int	i;
+// 	int	j;
+// 	int	buff[HEIGHT][WIDTH];
+
+// 	i = 0;
+// 	while (i < WIDTH)
+// 	{
+// 		j = 0;
+// 		while (j < HEIGHT)
+// 		{
+// 			if (j < HEIGHT / 2)
+// 				buff[j][i] = color_floor;
+// 			else
+// 				buff[j][i] = color_ceil;
+// 			j++;
+// 		}
+// 		i++;
+// 	}
+// 	draw_buffer(pgm, buff);
+// }
 
 /*Dessinne un lgine verticale de l'ecran (Une ligne du ray casting)*/
 

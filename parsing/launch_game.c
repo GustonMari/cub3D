@@ -147,7 +147,7 @@ void	ray_casting(t_ptr *pgm, int i)
 		pgm->coord.delta_dist_y = fabs(1 / pgm->coord.ray_dir_y);
 }
 
-/* void	paint_world(t_ptr *pgm, double i, double angle)
+void	paint_world(t_ptr *pgm, double i, double angle)
 {
 	int		top;
 	int		bottom;
@@ -176,69 +176,76 @@ void	ray_casting(t_ptr *pgm, int i)
 		bottom = HEIGHT - 1;
 
 
-	// double wallX;
-	// int		texture_x;
+	double wallX;
+	int		texture_x;
 
-	// if (pgm->coord.impact_point == 0)
-	// 	wallX = (pgm->coord.y + pgm->coord.real_distance * pgm->coord.ray_dir_y);
-	// else
-	// 	wallX = (pgm->coord.x + pgm->coord.real_distance * pgm->coord.ray_dir_x);
-	// wallX -= floor(wallX);
-
-	// texture_x = (int)(wallX * pgm->north.width);
-	// if (pgm->coord.impact_point == 0 && pgm->coord.ray_dir_x > 0)
-	// 	texture_x = pgm->north.width - texture_x - 1;
-	// if (pgm->coord.impact_point == 1 && pgm->coord.ray_dir_y < 0)
-	// 	texture_x = pgm->north.width - texture_x - 1;
-
-	//uint32_t buffer[HEIGHT][WIDTH];
-	// double step = 1.0 * pgm->north.height / (HEIGHT / (pgm->coord.real_distance));
-	// double texpos = (top -HEIGHT /2  + (HEIGHT / (pgm->coord.real_distance) / 2)) * step;
-	// int texY = (int)(texpos) & (pgm->north.height - 1);
-	// texpos += step;
-	// uint32_t color = pgm->north.addr[texY * pgm->north.width + texture_x];
-	// if (pgm->coord.impact_point == 1)
-	// 	color = (color >> 1) & 8355711;
-	
-	//get_pixel(pgm.north, j, i, &color);
-	//buffer[y][(int)i] = color;
-	//my_mlx_pixel_put(&pgm->image, i, j, color);
-		
-	
-
-	(void)shade;
-	(void)i;
-	//ft_vertical(i, top, bottom, pgm, shade);
-} */
-
-void	paint_world(t_ptr *pgm, double i, double angle)
-{
-	int		top;
-	int		bottom;
-	int		shade;
-	(void)angle;
-
-	shade = 0;
 	if (pgm->coord.impact_point == 0)
-	{
-		shade = 1;
-		pgm->coord.real_distance = fabs(pgm->coord.all_dist_box_x
-				- pgm->coord.delta_dist_x);
-	}
+		wallX = (pgm->coord.y + (pgm->coord.real_distance * pgm->coord.ray_dir_y));
 	else
-		pgm->coord.real_distance = fabs(pgm->coord.all_dist_box_y
-				- pgm->coord.delta_dist_y);
-	top = HEIGHT / 2 - (int)(HEIGHT / (pgm->coord.real_distance * 2));
-	 if (top < 0)
-	 	top = 0;
-	//WARNING
-	bottom = HEIGHT / 2 + (int)(HEIGHT / (pgm->coord.real_distance * 2));
-	if (bottom > HEIGHT)
-		bottom = HEIGHT - 1;
+		wallX = (pgm->coord.x + (pgm->coord.real_distance * pgm->coord.ray_dir_x));
+	wallX -= floor(wallX);
+
+	texture_x = (int)(wallX * (double)pgm->north.width);
+	if (pgm->coord.impact_point == 0 && pgm->coord.ray_dir_x > 0)
+		texture_x = pgm->north.width - texture_x - 1;
+	if (pgm->coord.impact_point == 1 && pgm->coord.ray_dir_y < 0)
+		texture_x = pgm->north.width - texture_x - 1;
+	//uint32_t buffer[HEIGHT][WIDTH];
+	
+	double step = 1.0 * pgm->north.height / (HEIGHT / (pgm->coord.real_distance));
+	double texpos = (top - HEIGHT /2  + ((HEIGHT / pgm->coord.real_distance) / 2)) * step;
+	int texY;
+	uint32_t color;
+	for(int y = top; y < bottom; y++)
+	{
+		texY = (int)(texpos) & (pgm->north.height - 1);
+		texpos += step;
+		color = pgm->north.addr[texY * pgm->north.width + texture_x];
+		//color = (uint32_t)pgm->north.addr[y];
+		//color = pgm->north.addr[1];
+		// printf("%d\n", pgm->north.line_length);
+		// for (int i = 0; i < pgm->north.line_length / 4; i++)
+		// printf("%d\n", pgm->north.addr[i]);
+		//color = pgm->north.addr[texture_x + y * pgm->north.width];
+		//if (pgm->coord.impact_point == 1)
+		//	color = (color >> 1) & 8355711;
+
+		//get_pixel(&pgm->north, y, i, &color);
+		pgm->buff[y][(int)i] = color;
+	}
 	(void)shade;
 	(void)i;
 	//ft_vertical(i, top, bottom, pgm, shade);
 }
+
+// void	paint_world(t_ptr *pgm, double i, double angle)
+// {
+// 	int		top;
+// 	int		bottom;
+// 	int		shade;
+// 	(void)angle;
+
+// 	shade = 0;
+// 	if (pgm->coord.impact_point == 0)
+// 	{
+// 		shade = 1;
+// 		pgm->coord.real_distance = fabs(pgm->coord.all_dist_box_x
+// 				- pgm->coord.delta_dist_x);
+// 	}
+// 	else
+// 		pgm->coord.real_distance = fabs(pgm->coord.all_dist_box_y
+// 				- pgm->coord.delta_dist_y);
+// 	top = HEIGHT / 2 - (int)(HEIGHT / (pgm->coord.real_distance * 2));
+// 	 if (top < 0)
+// 	 	top = 0;
+// 	//WARNING
+// 	bottom = HEIGHT / 2 + (int)(HEIGHT / (pgm->coord.real_distance * 2));
+// 	if (bottom > HEIGHT)
+// 		bottom = HEIGHT - 1;
+// 	(void)shade;
+// 	(void)i;
+// 	//ft_vertical(i, top, bottom, pgm, shade);
+// }
 
 /*
 	on a pris un FOV de 0.62 car on a fait
@@ -255,6 +262,7 @@ void	launch_game(t_ptr *pgm)
 	double	angle;
 	double	coef;
 
+	i = 0.0;
 	angle = 31.0;
 	coef = 62.0 / WIDTH;
 	ft_bicolor(pgm, pgm->floor, pgm->ceil);
@@ -270,5 +278,6 @@ void	launch_game(t_ptr *pgm)
 			angle += coef;
 		i++;
 	}
+	draw_buffer(pgm);
 	mlx_put_image_to_window(pgm->mlx, pgm->win, pgm->image.img, 0, 0);
 }

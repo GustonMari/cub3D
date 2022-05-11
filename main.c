@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 09:20:55 by gmary             #+#    #+#             */
-/*   Updated: 2022/05/11 10:01:44 by gmary            ###   ########.fr       */
+/*   Updated: 2022/05/11 14:53:52 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,10 @@ int main(int argc, char **argv)
 	if (secure_map(&pgm) == FALSE)
 		return (FALSE);
 	find_pos(&pgm);
-	ft_bicolor(&pgm, pgm.floor, pgm.ceil);
-	//launch_game(&pgm);
+	//ft_bicolor(&pgm, pgm.floor, pgm.ceil);
+	launch_game(&pgm);
 	ft_free_tab_2d(all);
+	
 	//mlx_key_hook(pgm.win, &key_manager, &pgm);
 	mlx_hook(pgm.win, 2, (1L << 0), &key_manager, &pgm);
 	mlx_hook(pgm.win, 3, (1L << 1), &key_release, &pgm);
@@ -131,19 +132,19 @@ int main(int argc, char **argv)
 	return (0);
 } */
 
-// int			get_pixel(t_data *data, int x, int y, unsigned int *color)
-// {
-// 	char	*dest;
+int			get_pixel(t_data *data, int x, int y, unsigned int *color)
+{
+	int	*dest;
 
-// 	if (x < 0 /* || x > img->siz.x */ || y < 0 /* || y > img->siz.y */)
-// 	{
-// 		return (1);
-// 	}
-// 	dest = data->addr +
-// 				(y * data->line_length + x * (data->bpp / 8));
-// 	*color = *(unsigned int *)dest;
-// 	return (0);
-// }
+	if (x < 0 /* || x > img->siz.x */ || y < 0 /* || y > img->siz.y */)
+	{
+		return (1);
+	}
+	dest = data->addr +
+				(y * data->line_length + x * (data->bpp / 8));
+	*color = *(unsigned int *)dest;
+	return (0);
+}
 
 // int main()
 // {

@@ -57,9 +57,13 @@ int	convert_cardinal_points(t_ptr *pgm, char *path, int dir)
 {
 	if (dir == NO)
 	{
-		pgm->no = mlx_xpm_file_to_image(pgm->mlx, path,
-				&pgm->image.width, &pgm->image.height);
-		if (pgm->no == NULL)
+		pgm->north.img = mlx_xpm_file_to_image(pgm->mlx, path,
+				&pgm->north.width, &pgm->north.height);
+		pgm->north.addr = (int *)mlx_get_data_addr(pgm->north.img,
+		&pgm->north.bpp, &pgm->north.line_length, &pgm->north.endian);
+
+		//fprintf(stderr, "")
+		if (pgm->north.img == NULL)
 			return (FALSE);
 	}
 	if (dir == SO)
@@ -136,6 +140,25 @@ void	convert_floor_ceil(t_ptr *pgm, char *path, int dir)
 	ft_free_tab_2d(tab);
 }
 
+int	init_struct(t_ptr *pgm)
+{
+	int	i;
+
+	i = 0;
+	pgm->buff = malloc(sizeof(int *) * (HEIGHT + 100000));
+	//WARNING
+	if (!pgm->buff)
+		return (FALSE);
+	while (i < HEIGHT)
+	{
+		pgm->buff[i] = malloc(sizeof(int) * (WIDTH + 100000));
+		if (!pgm->buff[i])
+			return (FALSE);
+		i++;
+	}
+	return (TRUE);
+}
+
 /*Converti les param et les mets dans la structure*/
 
 int	convert_param(t_ptr *pgm)
@@ -144,7 +167,8 @@ int	convert_param(t_ptr *pgm)
 	int		j;
 
 	i = 0;
-	//print_tab_2d(pgm->param);
+	if (init_struct(pgm) == FALSE)
+		return (FALSE);
 	while (pgm->param[i])
 	{
 		j = 0;
