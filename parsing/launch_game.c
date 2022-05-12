@@ -151,10 +151,12 @@ void	paint_world(t_ptr *pgm, double i)
 {
 	int		top;
 	int		bottom;
+	double	step;
 	//double	wallX;
 
-
+	step = -111111111;
 	define_walls(pgm);
+	printf("wall = %d\nimpact = %f\n", pgm->coord.cardinal_wall, pgm->coord.impact_point);
 	top = HEIGHT / 2 - (int)(HEIGHT / (pgm->coord.real_distance * 2));
 	 if (top < 0)
 	 	top = 0;
@@ -167,16 +169,30 @@ void	paint_world(t_ptr *pgm, double i)
 	else
 		pgm->coord.wall_x = (pgm->coord.x + (pgm->coord.real_distance * pgm->coord.ray_dir_x));
 	pgm->coord.wall_x -= floor(pgm->coord.wall_x);
-	find_texture_x(pgm, pgm->coord.cardinal_wall);
-	double step = 1.0 * pgm->north.height / (HEIGHT / (pgm->coord.real_distance));
+	// find_texture_x(pgm, pgm->coord.cardinal_wall);
+	if (pgm->coord.cardinal_wall == NO)
+		step = 1.0 * pgm->north.height / (HEIGHT / (pgm->coord.real_distance));
+	else if (pgm->coord.cardinal_wall == SO)
+		step = 1.0 * pgm->south.height / (HEIGHT / (pgm->coord.real_distance));
+	else if (pgm->coord.cardinal_wall == EA)
+		step = 1.0 * pgm->east.height / (HEIGHT / (pgm->coord.real_distance));
+	else if (pgm->coord.cardinal_wall == WE)
+		step = 1.0 * pgm->west.height / (HEIGHT / (pgm->coord.real_distance));
 	double texpos = (top - HEIGHT /2  + ((HEIGHT / pgm->coord.real_distance) / 2)) * step;
 	int texY;
 	uint32_t color;
 	for(int y = top; y < bottom; y++)
 	{
-		texY = (int)(texpos) & (pgm->north.height - 1);
+		find_texture_x(pgm, pgm->coord.cardinal_wall);
+		if (pgm->coord.cardinal_wall == NO)
+			texY = (int)(texpos) & (pgm->north.height - 1);
+		else if (pgm->coord.cardinal_wall == SO)
+			texY = (int)(texpos) & (pgm->south.height - 1);
+		else if (pgm->coord.cardinal_wall == EA)
+			texY = (int)(texpos) & (pgm->east.height - 1);
+		else if (pgm->coord.cardinal_wall == WE)
+			texY = (int)(texpos) & (pgm->west.height - 1);
 		texpos += step;
-		//printf("%d\n", pgm->coord.texture_x);
 		if (pgm->coord.cardinal_wall == NO)
 			color = pgm->north.addr[texY * pgm->north.width + pgm->coord.texture_x];
 		if (pgm->coord.cardinal_wall == SO)
@@ -197,19 +213,12 @@ void	paint_world(t_ptr *pgm, double i)
 {
 	int		top;
 	int		bottom;
-	double	wallX;
-	int		texture_x;
+	double	step;
+	//double	wallX;
 
-	if (pgm->coord.impact_point == 0)
-	{
-		//ici on est sur les cote east west
-		pgm->coord.real_distance = fabs(pgm->coord.all_dist_box_x
-				- pgm->coord.delta_dist_x);
-	}
-	else
-		pgm->coord.real_distance = fabs(pgm->coord.all_dist_box_y
-				- pgm->coord.delta_dist_y);
-
+	step = -111111111;
+	define_walls(pgm);
+	printf("wall = %d\nimpact = %f\n", pgm->coord.cardinal_wall, pgm->coord.impact_point);
 	top = HEIGHT / 2 - (int)(HEIGHT / (pgm->coord.real_distance * 2));
 	 if (top < 0)
 	 	top = 0;
@@ -218,29 +227,48 @@ void	paint_world(t_ptr *pgm, double i)
 	if (bottom > HEIGHT)
 		bottom = HEIGHT - 1;
 	if (pgm->coord.impact_point == 0)
-		wallX = (pgm->coord.y + (pgm->coord.real_distance * pgm->coord.ray_dir_y));
+		pgm->coord.wall_x = (pgm->coord.y + (pgm->coord.real_distance * pgm->coord.ray_dir_y));
 	else
-		wallX = (pgm->coord.x + (pgm->coord.real_distance * pgm->coord.ray_dir_x));
-	wallX -= floor(wallX);
-
-	texture_x = (int)(wallX * (double)pgm->north.width);
-	if (pgm->coord.impact_point == 0 && pgm->coord.ray_dir_x > 0)
-		texture_x = pgm->north.width - texture_x - 1;
-	if (pgm->coord.impact_point == 1 && pgm->coord.ray_dir_y < 0)
-		texture_x = pgm->north.width - texture_x - 1;
-	double step = 1.0 * pgm->north.height / (HEIGHT / (pgm->coord.real_distance));
+		pgm->coord.wall_x = (pgm->coord.x + (pgm->coord.real_distance * pgm->coord.ray_dir_x));
+	pgm->coord.wall_x -= floor(pgm->coord.wall_x);
+	// find_texture_x(pgm, pgm->coord.cardinal_wall);
+	if (pgm->coord.cardinal_wall == NO)
+		step = 1.0 * pgm->north.height / (HEIGHT / (pgm->coord.real_distance));
+	else if (pgm->coord.cardinal_wall == SO)
+		step = 1.0 * pgm->south.height / (HEIGHT / (pgm->coord.real_distance));
+	else if (pgm->coord.cardinal_wall == EA)
+		step = 1.0 * pgm->east.height / (HEIGHT / (pgm->coord.real_distance));
+	else if (pgm->coord.cardinal_wall == WE)
+		step = 1.0 * pgm->west.height / (HEIGHT / (pgm->coord.real_distance));
 	double texpos = (top - HEIGHT /2  + ((HEIGHT / pgm->coord.real_distance) / 2)) * step;
 	int texY;
 	uint32_t color;
 	for(int y = top; y < bottom; y++)
 	{
-		texY = (int)(texpos) & (pgm->north.height - 1);
+		find_texture_x(pgm, pgm->coord.cardinal_wall);
+		if (pgm->coord.cardinal_wall == NO)
+			texY = (int)(texpos) & (pgm->north.height - 1);
+		else if (pgm->coord.cardinal_wall == SO)
+			texY = (int)(texpos) & (pgm->south.height - 1);
+		else if (pgm->coord.cardinal_wall == EA)
+			texY = (int)(texpos) & (pgm->east.height - 1);
+		else if (pgm->coord.cardinal_wall == WE)
+			texY = (int)(texpos) & (pgm->west.height - 1);
 		texpos += step;
-		color = pgm->north.addr[texY * pgm->north.width + texture_x];
+		if (pgm->coord.cardinal_wall == NO)
+			color = pgm->north.addr[texY * pgm->north.width + pgm->coord.texture_x];
+		if (pgm->coord.cardinal_wall == SO)
+			color = pgm->south.addr[texY * pgm->south.width + pgm->coord.texture_x];
+		if (pgm->coord.cardinal_wall == EA)
+			color = pgm->east.addr[texY * pgm->east.width + pgm->coord.texture_x];
+		if (pgm->coord.cardinal_wall == WE)
+			color = pgm->west.addr[texY * pgm->west.width + pgm->coord.texture_x];
 		if (pgm->coord.impact_point == 0)
 			color = (color >> 1) & 8355711;
 		pgm->buff[y][(int)i] = color;
 	}
+	// printf("raydir_x = %f\n", pgm->coord.ray_dir_x);
+	// printf("raydir_y = %f\n", pgm->coord.ray_dir_y);
 } */
 
 /*
