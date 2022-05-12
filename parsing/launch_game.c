@@ -152,24 +152,21 @@ void	paint_world(t_ptr *pgm, double i)
 	int		top;
 	int		bottom;
 	double	step;
-	//double	wallX;
 
 	step = -111111111;
 	define_walls(pgm);
-	printf("wall = %d\nimpact = %f\n", pgm->coord.cardinal_wall, pgm->coord.impact_point);
 	top = HEIGHT / 2 - (int)(HEIGHT / (pgm->coord.real_distance * 2));
 	 if (top < 0)
 	 	top = 0;
 	//WARNING
 	bottom = HEIGHT / 2 + (int)(HEIGHT / (pgm->coord.real_distance * 2));
 	if (bottom > HEIGHT)
-		bottom = HEIGHT - 1;
+		bottom = HEIGHT;
 	if (pgm->coord.impact_point == 0)
 		pgm->coord.wall_x = (pgm->coord.y + (pgm->coord.real_distance * pgm->coord.ray_dir_y));
 	else
 		pgm->coord.wall_x = (pgm->coord.x + (pgm->coord.real_distance * pgm->coord.ray_dir_x));
 	pgm->coord.wall_x -= floor(pgm->coord.wall_x);
-	// find_texture_x(pgm, pgm->coord.cardinal_wall);
 	if (pgm->coord.cardinal_wall == NO)
 		step = 1.0 * pgm->north.height / (HEIGHT / (pgm->coord.real_distance));
 	else if (pgm->coord.cardinal_wall == SO)
@@ -205,8 +202,7 @@ void	paint_world(t_ptr *pgm, double i)
 			color = (color >> 1) & 8355711;
 		pgm->buff[y][(int)i] = color;
 	}
-	// printf("raydir_x = %f\n", pgm->coord.ray_dir_x);
-	// printf("raydir_y = %f\n", pgm->coord.ray_dir_y);
+	printf("%f\n", pgm->coord.real_distance);
 }
 
 /* void	paint_world(t_ptr *pgm, double i)

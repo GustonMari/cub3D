@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 14:33:29 by gmary             #+#    #+#             */
-/*   Updated: 2022/05/11 16:11:27 by gmary            ###   ########.fr       */
+/*   Updated: 2022/05/12 15:01:58 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,24 @@ void	key_right(t_ptr *pgm)
 		+ pgm->coord.plane_y * cos(0.05);
 }
 
+void	key_mv_left(t_ptr *pgm)
+{
+	if (pgm->map[(int)pgm->coord.y][(int)(pgm->coord.x - pgm->coord.plane_x)] != '1')
+		pgm->coord.x -= pgm->coord.plane_x * SPEED;
+	fprintf(stderr, "next case = |%c|\n", pgm->map[(int)(pgm->coord.y + pgm->coord.ray_dir_y)][(int)(pgm->coord.x)]);
+	if (pgm->map[(int)(pgm->coord.y - pgm->coord.plane_y)][(int)(pgm->coord.x)] != '1')
+		pgm->coord.y -= pgm->coord.plane_y * SPEED;
+}
+
+void	key_mv_right(t_ptr *pgm)
+{
+	if (pgm->map[(int)pgm->coord.y][(int)(pgm->coord.x + pgm->coord.plane_x)] != '1')
+		pgm->coord.x += pgm->coord.plane_x * SPEED;
+	fprintf(stderr, "next case = |%c|\n", pgm->map[(int)(pgm->coord.y + pgm->coord.ray_dir_y)][(int)(pgm->coord.x)]);
+	if (pgm->map[(int)(pgm->coord.y + pgm->coord.plane_y)][(int)(pgm->coord.x)] != '1')
+		pgm->coord.y += pgm->coord.plane_y * SPEED;
+}
+
 int	key_main(int key, t_ptr *pgm)
 {
 	if (key == XK_Escape)
@@ -92,10 +110,14 @@ int	key_main(int key, t_ptr *pgm)
 		key_up(pgm);
 	if (key == XK_s || key == XK_Down)
 		key_down(pgm);
-	if (key == XK_a || key == XK_Left)
+	if (/* key == XK_a ||  */key == XK_Left)
 		key_left(pgm);
-	if (key == XK_d || key == XK_Right)
+	if (/* key == XK_d ||  */key == XK_Right)
 		key_right(pgm);
+	if (key == XK_a)
+		key_mv_left(pgm);
+	if (key == XK_d)
+		key_mv_right(pgm);
 	return (0);
 }
 
