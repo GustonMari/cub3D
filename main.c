@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 09:20:55 by gmary             #+#    #+#             */
-/*   Updated: 2022/05/11 14:53:52 by gmary            ###   ########.fr       */
+/*   Updated: 2022/05/12 17:19:14 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,17 +61,29 @@
 	return (0);
 } */
 
-int main(int argc, char **argv)
+int main(int argc, char **argv, char **envp)
 {
 	int nb_line;
 	char **all;
 	t_ptr	pgm;
 
+	all = NULL;
+	ft_set_null(&pgm);
+	if (*envp == NULL)
+	{
+		printf("Error\nWhat can we do wihout env ?\n");
+		return(1);	
+	}
 	nb_line = -1;
 	all = parsing(argc, argv, &nb_line);
+	if (!all)
+		return (1);
 	if (ft_check(all, argv[1], nb_line, &pgm) == FALSE)
 	{
-		printf("Probleme file-----------------------------------------\n");
+		ft_free_tab_2d(all);
+		printf("some issue with file");
+		ft_free_tab_2d(pgm.map);
+		ft_free_tab_2d(pgm.param); // peut etre a tej plus tard
 		return (1);
 	}
 	pgm_image_init(&pgm, &pgm.image);

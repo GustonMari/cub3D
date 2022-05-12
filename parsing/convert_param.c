@@ -151,13 +151,13 @@ int	init_struct(t_ptr *pgm)
 	int	i;
 
 	i = 0;
-	pgm->buff = malloc(sizeof(int *) * (HEIGHT + 100000));
+	pgm->buff = malloc(sizeof(int *) * (HEIGHT/*  + 100000 */));
 	//WARNING
 	if (!pgm->buff)
 		return (FALSE);
 	while (i < HEIGHT)
 	{
-		pgm->buff[i] = malloc(sizeof(int) * (WIDTH + 100000));
+		pgm->buff[i] = malloc(sizeof(int) * (WIDTH/*  + 100000 */));
 		if (!pgm->buff[i])
 			return (FALSE);
 		i++;

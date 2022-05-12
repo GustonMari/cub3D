@@ -17,3 +17,16 @@ char	*ft_strndup(char *str, int n)
 	dest[i] = '\0';
 	return (dest);
 }
+
+void	ft_free_buff(t_ptr *pgm)
+{
+	int	i;
+
+	i = 0;
+	while (i < HEIGHT)
+	{
+		free(pgm->buff[i]);
+		i++;
+	}
+	free(pgm->buff);
+}

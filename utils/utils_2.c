@@ -15,6 +15,8 @@ void	*ft_free_tab_2d(char **tab)
 	int	i;
 
 	i = 0;
+	if (!tab)
+		return (NULL);
 	while (tab[i])
 	{
 		free(tab[i]);

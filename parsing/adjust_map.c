@@ -7,6 +7,7 @@ char	**adjust_map(char **map, int nb_line)
 	char	**new_map;
 
 	i = 0;
+	new_map = NULL;
 	max_len = find_max_lenght(map) - 1;
 	new_map = ft_calloc(sizeof(char *), nb_line + 1);
 	new_map[nb_line] = NULL;

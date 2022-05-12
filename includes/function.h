@@ -113,6 +113,12 @@ int		palette(int i);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 int		create_color(int t, int r, int g, int b);
 void	ft_bicolor(t_ptr *pgm, int color_floor, int color_ceil);
+
+/*
+------------------INIT--------------------------
+*/
+
+void	ft_set_null(t_ptr *pgm);
 void	pgm_image_init(t_ptr *pgm, t_data *image);
 
 /*
@@ -139,7 +145,7 @@ int		ft_atoi(char *str);
 char	**cpy_tab(char **srcs, int nb_line);
 int		line_is_whitespace(char *str);
 char	*ft_strndup(char *str, int n);
-
+void	ft_free_buff(t_ptr *pgm);
 /*
 ------------------CHECK MAP----------------------
 */

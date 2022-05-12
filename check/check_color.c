@@ -46,6 +46,7 @@ int	check_color_number(char *str)
 	int i;
 	int	nb;
 
+	dest = NULL;
 	i = 0;
 	if (str[i + 1])
 		dest = ft_split(&str[1], " ,");
@@ -58,7 +59,10 @@ int	check_color_number(char *str)
 	{
 		nb = ft_atoi(dest[i]);
 		if (nb < 0 || nb > 255)
+		{
+			ft_free_tab_2d(dest);
 			return (FALSE);
+		}
 		i++;
 	}
 	ft_free_tab_2d(dest);
