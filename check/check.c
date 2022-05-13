@@ -69,10 +69,50 @@ int	check_element_file(char **map)
 	return (TRUE);
 }
 
-int	ft_check(char **all, char *name, int nb_line, t_ptr *pgm)
+int	create_map_param(t_ptr *pgm, char **map, char **param)
+{
+	map = adjust_map(map, ft_count_line(map));
+	if (!map)
+		return (FALSE);
+	pgm->map = map;
+	pgm->param = param;
+	return (TRUE);
+}
+
+int	ft_check_bis(char **all, int ret, int nb_line, t_ptr *pgm)
 {
 	char	**map;
 	char	**param;
+
+	if (ret == FALSE)
+	{
+		ft_putstr_error("Error\nWrong element in file\n");
+		return (FALSE);
+	}
+	else if (ret > 1)
+	{
+		map = cpy_tab(&all[ret], (nb_line - ret));
+		if (!map)
+			return (FALSE);
+		param = cpy_tab(all, ret);
+		if (create_map_param(pgm, map, param) == FALSE)
+			return (FALSE);
+		if (check_map(pgm->map, ft_count_line(pgm->map)) == FALSE)
+		{
+			ft_putstr_error("Error\nWrong map\n");
+			return (FALSE);
+		}
+	}
+	else
+	{
+		printf("Problem append\n");
+		return (FALSE);
+	}
+	return (TRUE);
+}
+
+int	ft_check(char **all, char *name, int nb_line, t_ptr *pgm)
+{
 	int		ret;
 
 	ret = 0;
@@ -82,31 +122,7 @@ int	ft_check(char **all, char *name, int nb_line, t_ptr *pgm)
 		return (FALSE);
 	}
 	ret = check_element_file(all);
-	if (ret == FALSE)
-	{
-		ft_putstr_error("Error\nWrong element in file\n");
+	if (ft_check_bis(all, ret, nb_line, pgm) == FALSE)
 		return (FALSE);
-	}
-	else if (ret > 1)
-	{
-		map = cpy_tab(&all[ret], (nb_line - ret));
-		param = cpy_tab(all, ret);
-		map = adjust_map(map, ft_count_line(map));
-		pgm->map = map;
-		pgm->param = param;
-		//WARNING
-		if (!map)
-			return (FALSE);
-		if (check_map(map, ft_count_line(map)) == FALSE)
-		{
-			ft_putstr_error("Error\nWrong map\n");
-			return (FALSE);
-		}
-	}
-	else
-	{
-		printf("y'a un pb\n");
-		return (FALSE);
-	}
 	return (TRUE);
 }

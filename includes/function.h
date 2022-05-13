@@ -161,7 +161,12 @@ int		check_start_char(char c);
 -----------------CHECK-------------------------
 */
 
-int ft_check(char **all, char *name, int nb_line, t_ptr *pgm);
+int		ft_check(char **all, char *name, int nb_line, t_ptr *pgm);
+int		check_double(char **map);
+int		check_map(char **map, int nb_line);
+int		check_horizon(char *line);
+int		check_vertical(char **map, int column, int nb_line);
+
 
 /*
 -----------------CHECK COLOR----------------------
