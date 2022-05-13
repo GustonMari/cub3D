@@ -6,7 +6,7 @@
 /*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 17:53:41 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/05/13 17:54:55 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/05/13 18:29:15 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	get_direction_2(t_ptr *pgm, char c)
 		pgm->coord.plane_y = -0.62;
 	}
 }
-
 
 void	get_direction(t_ptr *pgm, char c)
 {

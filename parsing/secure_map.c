@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   secure_map.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/13 18:29:39 by ndormoy           #+#    #+#             */
+/*   Updated: 2022/05/13 18:29:51 by ndormoy          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/function.h"
 
 /*Permet de savoir si il faut mettre un 1 dans la map*/
@@ -12,7 +24,7 @@ int	everything_is_one(char c)
 /*Permet de creer la premiere et la derniere ligne de la map,
 rempli de 1*/
 
-int	first_last_line(char **new_map , int nb_line, int len)
+int	first_last_line(char **new_map, int nb_line, int len)
 {
 	int		i;
 
@@ -68,7 +80,7 @@ int	secure_map(t_ptr *pgm)
 			return (FALSE);
 		}
 		new_map[i + 1][0] = '1';
-		while(pgm->map[i][j])
+		while (pgm->map[i][j])
 		{
 			if (everything_is_one(pgm->map[i][j]) == FALSE)
 				new_map[i + 1][j + 1] = pgm->map[i][j];

@@ -177,15 +177,16 @@ int		tab_is_full(int *tab);
 -----------------CHECK COLOR----------------------
 */
 
-int check_color(char *str);
+int		check_color(char *str);
 
 
 /*
 ------------------ERROR--------------------------
 */
 
-int	ft_putstr_error(char *s);
-int	ft_check_error(t_ptr *pgm, char **all);
+int		ft_putstr_error(char *s);
+int		ft_check_error(t_ptr *pgm, char **all);
+char	**ft_putstr_error_char(char *s);
 
 /*
 ------------------PARSING-------------------------

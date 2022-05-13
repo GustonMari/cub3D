@@ -6,7 +6,7 @@
 /*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 17:52:01 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/05/13 18:17:14 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/05/13 18:29:23 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ void	ray_casting(t_ptr *pgm, int i)
 	tant qu'on est avant la droite du vecteur dir,
 	on va decrementer l'angle (qui est egal a la moitie du FOV -> 31)
 	par le coeficient coef qui se calcul en fonction de notre
-	definition de la largeur de l'ecran. Puis quand on depasse la droite on incremente.
+	definition de la largeur de l'ecran. Puis quand on
+	 depasse la droite on incremente.
 */
 
 void	launch_game(t_ptr *pgm)

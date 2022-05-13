@@ -9,6 +9,15 @@ int	ft_putstr_error(char *s)
 	return (FALSE);
 }
 
+char	**ft_putstr_error_char(char *s)
+{
+	if (s)
+	{
+		write(2, s, ft_strlen(s));
+	}
+	return (NULL);
+}
+
 int	ft_check_error(t_ptr *pgm, char **all)
 {
 	ft_free_tab_2d(all);
