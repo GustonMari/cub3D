@@ -2,6 +2,25 @@
 
 /*Permet de voir si une ligne est bonne en horizontal*/
 
+int	check_horizon_bis(char *line, int *i)
+{
+	if (check_forbiden_char(line[*i]) == FALSE)
+		return (FALSE);
+	if (line[*i + 1] && ft_is_space(line[*i + 1]) == TRUE)
+	{
+		if (line[*i] != '1')
+			return (FALSE);
+		(*i)++;
+		while (line[*i] && ft_is_space(line[*i]) == TRUE)
+			(*i)++;
+		if (line[*i] && line[*i] != '1')
+			return (FALSE);
+	}
+	else
+		(*i)++;
+	return (TRUE);
+}
+
 int	check_horizon(char *line)
 {
 	int	i;
@@ -14,24 +33,12 @@ int	check_horizon(char *line)
 		space = 1;
 		i++;
 	}
-	if (space == 1 && (line[i] != '1')) // faire fonction pour si la ligne est vide
+	if (space == 1 && (line[i] != '1'))
 		return (FALSE);
 	while (line[i])
 	{
-		if (check_forbiden_char(line[i]) == FALSE)
+		if (check_horizon_bis(line, &i) == FALSE)
 			return (FALSE);
-		if (line[i + 1] && ft_is_space(line[i + 1]) == TRUE)
-		{
-			if (line[i] != '1')
-				return (FALSE);
-			i++;
-			while (line[i] && ft_is_space(line[i]) == TRUE)
-				i++;
-			if (line[i] && line[i] != '1')
-				return (FALSE);
-		}
-		else
-			i++;
 	}
 	return (TRUE);
 }
@@ -42,7 +49,6 @@ int check_vertical(char **map, int column, int nb_line)
 {
 	int	i;
 	int	space;
-	(void)space;
 
 	i = 0;
 	space = 0;
@@ -51,7 +57,7 @@ int check_vertical(char **map, int column, int nb_line)
 		space = 1;
 		i++;
 	}
-	if (space == 1 && map[i][column] != '1' && map[i][column] != '\0') // faire fonction pour si la ligne est vide
+	if (space == 1 && map[i][column] != '1' && map[i][column] != '\0')
 		return (FALSE);
 	while (i < nb_line)
 	{
@@ -64,7 +70,8 @@ int check_vertical(char **map, int column, int nb_line)
 			i++;
 			while ((i < nb_line) && ft_is_space(map[i][column]) == TRUE)
 				i++;
-			if ((i < nb_line) && map[i][column] != '1' && map[i][column] != '\0')
+			if ((i < nb_line) && map[i][column] != '1'
+				&& map[i][column] != '\0')
 				return (FALSE);
 		}
 		else

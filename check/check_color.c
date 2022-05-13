@@ -3,6 +3,32 @@
 /*Va checker si il n'y a pas d'espace entre
 les chiffres 22  0,10  0,0 par exemple*/
 
+int	check_color_space_bis(char *str, int *i, int *k)
+{
+	while (str[*i] && (ft_is_space(str[*i]) == TRUE))
+		(*i)++;
+	if (ft_strlen(str) == *i || ft_isdigit(str[*i]) == FALSE)
+		return (FALSE);
+	while (str[*i] && ft_isdigit(str[*i]) == TRUE)
+		(*i)++;
+	while (str[*i] && (ft_is_space(str[*i]) == TRUE))
+		(*i)++;
+	if (*k < 2)
+	{
+		if (str[*i] && ft_strncmp(&str[*i], ",", 1))
+			return (FALSE);
+	}
+	else
+	{
+		if (str[*i] != '\0')
+			return (FALSE);
+	}
+	(*i)++;
+	(*k)++;
+	return (TRUE);
+}
+
+
 int	check_color_space(char *str)
 {
 	int	i;
@@ -12,26 +38,8 @@ int	check_color_space(char *str)
 	k = 0;
 	while (str[i] && k < 3)
 	{
-		while (str[i] && (ft_is_space(str[i]) == TRUE))
-			i++;
-		if (ft_strlen(str) == i || ft_isdigit(str[i]) == FALSE)
+		if (check_color_space_bis(str, &i, &k) == FALSE)
 			return (FALSE);
-		while (str[i] && ft_isdigit(str[i]) == TRUE)
-			i++;
-		while (str[i] && (ft_is_space(str[i]) == TRUE))
-			i++;
-		if (k < 2)
-		{
-			if (str[i] && ft_strncmp(&str[i], ",", 1))
-				return (FALSE);
-		}
-		else
-		{
-			if (str[i] != '\0')
-				return (FALSE);
-		}
-		i++;
-		k++;
 	}
 	if (k != 3)
 		return (FALSE);
