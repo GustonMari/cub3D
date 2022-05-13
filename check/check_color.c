@@ -42,9 +42,9 @@ int	check_color_space(char *str)
 
 int	check_color_number(char *str)
 {
-	char **dest;
-	int i;
-	int	nb;
+	char	**dest;
+	int		i;
+	int		nb;
 
 	dest = NULL;
 	i = 0;
@@ -52,7 +52,6 @@ int	check_color_number(char *str)
 		dest = ft_split(&str[1], " ,");
 	else
 		return (FALSE);
-	//WARNING
 	if (!dest)
 		return (-1);
 	while (i < 3)
@@ -82,13 +81,3 @@ int	check_color(char *str)
 		return (FALSE);
 	return (TRUE);
 }
-
-/* int	main()
-{
-	char str[] = "F   5  ,  0   ,  59  ";
-	if (check_color(str) == TRUE)
-		printf("C'est booon");
-	else
-		printf("CEST FAUXXXX");
-	return (0);
-} */
