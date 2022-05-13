@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/13 17:10:41 by ndormoy           #+#    #+#             */
+/*   Updated: 2022/05/13 17:15:41 by ndormoy          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/function.h"
 
 int	ft_is_sep(char c, char *charset)
@@ -16,7 +28,7 @@ char	ft_word_len(char *str, char *charset)
 	int	j;
 
 	j = 0;
-	while (str[j] && (ft_is_sep(str[j], charset) == 0 ))
+	while (str[j] && (ft_is_sep(str[j], charset) == 0))
 		j++;
 	return (j + 1);
 }

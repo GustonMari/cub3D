@@ -202,7 +202,7 @@ void	paint_world(t_ptr *pgm, double i)
 			color = (color >> 1) & 8355711;
 		pgm->buff[y][(int)i] = color;
 	}
-	printf("%f\n", pgm->coord.real_distance);
+	//printf("%f\n", pgm->coord.real_distance);
 }
 
 /* void	paint_world(t_ptr *pgm, double i)

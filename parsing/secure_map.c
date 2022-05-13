@@ -64,7 +64,6 @@ int	secure_map(t_ptr *pgm)
 		if (!new_map[i + 1])
 		{
 			free(new_map[pgm->nb_line + 1]);
-			printf("pouet\n");
 			ft_free_tab_2d(new_map);
 			return (FALSE);
 		}

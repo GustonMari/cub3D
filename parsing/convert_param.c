@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   convert_param.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/13 17:37:36 by ndormoy           #+#    #+#             */
+/*   Updated: 2022/05/13 17:40:44 by ndormoy          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/function.h"
 
 /*Permet de convertir le path des points cardinaux
@@ -11,47 +23,11 @@ char	*convert_cardinal_path(char *str)
 	len = 0;
 	while (str[len] && (ft_is_space(str[len]) == FALSE))
 		len++;
-	//WARNING
 	path = ft_strndup(str, len);
 	if (!path)
 		return (NULL);
 	return (path);
 }
-
-/*Permet de d'ouvrir les textures des points cardinaux*/
-
-/* int	convert_cardinal_points(t_ptr *pgm, char *path, int dir)
-{
-	if (dir == NO)
-	{
-		pgm->no = mlx_xpm_file_to_image(pgm->mlx, path,
-				&pgm->image.width, &pgm->image.height);
-		if (pgm->no == NULL)
-			return (FALSE);
-	}
-	if (dir == SO)
-	{
-		pgm->so = mlx_xpm_file_to_image(pgm->mlx, path,
-				&pgm->image.width, &pgm->image.height);
-		if (pgm->so == NULL)
-			return (FALSE);
-	}
-	if (dir == EA)
-	{
-		pgm->ea = mlx_xpm_file_to_image(pgm->mlx, path,
-				&pgm->image.width, &pgm->image.height);
-		if (pgm->ea == NULL)
-			return (FALSE);
-	}
-	if (dir == WE)
-	{
-		pgm->we = mlx_xpm_file_to_image(pgm->mlx, path,
-				&pgm->image.width, &pgm->image.height);
-		if (pgm->we == NULL)
-			return (FALSE);
-	}
-	return (TRUE);
-} */
 
 int	convert_cardinal_points(t_ptr *pgm, char *path, int dir)
 {
@@ -62,7 +38,7 @@ int	convert_cardinal_points(t_ptr *pgm, char *path, int dir)
 		if (pgm->north.img == NULL)
 			return (FALSE);
 		pgm->north.addr = (int *)mlx_get_data_addr(pgm->north.img,
-		&pgm->north.bpp, &pgm->north.line_length, &pgm->north.endian);
+				&pgm->north.bpp, &pgm->north.line_length, &pgm->north.endian);
 
 	}
 	if (dir == SO)
@@ -72,7 +48,7 @@ int	convert_cardinal_points(t_ptr *pgm, char *path, int dir)
 		if (pgm->south.img == NULL)
 			return (FALSE);
 		pgm->south.addr = (int *)mlx_get_data_addr(pgm->south.img,
-		&pgm->south.bpp, &pgm->south.line_length, &pgm->south.endian);
+				&pgm->south.bpp, &pgm->south.line_length, &pgm->south.endian);
 
 	}
 	if (dir == EA)
@@ -82,7 +58,7 @@ int	convert_cardinal_points(t_ptr *pgm, char *path, int dir)
 		if (pgm->east.img == NULL)
 			return (FALSE);
 		pgm->east.addr = (int *)mlx_get_data_addr(pgm->east.img,
-			&pgm->east.bpp, &pgm->east.line_length, &pgm->east.endian);
+				&pgm->east.bpp, &pgm->east.line_length, &pgm->east.endian);
 	}
 	if (dir == WE)
 	{
@@ -91,7 +67,7 @@ int	convert_cardinal_points(t_ptr *pgm, char *path, int dir)
 		if (pgm->west.img == NULL)
 			return (FALSE);
 		pgm->west.addr = (int *)mlx_get_data_addr(pgm->west.img,
-			&pgm->west.bpp, &pgm->west.line_length, &pgm->west.endian);
+				&pgm->west.bpp, &pgm->west.line_length, &pgm->west.endian);
 	}
 	return (TRUE);
 }
@@ -181,31 +157,25 @@ int	convert_param(t_ptr *pgm)
 		while (pgm->param[i][j] && (ft_is_space(pgm->param[i][j]) == TRUE))
 			j++;
 		if (ft_strncmp(pgm->param[i], "NO", 2) == TRUE)
-		{
 			if (convert_param_2(pgm, &pgm->param[i][j], NO) == FALSE)
 				return (FALSE);
-		}
 		if (ft_strncmp(pgm->param[i], "SO", 2) == TRUE)
-		{
 			if (convert_param_2(pgm, &pgm->param[i][j], SO) == FALSE)
 				return (FALSE);
-		}
 		if (ft_strncmp(pgm->param[i], "EA", 2) == TRUE)
-		{
 			if (convert_param_2(pgm, &pgm->param[i][j], EA) == FALSE)
 				return (FALSE);
-		}
 		if (ft_strncmp(pgm->param[i], "WE", 2) == TRUE)
-		{
 			if (convert_param_2(pgm, &pgm->param[i][j], WE) == FALSE)
 				return (FALSE);
-		}
 		if (ft_strncmp(pgm->param[i], "F", 1) == TRUE)
-		{
-			convert_floor_ceil(pgm, convert_cardinal_path(find_cardinal_path(&pgm->param[i][j])), FLOOR);
-		}
+			convert_floor_ceil(pgm,
+				convert_cardinal_path(find_cardinal_path(&pgm->param[i][j])),
+				FLOOR);
 		if (ft_strncmp(pgm->param[i], "C", 1) == TRUE)
-			convert_floor_ceil(pgm, convert_cardinal_path(find_cardinal_path(&pgm->param[i][j])), CEIL);
+			convert_floor_ceil(pgm,
+				convert_cardinal_path(find_cardinal_path(&pgm->param[i][j])),
+				CEIL);
 		i++;
 	}
 	return (TRUE);

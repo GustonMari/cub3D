@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_3.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/13 17:14:35 by ndormoy           #+#    #+#             */
+/*   Updated: 2022/05/13 17:15:23 by ndormoy          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/function.h"
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
@@ -59,4 +71,17 @@ int	line_is_whitespace(char *str)
 		i++;
 	}
 	return (TRUE);
+}
+
+void	print_tab_2d(char **strs)
+{
+	int	i;
+
+	i = 0;
+	while (strs[i])
+	{
+		ft_putstr_fd(strs[i], 2);
+		ft_putstr_fd("\n", 2);
+		i++;
+	}
 }

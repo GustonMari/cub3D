@@ -6,7 +6,7 @@
 /*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 16:59:08 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/05/13 17:00:33 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/05/13 17:07:02 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,6 @@ int	ft_is_space(char c)
 	if (c == ' ' || (c >= 9 && c <= 13))
 		return (TRUE);
 	return (FALSE);
-}
-
-void	print_tab_2d(char **strs)
-{
-	int	i;
-
-	i = 0;
-	while (strs[i])
-	{
-		ft_putstr_fd(strs[i], 2);
-		ft_putstr_fd("\n", 2);
-		i++;
-	}
 }
 
 int	ft_count_line(char **tab)
@@ -101,52 +88,3 @@ char	*ft_strdup_less(char *src, int carac)
 	dest[i] = '\0';
 	return (dest);
 }
-
-int	count_without_empty_line(char **srcs, int nb_line)
-{
-	int	i;
-	int	count;
-
-	i = 0;
-	count = 0;
-	while (srcs[i] && i < nb_line)
-	{
-		if (ft_strcmp(srcs[i], "\n"))
-			count++;
-		i++;
-	}
-	return (count);
-}
-
-char	**cpy_tab(char **srcs, int nb_line)
-{
-	int		len;
-	int		i;
-	int		j;
-	char	**new_tab;
-
-	i = 0;
-	j = 0;
-	len = count_without_empty_line(srcs, nb_line);
-	new_tab = ft_calloc(sizeof(char *), (len + 1));
-	if (!new_tab)
-		return (NULL);
-	while (srcs[i] && i < nb_line)
-	{
-		if (ft_strcmp(srcs[i], "\n"))
-		{
-			new_tab[j] = ft_strdup(srcs[i]);
-			if (!new_tab[j])
-			{
-				ft_free_tab_2d(new_tab);
-				return (NULL);
-			}
-			j++;
-		}
-		i++;
-	}
-	new_tab[j] = NULL;
-	return (new_tab);
-}
-
-/*Test github*/

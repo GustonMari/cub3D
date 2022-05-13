@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_2.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/13 17:09:58 by ndormoy           #+#    #+#             */
+/*   Updated: 2022/05/13 17:14:10 by ndormoy          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/function.h"
 
 int	ft_strlen(char *str)
@@ -26,6 +38,15 @@ void	*ft_free_tab_2d(char **tab)
 	return (NULL);
 }
 
+char	*ft_strjoin_free_safe(char *s1, char *s2, int del)
+{
+	if (del == 1)
+		free(s1);
+	if (del == 2)
+		free(s2);
+	return (NULL);
+}
+
 char	*ft_strjoin_free(char *s1, char *s2, int del)
 {
 	char	*dest;
@@ -36,13 +57,7 @@ char	*ft_strjoin_free(char *s1, char *s2, int del)
 	j = 0;
 	dest = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (!dest)
-	{
-		if (del == 1)
-			free(s1);
-		if (del == 2)
-			free(s2);
-		return (NULL);
-	}
+		return (ft_strjoin_free_safe(s1, s2, del));
 	while (s1[i])
 	{
 		dest[j] = s1[i];
@@ -71,26 +86,3 @@ int	ft_strcmp(char *s1, char *s2)
 	}
 	return (s1[i] - s2[i]);
 }
-
-int	ft_strchr_str(char *s, char *str)
-{
-	while (*s)
-	{
-		if (*s == str[0])
-		{
-			if (ft_strcmp(s, str) == 0)
-			{
-				return (TRUE);
-			}
-		}
-		s++;
-	}
-	return (FALSE);
-}
-
-// int main()
-// {
-// 	char	*name = "map.cub";
-
-// 	printf("ret = %d\n", ft_strchr_str(name, ".cub"));
-// }
