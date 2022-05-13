@@ -6,28 +6,35 @@
 /*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 17:37:36 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/05/13 17:40:44 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/05/13 17:48:50 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/function.h"
 
-/*Permet de convertir le path des points cardinaux
-et le mettre dans la string path*/
-
-char	*convert_cardinal_path(char *str)
+int	convert_cardinal_points_2(t_ptr *pgm, char *path, int dir)
 {
-	char	*path;
-	int		len;
-
-	len = 0;
-	while (str[len] && (ft_is_space(str[len]) == FALSE))
-		len++;
-	path = ft_strndup(str, len);
-	if (!path)
-		return (NULL);
-	return (path);
+	if (dir == EA)
+	{
+		pgm->east.img = mlx_xpm_file_to_image(pgm->mlx, path,
+				&pgm->east.width, &pgm->east.height);
+		if (pgm->east.img == NULL)
+			return (FALSE);
+		pgm->east.addr = (int *)mlx_get_data_addr(pgm->east.img,
+				&pgm->east.bpp, &pgm->east.line_length, &pgm->east.endian);
+	}
+	if (dir == WE)
+	{
+		pgm->west.img = mlx_xpm_file_to_image(pgm->mlx, path,
+				&pgm->west.width, &pgm->west.height);
+		if (pgm->west.img == NULL)
+			return (FALSE);
+		pgm->west.addr = (int *)mlx_get_data_addr(pgm->west.img,
+				&pgm->west.bpp, &pgm->west.line_length, &pgm->west.endian);
+	}
+	return (TRUE);
 }
+
 
 int	convert_cardinal_points(t_ptr *pgm, char *path, int dir)
 {
@@ -51,38 +58,12 @@ int	convert_cardinal_points(t_ptr *pgm, char *path, int dir)
 				&pgm->south.bpp, &pgm->south.line_length, &pgm->south.endian);
 
 	}
-	if (dir == EA)
-	{
-		pgm->east.img = mlx_xpm_file_to_image(pgm->mlx, path,
-				&pgm->east.width, &pgm->east.height);
-		if (pgm->east.img == NULL)
-			return (FALSE);
-		pgm->east.addr = (int *)mlx_get_data_addr(pgm->east.img,
-				&pgm->east.bpp, &pgm->east.line_length, &pgm->east.endian);
-	}
-	if (dir == WE)
-	{
-		pgm->west.img = mlx_xpm_file_to_image(pgm->mlx, path,
-				&pgm->west.width, &pgm->west.height);
-		if (pgm->west.img == NULL)
-			return (FALSE);
-		pgm->west.addr = (int *)mlx_get_data_addr(pgm->west.img,
-				&pgm->west.bpp, &pgm->west.line_length, &pgm->west.endian);
-	}
+	if (convert_cardinal_points_2(pgm, path, dir) == FALSE)
+		return (FALSE);
 	return (TRUE);
 }
 
-/*Va renvoyer le debut du path*/
 
-char	*find_cardinal_path(char *path)
-{
-	int	i;
-
-	i = 2;
-	while (path[i] && (ft_is_space(path[i]) == TRUE))
-		i++;
-	return (&path[i]);
-}
 
 int	convert_param_2(t_ptr *pgm, char *str_param, int dir)
 {
@@ -104,40 +85,28 @@ int	convert_param_2(t_ptr *pgm, char *str_param, int dir)
 	return (TRUE);
 }
 
-/*Permet la converion des chiffres (exe: 255,0,0) 
-vers l'int qui serra stocke par la suite dans la struct*/
-
-void	convert_floor_ceil(t_ptr *pgm, char *path, int dir)
+int	convert_param_conditions(t_ptr *pgm, int i, int j)
 {
-	char	**tab;
-
-	tab = ft_split(path, ", ");
-	if (dir == FLOOR)
-		pgm->floor = create_color(0,
-				ft_atoi(tab[0]), ft_atoi(tab[1]), ft_atoi(tab[2]));
-	if (dir == CEIL)
-		pgm->ceil = create_color(0,
-				ft_atoi(tab[0]), ft_atoi(tab[1]), ft_atoi(tab[2]));
-	free(path);
-	ft_free_tab_2d(tab);
-}
-
-int	init_struct(t_ptr *pgm)
-{
-	int	i;
-
-	i = 0;
-	pgm->buff = malloc(sizeof(int *) * (HEIGHT/*  + 100000 */));
-	//WARNING
-	if (!pgm->buff)
-		return (FALSE);
-	while (i < HEIGHT)
-	{
-		pgm->buff[i] = malloc(sizeof(int) * (WIDTH/*  + 100000 */));
-		if (!pgm->buff[i])
+	if (ft_strncmp(pgm->param[i], "NO", 2) == TRUE)
+		if (convert_param_2(pgm, &pgm->param[i][j], NO) == FALSE)
 			return (FALSE);
-		i++;
-	}
+	if (ft_strncmp(pgm->param[i], "SO", 2) == TRUE)
+		if (convert_param_2(pgm, &pgm->param[i][j], SO) == FALSE)
+			return (FALSE);
+	if (ft_strncmp(pgm->param[i], "EA", 2) == TRUE)
+		if (convert_param_2(pgm, &pgm->param[i][j], EA) == FALSE)
+			return (FALSE);
+	if (ft_strncmp(pgm->param[i], "WE", 2) == TRUE)
+		if (convert_param_2(pgm, &pgm->param[i][j], WE) == FALSE)
+			return (FALSE);
+	if (ft_strncmp(pgm->param[i], "F", 1) == TRUE)
+		convert_floor_ceil(pgm,
+			convert_cardinal_path(find_cardinal_path(&pgm->param[i][j])),
+			FLOOR);
+	if (ft_strncmp(pgm->param[i], "C", 1) == TRUE)
+		convert_floor_ceil(pgm,
+			convert_cardinal_path(find_cardinal_path(&pgm->param[i][j])),
+			CEIL);
 	return (TRUE);
 }
 
@@ -156,26 +125,8 @@ int	convert_param(t_ptr *pgm)
 		j = 0;
 		while (pgm->param[i][j] && (ft_is_space(pgm->param[i][j]) == TRUE))
 			j++;
-		if (ft_strncmp(pgm->param[i], "NO", 2) == TRUE)
-			if (convert_param_2(pgm, &pgm->param[i][j], NO) == FALSE)
-				return (FALSE);
-		if (ft_strncmp(pgm->param[i], "SO", 2) == TRUE)
-			if (convert_param_2(pgm, &pgm->param[i][j], SO) == FALSE)
-				return (FALSE);
-		if (ft_strncmp(pgm->param[i], "EA", 2) == TRUE)
-			if (convert_param_2(pgm, &pgm->param[i][j], EA) == FALSE)
-				return (FALSE);
-		if (ft_strncmp(pgm->param[i], "WE", 2) == TRUE)
-			if (convert_param_2(pgm, &pgm->param[i][j], WE) == FALSE)
-				return (FALSE);
-		if (ft_strncmp(pgm->param[i], "F", 1) == TRUE)
-			convert_floor_ceil(pgm,
-				convert_cardinal_path(find_cardinal_path(&pgm->param[i][j])),
-				FLOOR);
-		if (ft_strncmp(pgm->param[i], "C", 1) == TRUE)
-			convert_floor_ceil(pgm,
-				convert_cardinal_path(find_cardinal_path(&pgm->param[i][j])),
-				CEIL);
+		if (convert_param_conditions(pgm, i, j) == FALSE)
+			return (FALSE);
 		i++;
 	}
 	return (TRUE);

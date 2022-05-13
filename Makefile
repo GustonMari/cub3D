@@ -33,6 +33,7 @@ SRC = main.c \
 			utils/mlx.c \
 			parsing/parsing.c \
 			parsing/convert_param.c \
+			parsing/convert_param_2.c \
 			parsing/adjust_map.c \
 			parsing/launch_game.c \
 			parsing/put_texture.c \

@@ -203,7 +203,11 @@ void	find_pos(t_ptr *pgm);
 ------------------CONVERT PARAM-------------------------
 */
 
-int	convert_param(t_ptr *pgm);
+int		convert_param(t_ptr *pgm);
+char	*find_cardinal_path(char *path);
+void	convert_floor_ceil(t_ptr *pgm, char *path, int dir);
+int		init_struct(t_ptr *pgm);
+char	*convert_cardinal_path(char *str);
 
 /*
 ------------------SPLIT--------------------------
