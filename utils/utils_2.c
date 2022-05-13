@@ -36,7 +36,13 @@ char	*ft_strjoin_free(char *s1, char *s2, int del)
 	j = 0;
 	dest = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (!dest)
+	{
+		if (del == 1)
+			free(s1);
+		if (del == 2)
+			free(s2);
 		return (NULL);
+	}
 	while (s1[i])
 	{
 		dest[j] = s1[i];
