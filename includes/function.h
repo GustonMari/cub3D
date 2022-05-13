@@ -91,6 +91,8 @@ typedef struct s_ptr
 	t_coord	coord;
 	int		pos;
 	int 	nb_line;
+	int		top;
+	int		bottom;
 	void	*mlx;
 	void	*win;
 	char	**param;
@@ -198,6 +200,8 @@ char	**parsing(int argc, char **argv, int *nb_line);
 
 void	launch_game(t_ptr *pgm);
 void	find_pos(t_ptr *pgm);
+void	find_impact(t_ptr *pgm);
+void	find_intersection(t_ptr *pgm);
 
 /*
 ------------------CONVERT PARAM-------------------------
@@ -254,5 +258,11 @@ void	find_texture_x(t_ptr *pgm, int cardinal_wall);
 */
 
 void	__mlx_loop_hook(t_ptr *ptr);
+
+/*
+------------------PAINT WORLD------------------------
+*/
+
+void	paint_world(t_ptr *pgm, double i);
 
 #endif

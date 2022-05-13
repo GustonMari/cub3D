@@ -6,7 +6,7 @@
 /*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 17:37:36 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/05/13 17:48:50 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/05/13 17:49:57 by ndormoy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ int	convert_cardinal_points_2(t_ptr *pgm, char *path, int dir)
 	return (TRUE);
 }
 
-
 int	convert_cardinal_points(t_ptr *pgm, char *path, int dir)
 {
 	if (dir == NO)
@@ -46,7 +45,6 @@ int	convert_cardinal_points(t_ptr *pgm, char *path, int dir)
 			return (FALSE);
 		pgm->north.addr = (int *)mlx_get_data_addr(pgm->north.img,
 				&pgm->north.bpp, &pgm->north.line_length, &pgm->north.endian);
-
 	}
 	if (dir == SO)
 	{
@@ -56,14 +54,11 @@ int	convert_cardinal_points(t_ptr *pgm, char *path, int dir)
 			return (FALSE);
 		pgm->south.addr = (int *)mlx_get_data_addr(pgm->south.img,
 				&pgm->south.bpp, &pgm->south.line_length, &pgm->south.endian);
-
 	}
 	if (convert_cardinal_points_2(pgm, path, dir) == FALSE)
 		return (FALSE);
 	return (TRUE);
 }
-
-
 
 int	convert_param_2(t_ptr *pgm, char *str_param, int dir)
 {
