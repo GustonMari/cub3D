@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 09:20:55 by gmary             #+#    #+#             */
-/*   Updated: 2022/05/13 14:33:12 by gmary            ###   ########.fr       */
+/*   Updated: 2022/05/13 15:52:12 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,41 +72,39 @@ int main(int argc, char **argv, char **envp)
 	if (*envp == NULL)
 	{
 		printf("Error\nWhat can we do wihout env ?\n");
-		return(1);	
+		return (FALSE);
 	}
 	nb_line = -1;
 	all = parsing(argc, argv, &nb_line);
 	if (!all)
-		return (1);
+		return (FALSE);
 	if (ft_check(all, argv[1], nb_line, &pgm) == FALSE)
 	{
-		printf("some issue with file");
+		printf("some issue with file\n");
 		ft_free_tab_2d(all);
 		ft_free_tab_2d(pgm.map);
 		ft_free_tab_2d(pgm.param); // peut etre a tej plus tard
-		return (1);
+		return (FALSE);
 	}
+	ft_free_tab_2d(all);
 	pgm_image_init(&pgm, &pgm.image);
 	if (convert_param(&pgm) == FALSE)
 	{
-		ft_free_tab_2d(all);
 		ft_close(&pgm);
-		return (1);
-	}
-	//WARNING
-	if (secure_map(&pgm) == FALSE)
 		return (FALSE);
+	}
+	if (secure_map(&pgm) == FALSE)
+	{
+		ft_close(&pgm);
+		return (FALSE);
+	}
 	find_pos(&pgm);
-	//ft_bicolor(&pgm, pgm.floor, pgm.ceil);
 	launch_game(&pgm);
-	ft_free_tab_2d(all);
-	
-	//mlx_key_hook(pgm.win, &key_manager, &pgm);
 	mlx_hook(pgm.win, 2, (1L << 0), &key_manager, &pgm);
 	mlx_hook(pgm.win, 3, (1L << 1), &key_release, &pgm);
 	mlx_hook(pgm.win, 17, 02, ft_close, &pgm);
 	mlx_loop(pgm.mlx);
-	return (0);
+	return (TRUE);
 }
 
 

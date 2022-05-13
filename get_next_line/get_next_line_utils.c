@@ -8,6 +8,8 @@ char	*ft_gnl_strjoin(char *s1, char *s2)
 
 	if (!s1)
 		s1 = ft_strdup("");
+	if (!s1)
+		return (NULL);
 	if (!s1 && !s2)
 		return (NULL);
 	len_dest = ft_strlen((char *)s1) + ft_strlen((char *)s2);

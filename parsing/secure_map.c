@@ -22,10 +22,7 @@ int	first_last_line(char **new_map , int nb_line, int len)
 		return (FALSE);
 	new_map[nb_line + 1] = ft_calloc(sizeof(char), len + 3);
 	if (new_map[nb_line + 1] == NULL)
-	{
-		free(new_map[i]);
 		return (FALSE);
-	}
 	while (i < len + 1)
 	{
 		new_map[0][i] = '1';
@@ -57,17 +54,20 @@ int	secure_map(t_ptr *pgm)
 		return (FALSE);
 	if (first_last_line(new_map, pgm->nb_line, len) == FALSE)
 	{
-		free(new_map);
+		ft_free_tab_2d(new_map);
 		return (FALSE);
 	}
-
 	while (pgm->map[i])
 	{
 		j = 0;
 		new_map[i + 1] = ft_calloc(sizeof(char), len + 3);
-		//WARNING
-		if (!new_map[i])
+		if (!new_map[i + 1])
+		{
+			free(new_map[pgm->nb_line + 1]);
+			printf("pouet\n");
+			ft_free_tab_2d(new_map);
 			return (FALSE);
+		}
 		new_map[i + 1][0] = '1';
 		while(pgm->map[i][j])
 		{
@@ -81,8 +81,6 @@ int	secure_map(t_ptr *pgm)
 		new_map[pgm->nb_line + 2] = NULL;
 		i++;
 	}
-	printf("nb_line = %d\n", pgm->nb_line);
-	printf("len = %d\n", len);
 	ft_free_tab_2d(pgm->map);
 	pgm->map = new_map;
 	return (TRUE);

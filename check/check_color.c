@@ -28,7 +28,6 @@ int	check_color_space_bis(char *str, int *i, int *k)
 	return (TRUE);
 }
 
-
 int	check_color_space(char *str)
 {
 	int	i;

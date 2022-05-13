@@ -105,4 +105,3 @@ int	find_max_lenght(char **map)
 	}
 	return (len);
 }
-

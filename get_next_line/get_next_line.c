@@ -95,6 +95,8 @@ char	*get_next_line(int fd)
 		return (NULL);
 	if (!tmp)
 		tmp = ft_strdup("");
+	if (!tmp)
+		return (NULL);
 	tmp = read_buf(tmp, fd);
 	if (!tmp)
 		return (NULL);
