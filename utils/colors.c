@@ -6,32 +6,14 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 11:38:10 by gmary             #+#    #+#             */
-/*   Updated: 2022/05/11 09:56:38 by gmary            ###   ########.fr       */
+/*   Updated: 2022/05/13 16:47:09 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/function.h"
 
-//int	ft_black(t_ptr *pgm)
-//{
-//	int	x;
-//	int	y;
-//
-//	y = 0;
-//	while (y < HEIGHT)
-//	{
-//		x = 0;
-//		while (x < WIDTH)
-//		{
-//			my_mlx_pixel_put(&pgm->image, x, y, create_color(0, 0, 0, 0));
-//			x++;
-//		}
-//		y++;
-//	}
-//	return (0);
-//}
-
 /* 0xTTRRGGBB, 0x00FF0000 => red equivaut a (0,255,0,0), 0xFFFFFF => white */
+
 int	create_color(int t, int r, int g, int b)
 {
 	int	colors;
