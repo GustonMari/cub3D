@@ -57,3 +57,33 @@ int	check_name_map(char *name)
 	}
 	return (FALSE);
 }
+
+/*Va checker si les parametres avant la map sont bons,
+Si on a NO SO WE EA F C et que F et C sont bien parametres
+On checkera plus tard pour voir si les path de NO SO WE EA sont ok*/
+
+int	check_is_param(char *str)
+{
+	const char	*ref[] = {"NO", "SO", "WE", "EA", "F", "C", NULL};
+	static int	tab[6] = {0, 0, 0, 0, 0, 0};
+	int			i;
+
+	i = 0;
+	while (ref[i])
+	{
+		if (ft_strncmp(str, (char *)ref[i], ft_strlen((char *)ref[i])) == 0)
+		{
+			if (tab[i] == 1)
+				return (FALSE);
+			if (i == 4 || i == 5)
+				if (check_color(str) == FALSE)
+					return (FALSE);
+			tab[i] = 1;
+			return (TRUE);
+		}
+		if (tab_is_full(tab) == TRUE)
+			return (FULL);
+		i++;
+	}
+	return (FALSE);
+}

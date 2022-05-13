@@ -76,6 +76,11 @@ char	*read_buf(char *tmp, int fd)
 		}
 		buf[ret] = '\0';
 		tmp = ft_gnl_strjoin(tmp, buf);
+		if (!tmp)
+		{
+			free(buf);
+			return (NULL);
+		}
 	}
 	free(buf);
 	return (tmp);

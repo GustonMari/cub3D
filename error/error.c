@@ -1,9 +1,10 @@
-#include "../includes/get_next_line.h"
+#include "../includes/function.h"
 
-void	ft_putstr_error(char *s)
+int	ft_putstr_error(char *s)
 {
 	if (s)
 	{
 		write(2, s, ft_strlen(s));
 	}
+	return (FALSE);
 }

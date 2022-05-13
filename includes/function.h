@@ -29,6 +29,7 @@
 # define CEIL 105
 # define FOV 0.62
 # define SPEED 0.1
+
 /*
 	box_x et y sont les coordonnees de la du carre ou le joueur se trouve
 	direction_x et y sont les directions du joueur (par exmple N au depart))
@@ -166,6 +167,8 @@ int		check_double(char **map);
 int		check_map(char **map, int nb_line);
 int		check_horizon(char *line);
 int		check_vertical(char **map, int column, int nb_line);
+int		check_is_param(char *str);
+int		tab_is_full(int *tab);
 
 
 /*
@@ -179,8 +182,7 @@ int check_color(char *str);
 ------------------ERROR--------------------------
 */
 
-void	ft_putstr_error(char *s);
-
+int	ft_putstr_error(char *s);
 /*
 ------------------PARSING-------------------------
 */

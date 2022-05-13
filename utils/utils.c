@@ -117,11 +117,18 @@ char	**cpy_tab(char **srcs, int nb_line)
 	j = 0;
 	len = count_without_empty_line(srcs, nb_line);
 	new_tab = ft_calloc(sizeof(char *), (len + 1));
+	if (!new_tab)
+		return (NULL);
 	while (srcs[i] && i < nb_line)
 	{
 		if (ft_strcmp(srcs[i], "\n"))
 		{
 			new_tab[j] = ft_strdup(srcs[i]);
+			if (!new_tab[j])
+			{
+				ft_free_tab_2d(new_tab);
+				return (NULL);
+			}
 			j++;
 		}
 		i++;

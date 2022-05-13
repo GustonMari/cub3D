@@ -11,6 +11,8 @@ static int	ft_count_line_map(char *file)
 	if (fd < 0)
 		return (-1);
 	ret = get_next_line(fd);
+	if (!ret)
+		return (-1);
 	while (ret)
 	{
 		nb_line++;

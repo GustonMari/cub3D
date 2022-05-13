@@ -12,6 +12,11 @@ void	ft_set_null(t_ptr *pgm)
 void	pgm_image_init(t_ptr *pgm, t_data *image)
 {
 	pgm->mlx = mlx_init();
+	if (pgm->mlx == NULL)
+	{
+		printf("Error: mlx_init failed\n");
+		ft_close(pgm);
+	}
 	pgm->win = mlx_new_window(pgm->mlx, WIDTH, HEIGHT, "cub3d");
 	pgm->image.img = mlx_new_image(pgm->mlx, WIDTH, HEIGHT);
 	pgm->image.addr = (int *)mlx_get_data_addr(image->img,

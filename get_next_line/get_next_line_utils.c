@@ -13,7 +13,10 @@ char	*ft_gnl_strjoin(char *s1, char *s2)
 	len_dest = ft_strlen((char *)s1) + ft_strlen((char *)s2);
 	dest = (char *)malloc(sizeof(char) * (len_dest + 1));
 	if (!dest)
+	{
+		free(s1);
 		return (NULL);
+	}
 	i = 0;
 	while (s1 && s1[i])
 		*dest++ = s1[i++];

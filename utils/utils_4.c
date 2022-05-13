@@ -23,6 +23,8 @@ void	ft_free_buff(t_ptr *pgm)
 	int	i;
 
 	i = 0;
+	if (!pgm->buff)
+		return ;
 	while (i < HEIGHT)
 	{
 		free(pgm->buff[i]);
