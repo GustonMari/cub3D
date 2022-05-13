@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 14:33:29 by gmary             #+#    #+#             */
-/*   Updated: 2022/05/13 13:44:42 by gmary            ###   ########.fr       */
+/*   Updated: 2022/05/13 16:41:16 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	ft_close(t_ptr *pgm)
 	ft_free_tab_2d(pgm->param); // peut etre a tej plus tard
 	ft_free_buff(pgm);
 	exit(0);
+	return (FALSE);
 }
 
 void	key_up(t_ptr *pgm)

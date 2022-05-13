@@ -183,6 +183,8 @@ int check_color(char *str);
 */
 
 int	ft_putstr_error(char *s);
+int	ft_check_error(t_ptr *pgm, char **all);
+
 /*
 ------------------PARSING-------------------------
 */
@@ -243,7 +245,10 @@ void		draw_buffer(t_ptr *pgm);
 void		define_walls(t_ptr *pgm);
 void	find_texture_x(t_ptr *pgm, int cardinal_wall);
 
+/* 
+------------------MLX-------------------------------
+*/
 
-//int			get_pixel(t_data *data, int x, int y, unsigned int *color);
+void	__mlx_loop_hook(t_ptr *ptr);
 
 #endif
