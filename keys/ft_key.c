@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 14:33:29 by gmary             #+#    #+#             */
-/*   Updated: 2022/05/16 11:22:42 by gmary            ###   ########.fr       */
+/*   Updated: 2022/05/16 14:34:01 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,9 @@ int	ft_close(t_ptr *pgm)
 		mlx_destroy_display(pgm->mlx);
 		free(pgm->mlx);
 	}
-	// ft_free_tab_2d(pgm->map);
-	//ft_free_tab_2d(pgm->param);
-	//ft_free_buff(pgm);
-	(void)pgm;
+	ft_free_tab_2d(pgm->map);
+	ft_free_tab_2d(pgm->param);
+	ft_free_buff(pgm);
 	exit(0);
 	return (FALSE);
 }
@@ -40,11 +39,9 @@ int	ft_close(t_ptr *pgm)
 void	key_up(t_ptr *pgm)
 {
 	if (pgm->map[(int)pgm->coord.y]
-		[(int)(pgm->coord.x + pgm->coord.ray_dir_x)] != '1')
+		[(int)(pgm->coord.x + pgm->coord.direction_x)] != '1')
 		pgm->coord.x += pgm->coord.direction_x * SPEED;
-	if (pgm->map[(int)(pgm->coord.y + pgm->coord.ray_dir_y)]
-		[(int)(pgm->coord.x)] != '1'
-		&& pgm->map[(int)(pgm->coord.y - pgm->coord.plane_y -0.04)]
+	if (pgm->map[(int)(pgm->coord.y + pgm->coord.direction_y)]
 		[(int)(pgm->coord.x)] != '1')
 		pgm->coord.y += pgm->coord.direction_y * SPEED;
 }
@@ -52,9 +49,9 @@ void	key_up(t_ptr *pgm)
 void	key_down(t_ptr *pgm)
 {
 	if (pgm->map[(int)(pgm->coord.y)]
-		[(int)(pgm->coord.x - pgm->coord.ray_dir_x)] != '1')
+		[(int)(pgm->coord.x - pgm->coord.direction_x)] != '1')
 		pgm->coord.x -= pgm->coord.direction_x * SPEED;
-	if (pgm->map[(int)(pgm->coord.y - pgm->coord.ray_dir_y)]
+	if (pgm->map[(int)(pgm->coord.y - pgm->coord.direction_y)]
 		[(int)(pgm->coord.x)] != '1')
 		pgm->coord.y -= pgm->coord.direction_y * SPEED;
 }
