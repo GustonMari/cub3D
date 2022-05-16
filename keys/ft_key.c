@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 14:33:29 by gmary             #+#    #+#             */
-/*   Updated: 2022/05/16 09:46:11 by gmary            ###   ########.fr       */
+/*   Updated: 2022/05/16 11:22:42 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,10 @@ int	ft_close(t_ptr *pgm)
 		mlx_destroy_display(pgm->mlx);
 		free(pgm->mlx);
 	}
-	ft_free_tab_2d(pgm->map);
-	ft_free_tab_2d(pgm->param);
-	ft_free_buff(pgm);
+	// ft_free_tab_2d(pgm->map);
+	//ft_free_tab_2d(pgm->param);
+	//ft_free_buff(pgm);
+	(void)pgm;
 	exit(0);
 	return (FALSE);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 17:10:31 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/05/13 17:15:48 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/05/16 11:29:58 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ void	ft_bicolor(t_ptr *pgm, int color_floor, int color_ceil)
 		while (j < HEIGHT)
 		{
 			if (j < HEIGHT / 2)
-				pgm->buff[j][i] = color_floor;
-			else
 				pgm->buff[j][i] = color_ceil;
+			else
+				pgm->buff[j][i] = color_floor;
 			j++;
 		}
 		i++;

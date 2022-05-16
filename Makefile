@@ -1,4 +1,4 @@
-NAME = cub3d
+NAME = cub3D
 #CLEANHEREDOC = srcs/heredoc/clean_heredoc
 
 LIBINC = -L minilibx-linux -lmlx -lX11 -lXext -lm
