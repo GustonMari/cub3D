@@ -22,6 +22,7 @@ SRC = main.c \
 			get_next_line/get_next_line.c \
 			get_next_line/get_next_line_utils.c \
 			keys/ft_key.c \
+			keys/ft_key_2.c \
 			utils/draw.c \
 			utils/colors.c \
 			utils/ft_calloc.c \
@@ -30,6 +31,7 @@ SRC = main.c \
 			utils/utils_2.c \
 			utils/utils_3.c \
 			utils/utils_4.c \
+			utils/utils_5.c \
 			utils/mlx.c \
 			parsing/parsing.c \
 			parsing/convert_param.c \

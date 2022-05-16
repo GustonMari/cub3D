@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_map_2.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/16 10:44:33 by gmary             #+#    #+#             */
+/*   Updated: 2022/05/16 10:44:34 by gmary            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/function.h"
 
 /*Permet de checker la premiere
@@ -39,7 +51,7 @@ int	check_start_char(char c)
 
 int	check_forbiden_char(char c)
 {
-	if (c == '1' || c == '0' || c == 'N' 
+	if (c == '1' || c == '0' || c == 'N'
 		|| c == 'S' || c == 'W' || c == 'E' || c == '\0' || c == '\n')
 		return (TRUE);
 	return (FALSE);

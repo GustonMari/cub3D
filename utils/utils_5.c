@@ -1,40 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   utils_5.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/16 10:44:39 by gmary             #+#    #+#             */
-/*   Updated: 2022/05/16 10:44:40 by gmary            ###   ########.fr       */
+/*   Created: 2022/05/16 10:19:48 by gmary             #+#    #+#             */
+/*   Updated: 2022/05/16 10:41:23 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/function.h"
 
-int	ft_putstr_error(char *s)
+void	*__free(void *str)
 {
-	if (s)
-	{
-		write(2, s, ft_strlen(s));
-	}
-	return (FALSE);
-}
-
-char	**ft_putstr_error_char(char *s)
-{
-	if (s)
-	{
-		write(2, s, ft_strlen(s));
-	}
+	free(str);
 	return (NULL);
 }
 
-int	ft_check_error(t_ptr *pgm, char **all)
+int	ft_free_tab_2d_int(char **tab)
 {
-	ft_free_tab_2d(all);
-	ft_free_tab_2d(pgm->map);
-	ft_free_tab_2d(pgm->param);
-	ft_putstr_error("some issue with file\n");
+	int	i;
+
+	i = 0;
+	if (!tab)
+		return (FALSE);
+	while (tab[i])
+	{
+		free(tab[i]);
+		i++;
+	}
+	free(tab);
 	return (FALSE);
 }

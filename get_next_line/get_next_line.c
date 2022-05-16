@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/16 10:45:22 by gmary             #+#    #+#             */
+/*   Updated: 2022/05/16 10:45:23 by gmary            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/get_next_line.h"
 
 char	*get_rest(char *tmp)
@@ -54,6 +66,18 @@ char	*get_line(char *tmp)
 	return (line);
 }
 
+int	read_buf_bis(int ret, char *tmp, char *buf)
+{
+	if (ret == -1 || (ret == 0 && !*tmp))
+	{
+		free(tmp);
+		free(buf);
+		return (FALSE);
+	}
+	buf[ret] = '\0';
+	return (TRUE);
+}
+
 char	*read_buf(char *tmp, int fd)
 {
 	char		*buf;
@@ -64,23 +88,15 @@ char	*read_buf(char *tmp, int fd)
 	ret = 1;
 	buf = malloc(sizeof(char) * (taille_buf + 1));
 	if (!buf)
-		return (NULL);
+		return (__free(tmp));
 	while (ret != 0 && !ft_strchr(tmp, '\n'))
 	{
 		ret = read(fd, buf, BUFFER_SIZE);
-		if (ret == -1 || (ret == 0 && !*tmp))
-		{
-			free(tmp);
-			free(buf);
+		if (read_buf_bis(ret, tmp, buf) == FALSE)
 			return (NULL);
-		}
-		buf[ret] = '\0';
 		tmp = ft_gnl_strjoin(tmp, buf);
 		if (!tmp)
-		{
-			free(buf);
-			return (NULL);
-		}
+			return (__free(buf));
 	}
 	free(buf);
 	return (tmp);
