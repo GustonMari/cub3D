@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 10:45:00 by gmary             #+#    #+#             */
-/*   Updated: 2022/05/16 10:45:01 by gmary            ###   ########.fr       */
+/*   Updated: 2022/05/16 16:02:48 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -258,6 +258,7 @@ void		key_down(t_ptr *pgm);
 
 //int	ft_vertical(int x, int top, int bottom, t_ptr *pgm);
 //int			ft_vertical(int x, int top, int bottom, t_ptr *pgm, int shade);
+char		*convert_color_take(char *str);
 
 /*
 ------------------SECURE MAP-------------------------

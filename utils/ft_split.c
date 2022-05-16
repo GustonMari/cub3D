@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 17:10:41 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/05/13 17:15:41 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/05/16 15:52:58 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,5 +108,6 @@ char	**ft_split(char *str, char *charset)
 		return (tab);
 	}
 	tab = ft_cut(str, charset, tab);
+	//print_tab_2d(tab); // a enlever
 	return (tab);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   convert_param.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 17:37:36 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/05/13 17:49:57 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/05/16 16:12:03 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ int	convert_param_2(t_ptr *pgm, char *str_param, int dir)
 
 int	convert_param_conditions(t_ptr *pgm, int i, int j)
 {
+	//fprintf(stderr, "%d- param= %s\n", i, pgm->param[i]); //a tej aussi	
 	if (ft_strncmp(pgm->param[i], "NO", 2) == TRUE)
 		if (convert_param_2(pgm, &pgm->param[i][j], NO) == FALSE)
 			return (FALSE);
@@ -96,11 +97,11 @@ int	convert_param_conditions(t_ptr *pgm, int i, int j)
 			return (FALSE);
 	if (ft_strncmp(pgm->param[i], "F", 1) == TRUE)
 		convert_floor_ceil(pgm,
-			convert_cardinal_path(find_cardinal_path(&pgm->param[i][j])),
+			convert_color_take(find_cardinal_path(&pgm->param[i][j])),
 			FLOOR);
 	if (ft_strncmp(pgm->param[i], "C", 1) == TRUE)
 		convert_floor_ceil(pgm,
-			convert_cardinal_path(find_cardinal_path(&pgm->param[i][j])),
+			convert_color_take(find_cardinal_path(&pgm->param[i][j])),
 			CEIL);
 	return (TRUE);
 }
@@ -115,9 +116,11 @@ int	convert_param(t_ptr *pgm)
 	i = 0;
 	if (init_struct(pgm) == FALSE)
 		return (FALSE);
+	//print_tab_2d(pgm->param);
 	while (pgm->param[i])
 	{
 		j = 0;
+		//fprintf(stderr, "%d- param= %s\n", i, pgm->param[i]); //a tej aussi	
 		while (pgm->param[i][j] && (ft_is_space(pgm->param[i][j]) == TRUE))
 			j++;
 		if (convert_param_conditions(pgm, i, j) == FALSE)
