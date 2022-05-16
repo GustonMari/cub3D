@@ -3,19 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   paint_world.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 18:16:40 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/05/13 18:20:46 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/05/16 19:30:35 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/function.h"
 
+// double get_dec(double d)
+// {
+// 	printf("%f\n", d - (int)d);
+// 	return (d - (int)d);
+// }
+
 uint32_t	choose_color(t_ptr *pgm, int texy)
 {
 	uint32_t	color;
 
+	// printf("%d\n", pgm->east.bpp);
+	// fprintf(stderr, "pgm->north.width = %d\n", pgm->north.width);
+	// fprintf(stderr, "pgm->north.height = %d\n", pgm->north.height);
 	if (pgm->coord.cardinal_wall == NO)
 		color = pgm->north.addr[texy * pgm->north.width
 			+ pgm->coord.texture_x];
@@ -43,17 +52,36 @@ void	paint_line(t_ptr *pgm, double step, int i)
 	y = pgm->top;
 	texpos = (pgm->top - HEIGHT / 2
 			+ ((HEIGHT / pgm->coord.real_distance) / 2)) * step;
+	// fprintf(stderr, "bpp= %d\n", pgm->north.bpp);
+	// fprintf(stderr, "width= %d\n", pgm->north.width);
+	// fprintf(stderr, "height= %d\n", pgm->north.height);
+	// fprintf(stderr, "endian= %d\n", pgm->north.endian);
+	// fprintf(stderr, "line_lenght= %d\n", pgm->north.line_length);
+	// exit(0);
 	while (y < pgm->bottom)
 	{
 		find_texture_x(pgm, pgm->coord.cardinal_wall);
 		if (pgm->coord.cardinal_wall == NO)
-			texy = (int)(texpos) & (pgm->north.height - 1);
+		{
+			//fprintf(stderr, "top = %d\n", pgm->top);
+			//fprintf(stderr, "pgm->north.height = %d\n", pgm->north.height);
+			//fprintf(stderr, "")
+			texy = (int)(texpos) /* & (pgm->north.height256 - 1) */;
+		//	texy = (int)(texpos) & (/* pgm->north.height */256 - 1);
+
+			//fprintf(stderr, "texy = %d\n", texy);
+			//fprintf(stderr, "texpos = %f\n", texpos);
+		}
 		else if (pgm->coord.cardinal_wall == SO)
-			texy = (int)(texpos) & (pgm->south.height - 1);
+		{
+			//fprintf(stderr, "pgm->south.height = %d\n", pgm->south.height);
+			texy = (int)(texpos)/*  & (pgm->south.height - 1) */;
+			//fprintf(stderr, "texy = %d\n", texy);
+		}
 		else if (pgm->coord.cardinal_wall == EA)
-			texy = (int)(texpos) & (pgm->east.height - 1);
+			texy = (int)(texpos)/*  & (pgm->east.height - 1) */;
 		else if (pgm->coord.cardinal_wall == WE)
-			texy = (int)(texpos) & (pgm->west.height - 1);
+			texy = (int)(texpos)/*  & (pgm->west.height - 1) */;
 		texpos += step;
 		color = choose_color(pgm, texy);
 		pgm->buff[y][(int)i] = color;

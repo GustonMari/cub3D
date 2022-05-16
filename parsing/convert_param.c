@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 17:37:36 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/05/16 16:12:03 by gmary            ###   ########.fr       */
+/*   Updated: 2022/05/16 18:47:16 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	convert_cardinal_points_2(t_ptr *pgm, char *path, int dir)
 {
+	
 	if (dir == EA)
 	{
 		pgm->east.img = mlx_xpm_file_to_image(pgm->mlx, path,
@@ -83,23 +84,23 @@ int	convert_param_2(t_ptr *pgm, char *str_param, int dir)
 int	convert_param_conditions(t_ptr *pgm, int i, int j)
 {
 	//fprintf(stderr, "%d- param= %s\n", i, pgm->param[i]); //a tej aussi	
-	if (ft_strncmp(pgm->param[i], "NO", 2) == TRUE)
+	if (ft_strncmp(&pgm->param[i][j], "NO", 2) == TRUE)
 		if (convert_param_2(pgm, &pgm->param[i][j], NO) == FALSE)
 			return (FALSE);
-	if (ft_strncmp(pgm->param[i], "SO", 2) == TRUE)
+	if (ft_strncmp(&pgm->param[i][j], "SO", 2) == TRUE)
 		if (convert_param_2(pgm, &pgm->param[i][j], SO) == FALSE)
 			return (FALSE);
-	if (ft_strncmp(pgm->param[i], "EA", 2) == TRUE)
+	if (ft_strncmp(&pgm->param[i][j], "EA", 2) == TRUE)
 		if (convert_param_2(pgm, &pgm->param[i][j], EA) == FALSE)
 			return (FALSE);
-	if (ft_strncmp(pgm->param[i], "WE", 2) == TRUE)
+	if (ft_strncmp(&pgm->param[i][j], "WE", 2) == TRUE)
 		if (convert_param_2(pgm, &pgm->param[i][j], WE) == FALSE)
 			return (FALSE);
-	if (ft_strncmp(pgm->param[i], "F", 1) == TRUE)
+	if (ft_strncmp(&pgm->param[i][j], "F", 1) == TRUE)
 		convert_floor_ceil(pgm,
 			convert_color_take(find_cardinal_path(&pgm->param[i][j])),
 			FLOOR);
-	if (ft_strncmp(pgm->param[i], "C", 1) == TRUE)
+	if (ft_strncmp(&pgm->param[i][j], "C", 1) == TRUE)
 		convert_floor_ceil(pgm,
 			convert_color_take(find_cardinal_path(&pgm->param[i][j])),
 			CEIL);
@@ -120,9 +121,9 @@ int	convert_param(t_ptr *pgm)
 	while (pgm->param[i])
 	{
 		j = 0;
-		//fprintf(stderr, "%d- param= %s\n", i, pgm->param[i]); //a tej aussi	
 		while (pgm->param[i][j] && (ft_is_space(pgm->param[i][j]) == TRUE))
 			j++;
+		//fprintf(stderr, "%d- param= |%s|\n", i, &pgm->param[i][j]);
 		if (convert_param_conditions(pgm, i, j) == FALSE)
 			return (FALSE);
 		i++;

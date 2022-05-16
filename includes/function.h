@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 10:45:00 by gmary             #+#    #+#             */
-/*   Updated: 2022/05/16 16:02:48 by gmary            ###   ########.fr       */
+/*   Updated: 2022/05/16 18:41:41 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@
 # define TRUE 0
 # define FALSE 1
 # define FULL 10
-# define HEIGHT 480//960 
-# define WIDTH 640//1280 
+# define HEIGHT 1000/*480*/ /* 960  */
+# define WIDTH 1000/*640 *//* 1280  */
 # define NO 100
 # define SO 101
 # define EA 102
