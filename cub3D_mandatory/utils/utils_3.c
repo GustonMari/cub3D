@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 17:14:35 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/05/17 15:17:57 by gmary            ###   ########.fr       */
+/*   Updated: 2022/05/17 18:03:47 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	print_tab_2d(char **strs)
 	while (strs[i])
 	{
 		ft_putstr_fd(strs[i], 2);
-		ft_putstr_fd("\n", 2);
+		//ft_putstr_fd("\n", 2);
 		i++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 17:16:23 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/05/17 10:05:43 by gmary            ###   ########.fr       */
+/*   Updated: 2022/05/17 18:21:49 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,23 @@ char	**adjust_map_free(char **new_map, char **map)
 
 char	**adjust_map_2(char **map, char **new_map, int max_len, int i)
 {
+	int	len;
+
+	len = ft_strlen(map[i]);
 	if (ft_strlen(map[i]) != max_len)
 	{
-		new_map[i] = ft_strdup_less(map[i], 1);
-		if (!new_map[i])
-			return (adjust_map_free(new_map, map));
+		if (map[i][len] == '\n')
+		{
+			new_map[i] = ft_strdup_less(map[i], 1);
+			if (!new_map[i])
+				return (adjust_map_free(new_map, map));
+		}
+		else
+		{
+			new_map[i] = ft_strdup(map[i]);
+			if (!new_map[i])
+				return (adjust_map_free(new_map, map));
+		}
 		while (ft_strlen(new_map[i]) < max_len)
 		{
 			new_map[i] = ft_strjoin_free(new_map[i], " ", 1);
