@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 10:44:29 by gmary             #+#    #+#             */
-/*   Updated: 2022/05/17 15:24:41 by gmary            ###   ########.fr       */
+/*   Updated: 2022/05/17 18:28:32 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,8 @@ int	check_vertical_bis(char **map, int *i, int column, int nb_line)
 		return (FALSE);
 	if (((*i) + 1 < nb_line) && ft_is_space(map[(*i) + 1][column]) == TRUE)
 	{
-		if (map[*i][column] != '1' && map[*i][column] != '\0')
+		if (map[*i][column] != '1'
+			&& map[*i][column] != '\0' && map[*i][column] != '\n')
 			return (FALSE);
 		(*i)++;
 		while (map[*i] && (*i < nb_line)
@@ -77,6 +78,27 @@ int	check_vertical_bis(char **map, int *i, int column, int nb_line)
 		(*i)++;
 	return (TRUE);
 }
+
+/* int	check_vertical_bis(char **map, int *i, int column, int nb_line)
+{
+	if (check_forbiden_char(map[*i][column]) == FALSE)
+		return (FALSE);
+	if (((*i) + 1 < nb_line) && ft_is_space(map[(*i) + 1][column]) == TRUE)
+	{
+		if (map[*i][column] != '1' && map[*i][column] != '\0')
+			return (FALSE);
+		(*i)++;
+		while (map[*i] && (*i < nb_line)
+			&& ft_is_space(map[*i][column]) == TRUE)
+			(*i)++;
+		if ((*i < nb_line) && map[*i][column] != '1'
+			&& map[*i][column] != '\0')
+			return (FALSE);
+	}
+	else
+		(*i)++;
+	return (TRUE);
+} */
 
 int	check_vertical(char **map, int column, int nb_line)
 {

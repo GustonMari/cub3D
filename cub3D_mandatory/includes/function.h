@@ -6,21 +6,21 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 10:45:00 by gmary             #+#    #+#             */
-/*   Updated: 2022/05/16 18:41:41 by gmary            ###   ########.fr       */
+/*   Updated: 2022/05/17 18:44:05 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FUNCTION_H
 # define FUNCTION_H
-//for mac_os
-//# include "minilibx/mlx.h"
-//for Linux
+/* for mac_os
+# include "minilibx/mlx.h"
+for Linux */
 # include "../minilibx-linux/mlx.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
-// check dans le makefile
+/* check dans le makefile */
 # include <X11/keysym.h>
 # include <unistd.h>
 # include <math.h>
@@ -91,7 +91,6 @@ typedef struct s_data
 	int		height;
 }				t_data;
 
-//corespond a notre structure global
 typedef struct s_ptr
 {
 	t_data	image;
@@ -256,8 +255,6 @@ void		key_down(t_ptr *pgm);
 ------------------COLOR--------------------------
 */
 
-//int	ft_vertical(int x, int top, int bottom, t_ptr *pgm);
-//int			ft_vertical(int x, int top, int bottom, t_ptr *pgm, int shade);
 char		*convert_color_take(char *str);
 
 /*

@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 10:45:07 by gmary             #+#    #+#             */
-/*   Updated: 2022/05/16 10:45:09 by gmary            ###   ########.fr       */
+/*   Updated: 2022/05/17 18:43:36 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,3 @@ void	pgm_image_init(t_ptr *pgm, t_data *image)
 	pgm->west.img = NULL;
 	pgm->east.img = NULL;
 }
-
-/* void	pgm_image_init(t_ptr *pgm, t_data *image)
-{
-	pgm->mlx = mlx_init();
-	pgm->win = mlx_new_window(pgm->mlx, WIDTH, HEIGHT, "cub3d");
-	pgm->image.img = mlx_new_image(pgm->mlx, WIDTH, HEIGHT);
-	//pgm->win = mlx_new_window(pgm->mlx, HEIGHT, WIDTH, "cub3d");
-	//pgm->image.img = mlx_new_image(pgm->mlx, HEIGHT, WIDTH);
-	pgm->image.addr = mlx_get_data_addr(image->img,
-			&image->bpp, &image->line_length, &image->endian);
-} */

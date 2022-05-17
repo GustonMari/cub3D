@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 10:44:29 by gmary             #+#    #+#             */
-/*   Updated: 2022/05/17 18:24:06 by gmary            ###   ########.fr       */
+/*   Updated: 2022/05/17 18:28:32 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ int	check_vertical_bis(char **map, int *i, int column, int nb_line)
 		(*i)++;
 	return (TRUE);
 } */
-
 
 int	check_vertical(char **map, int column, int nb_line)
 {

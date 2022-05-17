@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launch_game_2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 17:53:41 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/05/13 18:29:15 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/05/17 18:44:32 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ void	get_direction(t_ptr *pgm, char c)
 		get_direction_2(pgm, c);
 }
 
-//WARNING 0.5 sert a mettre au milieu d'un carre mais
-//c'est pas forcement ca qu'il faut faire
+/* WARNING 0.5 sert a mettre au milieu d'un carre mais
+c'est pas forcement ca qu'il faut faire */
 
 void	find_pos(t_ptr *pgm)
 {
