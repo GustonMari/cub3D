@@ -1,0 +1,18 @@
+NO ./texture/Beer.xpm
+SO ./texture/ChickenLeg.xpm
+EA ./texture/Sashimi.xpm
+WE ./texture/MelonWater.xpm
+
+F 200,100,0
+C 225,30,0
+
+1111111111
+1000000001
+10N0000001
+1000100001
+1111101111
+1111101111
+1000101111
+1000000001
+1000111111
+1111
