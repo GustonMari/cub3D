@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 18:20:58 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/05/13 18:26:27 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/05/17 10:53:44 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ char	**parsing(int argc, char **argv, int *nb_line)
 	char	**map;
 
 	if (argc != 2)
-		return (ft_putstr_error_char("Error, wrong number of arguments\n"));
+		return (ft_putstr_error_char("Error\nwrong number of arguments\n"));
 	*nb_line = ft_count_line_map(argv[1]);
 	if (*nb_line == -1)
 		return (ft_putstr_error_char("Error\nfile map does not exist\n"));
