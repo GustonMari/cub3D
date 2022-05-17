@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 10:44:36 by gmary             #+#    #+#             */
-/*   Updated: 2022/05/16 10:44:37 by gmary            ###   ########.fr       */
+/*   Updated: 2022/05/17 15:23:35 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	check_map(char **map, int nb_line)
 	}
 	i = 0;
 	max_len = find_max_lenght(map);
-	while (i < max_len - 1)
+	while (map[i] && i < max_len - 1)
 	{
 		if (check_vertical(map, i, nb_line) == FALSE)
 			return (FALSE);

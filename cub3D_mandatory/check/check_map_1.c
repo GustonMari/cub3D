@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 10:44:29 by gmary             #+#    #+#             */
-/*   Updated: 2022/05/17 09:45:56 by gmary            ###   ########.fr       */
+/*   Updated: 2022/05/17 15:24:41 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,8 @@ int	check_vertical_bis(char **map, int *i, int column, int nb_line)
 		if (map[*i][column] != '1' && map[*i][column] != '\0')
 			return (FALSE);
 		(*i)++;
-		while ((*i < nb_line) && ft_is_space(map[*i][column]) == TRUE)
+		while (map[*i] && (*i < nb_line)
+			&& ft_is_space(map[*i][column]) == TRUE)
 			(*i)++;
 		if ((*i < nb_line) && map[*i][column] != '1'
 			&& map[*i][column] != '\0')
@@ -84,14 +85,15 @@ int	check_vertical(char **map, int column, int nb_line)
 
 	i = 0;
 	space = 0;
-	while (ft_is_space(map[i][column]) == TRUE)
+	while (map[i] && map[i][column] && ft_is_space(map[i][column]) == TRUE)
 	{
 		space = 1;
 		i++;
 	}
-	if (space == 1 && map[i][column] != '1' && map[i][column] != '\0')
+	if (map[i] && map[i][column] && space == 1
+		&& map[i][column] != '1' && map[i][column] != '\0')
 		return (FALSE);
-	while (i < nb_line)
+	while (map[i] && map[i][column] && i < nb_line)
 	{
 		if (check_vertical_bis(map, &i, column, nb_line) == FALSE)
 			return (FALSE);
