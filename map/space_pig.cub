@@ -1,9 +1,9 @@
-NO ./texture/blopi.xpm
-EA ./texture/CEILING.xpm
-SO ./texture/eagle.xpm
+NO ./texture/blue.xpm
+EA ./texture/green.xpm
+SO ./texture/purple.xpm
 WE ./texture/Starfield.xpm
 
-F 200,100,0
+F 94,82,79
  C 5, 30,0
 
 11111111111111111111111111111111111111111111

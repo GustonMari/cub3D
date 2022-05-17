@@ -1,8 +1,0 @@
-NO ./texture/blopi.xpm
-EA ./texture/CEILING.xpm
-SO ./texture/eagle.xpm
-WE ./texture/Starfield.xpm
-
-F 200,100,0
- C 5, 30,0
-
