@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 17:37:36 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/05/16 18:47:16 by gmary            ###   ########.fr       */
+/*   Updated: 2022/05/17 09:57:17 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	convert_cardinal_points_2(t_ptr *pgm, char *path, int dir)
 {
-	
 	if (dir == EA)
 	{
 		pgm->east.img = mlx_xpm_file_to_image(pgm->mlx, path,
@@ -83,7 +82,6 @@ int	convert_param_2(t_ptr *pgm, char *str_param, int dir)
 
 int	convert_param_conditions(t_ptr *pgm, int i, int j)
 {
-	//fprintf(stderr, "%d- param= %s\n", i, pgm->param[i]); //a tej aussi	
 	if (ft_strncmp(&pgm->param[i][j], "NO", 2) == TRUE)
 		if (convert_param_2(pgm, &pgm->param[i][j], NO) == FALSE)
 			return (FALSE);
@@ -117,13 +115,11 @@ int	convert_param(t_ptr *pgm)
 	i = 0;
 	if (init_struct(pgm) == FALSE)
 		return (FALSE);
-	//print_tab_2d(pgm->param);
 	while (pgm->param[i])
 	{
 		j = 0;
 		while (pgm->param[i][j] && (ft_is_space(pgm->param[i][j]) == TRUE))
 			j++;
-		//fprintf(stderr, "%d- param= |%s|\n", i, &pgm->param[i][j]);
 		if (convert_param_conditions(pgm, i, j) == FALSE)
 			return (FALSE);
 		i++;

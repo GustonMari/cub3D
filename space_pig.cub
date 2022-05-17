@@ -1,6 +1,6 @@
-NO ./texture/square-1000.xpm
-EA ./texture/purple.xpm
-SO ./texture/green.xpm
+NO ./texture/blopi.xpm
+EA ./texture/CEILING.xpm
+SO ./texture/eagle.xpm
 WE ./texture/Starfield.xpm
 
 F 200,100,0

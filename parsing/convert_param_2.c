@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 17:39:14 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/05/16 16:03:19 by gmary            ###   ########.fr       */
+/*   Updated: 2022/05/17 09:57:55 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,14 +77,13 @@ char	*convert_cardinal_path(char *str)
 	return (path);
 }
 
-
 char	*convert_color_take(char *str)
 {
 	char	*path;
 	int		len;
 
 	len = 0;
-	while (str[len] /* && (ft_is_space(str[len]) == FALSE) */)
+	while (str[len])
 		len++;
 	path = ft_strndup(str, len);
 	if (!path)

@@ -6,7 +6,7 @@
 /*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 10:44:29 by gmary             #+#    #+#             */
-/*   Updated: 2022/05/16 10:44:30 by gmary            ###   ########.fr       */
+/*   Updated: 2022/05/17 09:45:56 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,8 @@ int	find_max_lenght(char **map)
 
 	i = 0;
 	len = ft_strlen(map[i]);
+	if (len == -1)
+		return (-1);
 	while (map[i])
 	{
 		if (len < ft_strlen((map[i])))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   adjust_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ndormoy <ndormoy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gmary <gmary@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 17:16:23 by ndormoy           #+#    #+#             */
-/*   Updated: 2022/05/13 17:36:36 by ndormoy          ###   ########.fr       */
+/*   Updated: 2022/05/17 09:59:38 by gmary            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ char	**adjust_map(char **map, int nb_line)
 	i = 0;
 	new_map = NULL;
 	max_len = find_max_lenght(map) - 1;
+	if (max_len < 0)
+		return (ft_free_tab_2d(map));
 	new_map = ft_calloc(sizeof(char *), nb_line + 1);
 	if (!new_map)
 		return (ft_free_tab_2d(map));
